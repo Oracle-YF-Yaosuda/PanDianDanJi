@@ -9,17 +9,36 @@
 #import "XLNetworkViewController.h"
 #import "XLLogin_ViewController.h"
 @interface XLNetworkViewController (){
+    /*
+     以下两个是判断键盘监听用的
+     */
     float cha;
     int pan;
+    
+    
 }
 
 @end
 
 @implementation XLNetworkViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    NSString*wangzhi= [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"];
+    if (NULL != wangzhi) {
+        NSArray*Fenge=[wangzhi componentsSeparatedByString:@"."];
+        NSArray*fe2=[[Fenge lastObject] componentsSeparatedByString:@":"];
+        _NetText1.text=[NSString stringWithFormat:@"%@",Fenge[0]];
+        _NetText2.text=[NSString stringWithFormat:@"%@",Fenge[1]];
+        _NetText3.text=[NSString stringWithFormat:@"%@",Fenge[2]];
+        _NetText4.text=[NSString stringWithFormat:@"%@",fe2[0]];
+        _NetText5.text=[NSString stringWithFormat:@"%@",fe2[1]];
+    }
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self delegate];
+    [self registerForKeyboardNotifications];
     
 }
 
@@ -33,49 +52,68 @@
     _NetText3.delegate=self;
     _NetText4.delegate=self;
     _NetText5.delegate=self;
+    
     _NetText1.keyboardType=UIKeyboardTypeNumberPad;
     _NetText2.keyboardType=UIKeyboardTypeNumberPad;
     _NetText3.keyboardType=UIKeyboardTypeNumberPad;
     _NetText4.keyboardType=UIKeyboardTypeNumberPad;
     _NetText5.keyboardType=UIKeyboardTypeNumberPad;
+    
+    _NetText1.textAlignment=NSTextAlignmentRight;
+    _NetText2.textAlignment=NSTextAlignmentRight;
+    _NetText3.textAlignment=NSTextAlignmentRight;
+    _NetText4.textAlignment=NSTextAlignmentRight;
+    
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self huanhang:@"" :textField];
+    
+    return YES;
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (![string isEqualToString:@""]) {
+        if (textField == _NetText5) {
+            if (textField.text.length>=5) {
+                return NO;
+            }
+        }else{
+            if(textField.text.length>=3){
+                
+                [self huanhang:string :textField];
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+-(void)huanhang:(NSString *)str :(UITextField*)textField{
     if (textField == _NetText1) {
+        _NetText2.text =str;
         [_NetText2 becomeFirstResponder];
     }else if (textField == _NetText2) {
+        _NetText3.text =str;
         [_NetText3 becomeFirstResponder];
     }else if (textField == _NetText3) {
+        _NetText4.text =str;
         [_NetText4 becomeFirstResponder];
     }else if (textField == _NetText4) {
+        _NetText5.text =str;
         [_NetText5 becomeFirstResponder];
     }else {
         [self SaveNetwork:nil];
     }
-    return YES;
 }
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (textField == _NetText5) {
-        if (textField.text.length>=5) {
-            
-            return NO;
-        }
-    }else{
-        if(textField.text.length>=3){
-            [self textFieldShouldReturn:textField];
-            return NO;
-        }
-    }
-    
-    return YES;
-}
-#pragma  mark ---注册通知
+#pragma  mark ---注册监听通知
 - (void) registerForKeyboardNotifications
 {
     cha=0.0;
     pan=0;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardWillHideNotification object:nil];
+    
 }
 #pragma mark ----通知实现
 - (void) keyboardWasShown:(NSNotification *) notif
@@ -122,13 +160,15 @@
     [UIView commitAnimations];
     
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 - (IBAction)SaveNetwork:(id)sender {
-    
-    
+    NSString*Pinjie=[NSString stringWithFormat:@"%@.%@.%@.%@:%@",_NetText1.text,_NetText2.text,_NetText3.text,_NetText4.text,_NetText5.text];
+    NSUserDefaults *juyuwang=[NSUserDefaults standardUserDefaults];
+    [juyuwang setObject:Pinjie forKey:@"JuYuWang"];
     [self back];
 }
-
 - (IBAction)NetBack:(id)sender {
     [self back];
 }

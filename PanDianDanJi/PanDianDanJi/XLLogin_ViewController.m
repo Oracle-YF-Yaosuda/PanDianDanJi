@@ -7,6 +7,7 @@
 //
 
 #import "XLLogin_ViewController.h"
+#import "WarningBox.h"
 
 @interface XLLogin_ViewController (){
     CGFloat cha;
@@ -16,7 +17,11 @@
 @end
 
 @implementation XLLogin_ViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    if (NULL != [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]) {
+        [WarningBox warningBoxModeText:@"局域网已设置" andView:self.view];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self delegate];
@@ -27,9 +32,9 @@
 {
     cha=0.0;
     pan=0;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 #pragma mark ----通知实现
 - (void) keyboardWasShown:(NSNotification *) notif
@@ -82,6 +87,9 @@
 
 #pragma mark ----Login_Action
 - (IBAction)Login:(UIButton *)sender {
+    
+    
+    
     NSLog(@"hehe ");
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21647791D7FE71F004FA8D3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D21647761D7FE71F004FA8D3 /* MBProgressHUD.m */; };
+		D216477A1D7FE71F004FA8D3 /* WarningBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D21647781D7FE71F004FA8D3 /* WarningBox.m */; };
 		D23ECA701D7E5032006EDD7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECA6F1D7E5032006EDD7D /* main.m */; };
 		D23ECA731D7E5032006EDD7D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECA721D7E5032006EDD7D /* AppDelegate.m */; };
 		D23ECA791D7E5032006EDD7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23ECA771D7E5032006EDD7D /* Main.storyboard */; };
@@ -125,6 +127,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D21647731D7FE555004FA8D3 /* XL_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XL_Header.h; sourceTree = "<group>"; };
+		D21647751D7FE71F004FA8D3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		D21647761D7FE71F004FA8D3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		D21647771D7FE71F004FA8D3 /* WarningBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningBox.h; sourceTree = "<group>"; };
+		D21647781D7FE71F004FA8D3 /* WarningBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningBox.m; sourceTree = "<group>"; };
 		D23ECA6B1D7E5032006EDD7D /* PanDianDanJi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanDianDanJi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23ECA6F1D7E5032006EDD7D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D23ECA711D7E5032006EDD7D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -259,6 +266,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D21647741D7FE71F004FA8D3 /* WarningBox */ = {
+			isa = PBXGroup;
+			children = (
+				D21647751D7FE71F004FA8D3 /* MBProgressHUD.h */,
+				D21647761D7FE71F004FA8D3 /* MBProgressHUD.m */,
+				D21647771D7FE71F004FA8D3 /* WarningBox.h */,
+				D21647781D7FE71F004FA8D3 /* WarningBox.m */,
+			);
+			path = WarningBox;
+			sourceTree = "<group>";
+		};
 		D23ECA621D7E5032006EDD7D = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +339,7 @@
 		D23ECAA21D7E506C006EDD7D /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				D21647741D7FE71F004FA8D3 /* WarningBox */,
 			);
 			name = framework;
 			sourceTree = "<group>";
@@ -354,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				D23ECAAA1D7E5226006EDD7D /* 图片 */,
+				D21647731D7FE555004FA8D3 /* XL_Header.h */,
 				D23ECA711D7E5032006EDD7D /* AppDelegate.h */,
 				D23ECA721D7E5032006EDD7D /* AppDelegate.m */,
 				D23ECA771D7E5032006EDD7D /* Main.storyboard */,
@@ -698,6 +718,8 @@
 			files = (
 				D23ECAA91D7E51D3006EDD7D /* XLLogin_ViewController.m in Sources */,
 				D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */,
+				D216477A1D7FE71F004FA8D3 /* WarningBox.m in Sources */,
+				D21647791D7FE71F004FA8D3 /* MBProgressHUD.m in Sources */,
 				D23ECA731D7E5032006EDD7D /* AppDelegate.m in Sources */,
 				D23ECA701D7E5032006EDD7D /* main.m in Sources */,
 			);
@@ -925,6 +947,7 @@
 				D23ECA9A1D7E5032006EDD7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D23ECA9B1D7E5032006EDD7D /* Build configuration list for PBXNativeTarget "PanDianDanJiTests" */ = {
 			isa = XCConfigurationList;
@@ -933,6 +956,7 @@
 				D23ECA9D1D7E5032006EDD7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D23ECA9E1D7E5032006EDD7D /* Build configuration list for PBXNativeTarget "PanDianDanJiUITests" */ = {
 			isa = XCConfigurationList;
@@ -941,6 +965,7 @@
 				D23ECAA01D7E5032006EDD7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
