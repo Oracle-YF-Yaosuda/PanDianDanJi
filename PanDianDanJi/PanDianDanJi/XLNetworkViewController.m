@@ -8,6 +8,8 @@
 
 #import "XLNetworkViewController.h"
 #import "XLLogin_ViewController.h"
+#import "XL_Header.h"
+
 @interface XLNetworkViewController (){
     /*
      以下两个是判断键盘监听用的
@@ -23,9 +25,9 @@
 @implementation XLNetworkViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-    NSString*wangzhi= [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"];
-    if (NULL != wangzhi) {
-        NSArray*Fenge=[wangzhi componentsSeparatedByString:@"."];
+    
+    if (NULL != JuyuwangIP) {
+        NSArray*Fenge=[JuyuwangIP componentsSeparatedByString:@"."];
         NSArray*fe2=[[Fenge lastObject] componentsSeparatedByString:@":"];
         _NetText1.text=[NSString stringWithFormat:@"%@",Fenge[0]];
         _NetText2.text=[NSString stringWithFormat:@"%@",Fenge[1]];
@@ -165,15 +167,14 @@
 }
 - (IBAction)SaveNetwork:(id)sender {
     NSString*Pinjie=[NSString stringWithFormat:@"%@.%@.%@.%@:%@",_NetText1.text,_NetText2.text,_NetText3.text,_NetText4.text,_NetText5.text];
-    NSUserDefaults *juyuwang=[NSUserDefaults standardUserDefaults];
-    [juyuwang setObject:Pinjie forKey:@"JuYuWang"];
+    NSUserDefaults *shuju=[NSUserDefaults standardUserDefaults];
+    [shuju setObject:Pinjie forKey:@"JuYuWang"];
     [self back];
 }
 - (IBAction)NetBack:(id)sender {
     [self back];
 }
 -(void)back{
-    XLLogin_ViewController *newC=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
-    [ self presentViewController:newC animated: YES completion:nil];
+    [ self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

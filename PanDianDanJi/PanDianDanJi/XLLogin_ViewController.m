@@ -8,6 +8,9 @@
 
 #import "XLLogin_ViewController.h"
 #import "WarningBox.h"
+#import "XL_Header.h"
+#import "XL_WangLuo.h"
+#import "XLHomeViewController.h"
 
 @interface XLLogin_ViewController (){
     CGFloat cha;
@@ -18,12 +21,14 @@
 
 @implementation XLLogin_ViewController
 -(void)viewWillAppear:(BOOL)animated{
-    if (NULL != [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]) {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    if (NULL != JuyuwangIP) {
         [WarningBox warningBoxModeText:@"局域网已设置" andView:self.view];
     }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self delegate];
     [self registerForKeyboardNotifications];
 }
@@ -87,10 +92,37 @@
 
 #pragma mark ----Login_Action
 - (IBAction)Login:(UIButton *)sender {
-    
-    
-    
-    NSLog(@"hehe ");
+    if ([_Name.text isEqual:@""]||[_Password.text isEqual:@""]) {
+        [WarningBox warningBoxModeText:@"请填写好账号信息哟~" andView:self.view];
+    }else if (NULL ==JuyuwangIP){
+        [WarningBox warningBoxModeText:@"请先设置网络连接" andView:self.view];
+    }else{
+       /*
+        [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
+        NSString *fangshi=@"/sys/login";
+        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"", nil];
+//自己写的网络请求    请求外网地址
+        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            @try {
+                if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+                    
+                }
+            } @catch (NSException *exception) {
+                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+            }
+        } failure:^(NSError *error) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+        }];
+    */
+        
+        [self jumpHome];
+   }
+}
+-(void)jumpHome{
+    XLHomeViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
+    [self.navigationController pushViewController:home animated:YES];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
