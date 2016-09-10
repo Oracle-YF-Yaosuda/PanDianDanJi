@@ -11,7 +11,7 @@
 #import "SBJsonWriter.h"
 #import "AFNetworking.h"
 @implementation XL_WangLuo
-+(void)WaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Type)type success:(void (^)(id responseObject))success
++(void)WaiwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                            failure:(void (^)(NSError *error))failure{
     
     NSString *Waiwang=WaiWang;
@@ -68,14 +68,14 @@
     }
     
 }
-+(void)JuYuwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Type)type success:(void (^)(id responseObject))success
++(void)JuYuwangQingqiuwithBizMethod:(NSString*)BizMetho Rucan:(NSDictionary*)BizParamSt type:(Post_or_Get)type success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError *error))failure{
     NSUserDefaults * shuju=[NSUserDefaults standardUserDefaults];//非登录接口用
     NSString *JuYuwang=JuYuWang;//登录接口不用
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-    
+    NSLog(@"\n\nURL:\n\n%@\n\n",Url);
     NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
     NSString *vaildToken=@"";//传空或非空
     NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
@@ -84,8 +84,8 @@
     NSDictionary*BizParamStr=BizParamSt;
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
-    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",UserID,@"userid",vaildToken,@"vaildToken",accessToken,@"accessToken",Rucan,@"params", nil];
-    
+    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",Rucan,@"params",UserID,@"userid",accessToken,@"accessToken", nil];
+    NSLog(@"\n\n入参:\n\n%@\n\n",ChuanCan);
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     
