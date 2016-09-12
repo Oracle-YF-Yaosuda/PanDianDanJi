@@ -127,6 +127,11 @@
 		D23ECB5C1D7E63E7006EDD7D /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB5B1D7E63E7006EDD7D /* welcome.png */; };
 		D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */; };
 		D23ECB611D7E9135006EDD7D /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB601D7E9135006EDD7D /* btn_save.png */; };
+		D7DB64131D86526B00C40795 /* XLSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64121D86526B00C40795 /* XLSettingViewController.m */; };
+		D7DB64161D86529C00C40795 /* XLChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64151D86529C00C40795 /* XLChangeViewController.m */; };
+		D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64181D8652CC00C40795 /* XLRelationViewController.m */; };
+		D7DB641C1D8652EC00C40795 /* XLExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB641B1D8652EC00C40795 /* XLExplainViewController.m */; };
+		D7DB64221D867E1500C40795 /* Color+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64211D867E1500C40795 /* Color+Hex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +306,16 @@
 		D23ECB5D1D7E6C2D006EDD7D /* XLNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNetworkViewController.h; sourceTree = "<group>"; };
 		D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNetworkViewController.m; sourceTree = "<group>"; };
 		D23ECB601D7E9135006EDD7D /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
+		D7DB64111D86526B00C40795 /* XLSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSettingViewController.h; sourceTree = "<group>"; };
+		D7DB64121D86526B00C40795 /* XLSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSettingViewController.m; sourceTree = "<group>"; };
+		D7DB64141D86529C00C40795 /* XLChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLChangeViewController.h; sourceTree = "<group>"; };
+		D7DB64151D86529C00C40795 /* XLChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLChangeViewController.m; sourceTree = "<group>"; };
+		D7DB64171D8652CC00C40795 /* XLRelationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLRelationViewController.h; sourceTree = "<group>"; };
+		D7DB64181D8652CC00C40795 /* XLRelationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLRelationViewController.m; sourceTree = "<group>"; };
+		D7DB641A1D8652EC00C40795 /* XLExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLExplainViewController.h; sourceTree = "<group>"; };
+		D7DB641B1D8652EC00C40795 /* XLExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLExplainViewController.m; sourceTree = "<group>"; };
+		D7DB64201D867E1500C40795 /* Color+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Color+Hex.h"; sourceTree = "<group>"; };
+		D7DB64211D867E1500C40795 /* Color+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Color+Hex.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +429,11 @@
 		D21BF9871D80FA8E00D538DA /* 设置相关 */ = {
 			isa = PBXGroup;
 			children = (
+				D7DB64111D86526B00C40795 /* XLSettingViewController.h */,
+				D7DB64121D86526B00C40795 /* XLSettingViewController.m */,
+				D7DB641F1D867D4000C40795 /* 修改密码 */,
+				D7DB641E1D867D3900C40795 /* 联系我们 */,
+				D7DB641D1D867D3100C40795 /* 软件说明 */,
 			);
 			name = "设置相关";
 			sourceTree = "<group>";
@@ -507,6 +527,8 @@
 		D23ECAA51D7E50B4006EDD7D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D7DB64201D867E1500C40795 /* Color+Hex.h */,
+				D7DB64211D867E1500C40795 /* Color+Hex.m */,
 				D21647731D7FE555004FA8D3 /* XL_Header.h */,
 				D21A24F91D8006BF007BBDCE /* XL_WangLuo.h */,
 				D21A24FA1D8006BF007BBDCE /* XL_WangLuo.m */,
@@ -638,6 +660,33 @@
 				D23ECB371D7E5472006EDD7D /* jianpan_mr_36.png */,
 			);
 			path = "计算器";
+			sourceTree = "<group>";
+		};
+		D7DB641D1D867D3100C40795 /* 软件说明 */ = {
+			isa = PBXGroup;
+			children = (
+				D7DB641A1D8652EC00C40795 /* XLExplainViewController.h */,
+				D7DB641B1D8652EC00C40795 /* XLExplainViewController.m */,
+			);
+			name = "软件说明";
+			sourceTree = "<group>";
+		};
+		D7DB641E1D867D3900C40795 /* 联系我们 */ = {
+			isa = PBXGroup;
+			children = (
+				D7DB64171D8652CC00C40795 /* XLRelationViewController.h */,
+				D7DB64181D8652CC00C40795 /* XLRelationViewController.m */,
+			);
+			name = "联系我们";
+			sourceTree = "<group>";
+		};
+		D7DB641F1D867D4000C40795 /* 修改密码 */ = {
+			isa = PBXGroup;
+			children = (
+				D7DB64141D86529C00C40795 /* XLChangeViewController.h */,
+				D7DB64151D86529C00C40795 /* XLChangeViewController.m */,
+			);
+			name = "修改密码";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -868,19 +917,24 @@
 				D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */,
 				D216477A1D7FE71F004FA8D3 /* WarningBox.m in Sources */,
 				D21A24F11D7FF845007BBDCE /* SBJsonStreamWriterAccumulator.m in Sources */,
+				D7DB641C1D8652EC00C40795 /* XLExplainViewController.m in Sources */,
 				D21A24CE1D7FF18C007BBDCE /* AFURLResponseSerialization.m in Sources */,
 				D21BF98A1D80FCE800D538DA /* XLHomeViewController.m in Sources */,
 				D21A24F31D7FF845007BBDCE /* SBJsonTokeniser.m in Sources */,
+				D7DB64221D867E1500C40795 /* Color+Hex.m in Sources */,
 				D21A24EA1D7FF845007BBDCE /* NSObject+SBJson.m in Sources */,
+				D7DB64161D86529C00C40795 /* XLChangeViewController.m in Sources */,
 				D21A24EE1D7FF845007BBDCE /* SBJsonStreamParserAdapter.m in Sources */,
 				D21647791D7FE71F004FA8D3 /* MBProgressHUD.m in Sources */,
 				D21A24F51D7FF845007BBDCE /* SBJsonWriter.m in Sources */,
 				D21A24F41D7FF845007BBDCE /* SBJsonUTF8Stream.m in Sources */,
+				D7DB64131D86526B00C40795 /* XLSettingViewController.m in Sources */,
 				D21A24EB1D7FF845007BBDCE /* SBJsonParser.m in Sources */,
 				D23ECA731D7E5032006EDD7D /* AppDelegate.m in Sources */,
 				D21A24EC1D7FF845007BBDCE /* SBJsonStreamParser.m in Sources */,
 				D21A24CA1D7FF18C007BBDCE /* AFHTTPSessionManager.m in Sources */,
 				D21A24CD1D7FF18C007BBDCE /* AFURLRequestSerialization.m in Sources */,
+				D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */,
 				D21A24CF1D7FF18C007BBDCE /* AFURLSessionManager.m in Sources */,
 				D21A24FB1D8006BF007BBDCE /* XL_WangLuo.m in Sources */,
 				D21A24EF1D7FF845007BBDCE /* SBJsonStreamParserState.m in Sources */,
