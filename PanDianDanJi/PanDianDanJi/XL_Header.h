@@ -12,10 +12,10 @@
 
 #define Scheme  @"http://"
 #define AppName @"/stockmgr"
-#define path    @"/api/rest/1.0"
+#define apath    @"/api/rest/1.0"
 
-#define WaiWang [NSString stringWithFormat:@"%@%@%@%@%@",Scheme,Host,Port,AppName,path]
+#define WaiWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
 
-#define JuYuWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,path]
+#define JuYuWang [NSString stringWithFormat:@"%@%@%@%@",Scheme,JuyuwangIP,AppName,apath]
 
 #define Appkey   @"d800528f235e4142b78a8c26c4d537d9"

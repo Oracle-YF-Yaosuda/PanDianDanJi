@@ -132,6 +132,15 @@
 		D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64181D8652CC00C40795 /* XLRelationViewController.m */; };
 		D7DB641C1D8652EC00C40795 /* XLExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB641B1D8652EC00C40795 /* XLExplainViewController.m */; };
 		D7DB64221D867E1500C40795 /* Color+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64211D867E1500C40795 /* Color+Hex.m */; };
+		D7DB64361D8692E800C40795 /* XL_FMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64351D8692E800C40795 /* XL_FMDB.m */; };
+		D7DB64381D86AA3F00C40795 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D7DB64371D86AA3F00C40795 /* libsqlite3.0.tbd */; };
+		D7DB64461D86AC8000C40795 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB643B1D86AC8000C40795 /* FMDatabase.m */; };
+		D7DB64471D86AC8000C40795 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB643D1D86AC8000C40795 /* FMDatabaseAdditions.m */; };
+		D7DB64481D86AC8000C40795 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB643F1D86AC8000C40795 /* FMDatabasePool.m */; };
+		D7DB64491D86AC8000C40795 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64411D86AC8000C40795 /* FMDatabaseQueue.m */; };
+		D7DB644A1D86AC8000C40795 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64441D86AC8000C40795 /* FMResultSet.m */; };
+		D7DB644B1D86AC8000C40795 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7DB64451D86AC8000C40795 /* Info.plist */; };
+		D7F575C81D88D68500F8DA63 /* XL_ZhuJiMaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7F575C71D88D68500F8DA63 /* XL_ZhuJiMaViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +325,23 @@
 		D7DB641B1D8652EC00C40795 /* XLExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLExplainViewController.m; sourceTree = "<group>"; };
 		D7DB64201D867E1500C40795 /* Color+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Color+Hex.h"; sourceTree = "<group>"; };
 		D7DB64211D867E1500C40795 /* Color+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Color+Hex.m"; sourceTree = "<group>"; };
+		D7DB64341D8692E800C40795 /* XL_FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_FMDB.h; sourceTree = "<group>"; };
+		D7DB64351D8692E800C40795 /* XL_FMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_FMDB.m; sourceTree = "<group>"; };
+		D7DB64371D86AA3F00C40795 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		D7DB643A1D86AC8000C40795 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		D7DB643B1D86AC8000C40795 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		D7DB643C1D86AC8000C40795 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		D7DB643D1D86AC8000C40795 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		D7DB643E1D86AC8000C40795 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		D7DB643F1D86AC8000C40795 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		D7DB64401D86AC8000C40795 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		D7DB64411D86AC8000C40795 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		D7DB64421D86AC8000C40795 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		D7DB64431D86AC8000C40795 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		D7DB64441D86AC8000C40795 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		D7DB64451D86AC8000C40795 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7F575C61D88D68500F8DA63 /* XL_ZhuJiMaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_ZhuJiMaViewController.h; sourceTree = "<group>"; };
+		D7F575C71D88D68500F8DA63 /* XL_ZhuJiMaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_ZhuJiMaViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +349,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7DB64381D86AA3F00C40795 /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +527,8 @@
 		D23ECAA21D7E506C006EDD7D /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				D7DB64391D86AC8000C40795 /* fmdb */,
+				D7DB64371D86AA3F00C40795 /* libsqlite3.0.tbd */,
 				D21A24D01D7FF845007BBDCE /* SBJSON */,
 				D21A24BC1D7FF18C007BBDCE /* AFNetworking 3.0.4 */,
 				D21647741D7FE71F004FA8D3 /* WarningBox */,
@@ -510,6 +539,7 @@
 		D23ECAA31D7E5084006EDD7D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D7F575C51D88D65100F8DA63 /* 助记码相关 */,
 				D21BF9821D80F0D000D538DA /* 登陆及密码相关 */,
 				D21BF9831D80F12D00D538DA /* 主页相关 */,
 				D21BF9871D80FA8E00D538DA /* 设置相关 */,
@@ -529,6 +559,8 @@
 			children = (
 				D7DB64201D867E1500C40795 /* Color+Hex.h */,
 				D7DB64211D867E1500C40795 /* Color+Hex.m */,
+				D7DB64341D8692E800C40795 /* XL_FMDB.h */,
+				D7DB64351D8692E800C40795 /* XL_FMDB.m */,
 				D21647731D7FE555004FA8D3 /* XL_Header.h */,
 				D21A24F91D8006BF007BBDCE /* XL_WangLuo.h */,
 				D21A24FA1D8006BF007BBDCE /* XL_WangLuo.m */,
@@ -687,6 +719,34 @@
 				D7DB64151D86529C00C40795 /* XLChangeViewController.m */,
 			);
 			name = "修改密码";
+			sourceTree = "<group>";
+		};
+		D7DB64391D86AC8000C40795 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				D7DB643A1D86AC8000C40795 /* FMDatabase.h */,
+				D7DB643B1D86AC8000C40795 /* FMDatabase.m */,
+				D7DB643C1D86AC8000C40795 /* FMDatabaseAdditions.h */,
+				D7DB643D1D86AC8000C40795 /* FMDatabaseAdditions.m */,
+				D7DB643E1D86AC8000C40795 /* FMDatabasePool.h */,
+				D7DB643F1D86AC8000C40795 /* FMDatabasePool.m */,
+				D7DB64401D86AC8000C40795 /* FMDatabaseQueue.h */,
+				D7DB64411D86AC8000C40795 /* FMDatabaseQueue.m */,
+				D7DB64421D86AC8000C40795 /* FMDB.h */,
+				D7DB64431D86AC8000C40795 /* FMResultSet.h */,
+				D7DB64441D86AC8000C40795 /* FMResultSet.m */,
+				D7DB64451D86AC8000C40795 /* Info.plist */,
+			);
+			path = fmdb;
+			sourceTree = "<group>";
+		};
+		D7F575C51D88D65100F8DA63 /* 助记码相关 */ = {
+			isa = PBXGroup;
+			children = (
+				D7F575C61D88D68500F8DA63 /* XL_ZhuJiMaViewController.h */,
+				D7F575C71D88D68500F8DA63 /* XL_ZhuJiMaViewController.m */,
+			);
+			name = "助记码相关";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -885,6 +945,7 @@
 				D23ECB011D7E5226006EDD7D /* jianpan_dk_04_13.png in Resources */,
 				D23ECB4D1D7E5472006EDD7D /* jianpan_mr_03.png in Resources */,
 				D23ECB581D7E5472006EDD7D /* jianpan_mr_36.png in Resources */,
+				D7DB644B1D86AC8000C40795 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,6 +971,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D21A24F21D7FF845007BBDCE /* SBJsonStreamWriterState.m in Sources */,
+				D7F575C81D88D68500F8DA63 /* XL_ZhuJiMaViewController.m in Sources */,
 				D21A24F01D7FF845007BBDCE /* SBJsonStreamWriter.m in Sources */,
 				D23ECAA91D7E51D3006EDD7D /* XLLogin_ViewController.m in Sources */,
 				D21A24CC1D7FF18C007BBDCE /* AFSecurityPolicy.m in Sources */,
@@ -918,6 +980,7 @@
 				D216477A1D7FE71F004FA8D3 /* WarningBox.m in Sources */,
 				D21A24F11D7FF845007BBDCE /* SBJsonStreamWriterAccumulator.m in Sources */,
 				D7DB641C1D8652EC00C40795 /* XLExplainViewController.m in Sources */,
+				D7DB64461D86AC8000C40795 /* FMDatabase.m in Sources */,
 				D21A24CE1D7FF18C007BBDCE /* AFURLResponseSerialization.m in Sources */,
 				D21BF98A1D80FCE800D538DA /* XLHomeViewController.m in Sources */,
 				D21A24F31D7FF845007BBDCE /* SBJsonTokeniser.m in Sources */,
@@ -925,19 +988,24 @@
 				D21A24EA1D7FF845007BBDCE /* NSObject+SBJson.m in Sources */,
 				D7DB64161D86529C00C40795 /* XLChangeViewController.m in Sources */,
 				D21A24EE1D7FF845007BBDCE /* SBJsonStreamParserAdapter.m in Sources */,
+				D7DB644A1D86AC8000C40795 /* FMResultSet.m in Sources */,
+				D7DB64491D86AC8000C40795 /* FMDatabaseQueue.m in Sources */,
 				D21647791D7FE71F004FA8D3 /* MBProgressHUD.m in Sources */,
 				D21A24F51D7FF845007BBDCE /* SBJsonWriter.m in Sources */,
 				D21A24F41D7FF845007BBDCE /* SBJsonUTF8Stream.m in Sources */,
 				D7DB64131D86526B00C40795 /* XLSettingViewController.m in Sources */,
+				D7DB64471D86AC8000C40795 /* FMDatabaseAdditions.m in Sources */,
 				D21A24EB1D7FF845007BBDCE /* SBJsonParser.m in Sources */,
 				D23ECA731D7E5032006EDD7D /* AppDelegate.m in Sources */,
 				D21A24EC1D7FF845007BBDCE /* SBJsonStreamParser.m in Sources */,
+				D7DB64361D8692E800C40795 /* XL_FMDB.m in Sources */,
 				D21A24CA1D7FF18C007BBDCE /* AFHTTPSessionManager.m in Sources */,
 				D21A24CD1D7FF18C007BBDCE /* AFURLRequestSerialization.m in Sources */,
 				D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */,
 				D21A24CF1D7FF18C007BBDCE /* AFURLSessionManager.m in Sources */,
 				D21A24FB1D8006BF007BBDCE /* XL_WangLuo.m in Sources */,
 				D21A24EF1D7FF845007BBDCE /* SBJsonStreamParserState.m in Sources */,
+				D7DB64481D86AC8000C40795 /* FMDatabasePool.m in Sources */,
 				D21A24CB1D7FF18C007BBDCE /* AFNetworkReachabilityManager.m in Sources */,
 				D23ECA701D7E5032006EDD7D /* main.m in Sources */,
 			);

@@ -100,27 +100,23 @@
        
         [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
         NSString *fangshi=@"/sys/login";
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"", nil];
+        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_Name.text,@"loginName",_Password,@"password", nil];
 //自己写的网络请求    请求外网地址
-//        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-//            [WarningBox warningBoxHide:YES andView:self.view];
-//            @try {
-//                if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-//                    
-//                }
-//            } @catch (NSException *exception) {
-//                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
-//            }
-//        } failure:^(NSError *error) {
-//            [WarningBox warningBoxHide:YES andView:self.view];
-//            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-//        }];
-
-        [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-            
+        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+            [WarningBox warningBoxHide:YES andView:self.view];
+            @try {
+                NSLog(@"%@",responseObject);
+                if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+                    
+                }
+            } @catch (NSException *exception) {
+                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+            }
         } failure:^(NSError *error) {
-            
+            [WarningBox warningBoxHide:YES andView:self.view];
+            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
         }];
+
         
         [self jumpHome];
    }
