@@ -75,7 +75,6 @@
     NSString *BizMethod=BizMetho;
     
     NSString *Url=[NSString stringWithFormat:@"%@%@",JuYuwang,BizMethod];
-    NSLog(@"\n\nURL:\n\n%@\n\n",Url);
     NSString *UserID=[shuju objectForKey:@"UserID"];//登陆不用传
     NSString *vaildToken=@"";//传空或非空
     NSString *accessToken=[shuju objectForKey:@"accessToken"];//登陆不用传
@@ -84,8 +83,7 @@
     NSDictionary*BizParamStr=BizParamSt;
     
     NSString *Rucan=[writer stringWithObject:BizParamStr];
-    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",Rucan,@"params",UserID,@"userid",accessToken,@"accessToken", nil];
-    NSLog(@"\n\n入参:\n\n%@\n\n",ChuanCan);
+    NSDictionary *ChuanCan=[NSDictionary dictionaryWithObjectsAndKeys:Appkey,@"appkey",vaildToken,@"vaildToken",UserID,@"userid",accessToken,@"accessToken",Rucan,@"params", nil];
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
     

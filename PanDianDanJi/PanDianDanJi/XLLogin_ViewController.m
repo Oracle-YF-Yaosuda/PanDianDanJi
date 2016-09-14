@@ -25,6 +25,10 @@
     if (NULL != JuyuwangIP) {
         [WarningBox warningBoxModeText:@"局域网已设置" andView:self.view];
     }
+    if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
+        _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
+        _Password.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -100,14 +104,23 @@
        
         [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
         NSString *fangshi=@"/sys/login";
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_Name.text,@"loginName",_Password,@"password", nil];
+        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_Name.text,@"loginName",_Password.text,@"password", nil];
 //自己写的网络请求    请求外网地址
         [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
             @try {
-                NSLog(@"%@",responseObject);
                 if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+                    NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
+                    [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"Name"];
+                    [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"Password"];
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
+                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
                     
+                    [self jumpHome];
+                }
+                else{
+                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
                 }
             } @catch (NSException *exception) {
                 [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
@@ -115,10 +128,8 @@
         } failure:^(NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+            NSLog(@"%@",error);
         }];
-
-        
-        [self jumpHome];
    }
 }
 -(void)jumpHome{

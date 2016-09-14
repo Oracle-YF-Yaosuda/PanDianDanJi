@@ -126,7 +126,7 @@ static XL_FMDB *fmdb =nil;
             }
         }
         [sql appendString:@")"];
-        NSLog(@"%@", sql);
+        
         [db executeUpdate:sql withArgumentsInArray:values];
     }
 

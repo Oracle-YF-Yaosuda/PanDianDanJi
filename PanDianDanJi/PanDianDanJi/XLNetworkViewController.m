@@ -9,6 +9,7 @@
 #import "XLNetworkViewController.h"
 #import "XLLogin_ViewController.h"
 #import "XL_Header.h"
+#import "WarningBox/WarningBox.h"
 
 @interface XLNetworkViewController (){
     /*
@@ -16,8 +17,6 @@
      */
     float cha;
     int pan;
-    
-    
 }
 
 @end
@@ -166,15 +165,17 @@
     [self.view endEditing:YES];
 }
 - (IBAction)SaveNetwork:(id)sender {
-    NSString*Pinjie=[NSString stringWithFormat:@"%@.%@.%@.%@:%@",_NetText1.text,_NetText2.text,_NetText3.text,_NetText4.text,_NetText5.text];
-    NSUserDefaults *shuju=[NSUserDefaults standardUserDefaults];
-    [shuju setObject:Pinjie forKey:@"JuYuWang"];
-    [self back];
+    if (_NetText5.text.length>0&&_NetText4.text.length>0&&_NetText3.text.length>0&&_NetText2.text.length>0&&_NetText1.text.length>0) {
+        NSString*Pinjie=[NSString stringWithFormat:@"%@.%@.%@.%@:%@",_NetText1.text,_NetText2.text,_NetText3.text,_NetText4.text,_NetText5.text];
+        NSUserDefaults *shuju=[NSUserDefaults standardUserDefaults];
+        [shuju setObject:Pinjie forKey:@"JuYuWang"];
+        [self NetBack:nil];
+    }else{
+        [WarningBox warningBoxModeText:@"请填写全部信息" andView:self.view];
+    }
 }
 - (IBAction)NetBack:(id)sender {
-    [self back];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
--(void)back{
-    [ self.navigationController popToRootViewControllerAnimated:YES];
-}
+
 @end
