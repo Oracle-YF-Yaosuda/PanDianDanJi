@@ -89,6 +89,7 @@
         [_Name resignFirstResponder];
         [_Password becomeFirstResponder];
     }else{
+        [self.view endEditing:YES];
         [self Login:nil];
     }
     return YES;
