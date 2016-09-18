@@ -127,6 +127,7 @@
 		D23ECB5C1D7E63E7006EDD7D /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB5B1D7E63E7006EDD7D /* welcome.png */; };
 		D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */; };
 		D23ECB611D7E9135006EDD7D /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB601D7E9135006EDD7D /* btn_save.png */; };
+		D74F2C4A1D8922CE009AC061 /* XL_PanDianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */; };
 		D7DB64131D86526B00C40795 /* XLSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64121D86526B00C40795 /* XLSettingViewController.m */; };
 		D7DB64161D86529C00C40795 /* XLChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64151D86529C00C40795 /* XLChangeViewController.m */; };
 		D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64181D8652CC00C40795 /* XLRelationViewController.m */; };
@@ -315,6 +316,8 @@
 		D23ECB5D1D7E6C2D006EDD7D /* XLNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNetworkViewController.h; sourceTree = "<group>"; };
 		D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNetworkViewController.m; sourceTree = "<group>"; };
 		D23ECB601D7E9135006EDD7D /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
+		D74F2C481D8922CE009AC061 /* XL_PanDianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_PanDianViewController.h; sourceTree = "<group>"; };
+		D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_PanDianViewController.m; sourceTree = "<group>"; };
 		D7DB64111D86526B00C40795 /* XLSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSettingViewController.h; sourceTree = "<group>"; };
 		D7DB64121D86526B00C40795 /* XLSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSettingViewController.m; sourceTree = "<group>"; };
 		D7DB64141D86529C00C40795 /* XLChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLChangeViewController.h; sourceTree = "<group>"; };
@@ -539,6 +542,7 @@
 		D23ECAA31D7E5084006EDD7D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D74F2C471D8922A6009AC061 /* 盘点相关 */,
 				D7F575C51D88D65100F8DA63 /* 助记码相关 */,
 				D21BF9821D80F0D000D538DA /* 登陆及密码相关 */,
 				D21BF9831D80F12D00D538DA /* 主页相关 */,
@@ -692,6 +696,15 @@
 				D23ECB371D7E5472006EDD7D /* jianpan_mr_36.png */,
 			);
 			path = "计算器";
+			sourceTree = "<group>";
+		};
+		D74F2C471D8922A6009AC061 /* 盘点相关 */ = {
+			isa = PBXGroup;
+			children = (
+				D74F2C481D8922CE009AC061 /* XL_PanDianViewController.h */,
+				D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */,
+			);
+			name = "盘点相关";
 			sourceTree = "<group>";
 		};
 		D7DB641D1D867D3100C40795 /* 软件说明 */ = {
@@ -994,6 +1007,7 @@
 				D21A24F51D7FF845007BBDCE /* SBJsonWriter.m in Sources */,
 				D21A24F41D7FF845007BBDCE /* SBJsonUTF8Stream.m in Sources */,
 				D7DB64131D86526B00C40795 /* XLSettingViewController.m in Sources */,
+				D74F2C4A1D8922CE009AC061 /* XL_PanDianViewController.m in Sources */,
 				D7DB64471D86AC8000C40795 /* FMDatabaseAdditions.m in Sources */,
 				D21A24EB1D7FF845007BBDCE /* SBJsonParser.m in Sources */,
 				D23ECA731D7E5032006EDD7D /* AppDelegate.m in Sources */,

@@ -12,10 +12,13 @@
 #import "XL_Header.h"
 #import "XL_WangLuo.h"
 #import "XL_FMDB.h"
+#import "XL_PanDianViewController.h"
+
 @interface XLHomeViewController (){
     XL_FMDB  *XL;//数据库调用者
     FMDatabase *db;//数据库
 }
+
 
 @end
 
@@ -29,6 +32,7 @@
     [self shujuku];
     
     
+
     
     
     //     [XL DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:@"london",@"name",@"791432148895",@"birthday",@"156842",@"price", nil] intoTable:@"Pandian1"];
@@ -138,7 +142,7 @@
 }
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
-    NSLog(@"4");
+
 }
 
 //跳转设置
