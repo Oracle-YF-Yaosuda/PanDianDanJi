@@ -7,7 +7,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--返回-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="login" id="BYZ-38-t0r" customClass="XLLogin_ViewController" sceneMemberID="viewController">
@@ -130,11 +130,7 @@
                             <constraint firstItem="63h-2a-P7l" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zRG-Yd-Gzx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cf2-Ta-AXA">
-                        <barButtonItem key="backBarButtonItem" title="返回" id="w9S-aU-sna">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="返回" id="cf2-Ta-AXA"/>
                     <connections>
                         <outlet property="LoginOutlet" destination="JqV-EQ-Nra" id="l87-Pt-5df"/>
                         <outlet property="Name" destination="iLq-EP-rMI" id="hv9-Me-Y3L"/>
@@ -534,7 +530,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ty1-tL-4Jk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936" y="1171"/>
+            <point key="canvasLocation" x="892" y="1104"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="pz4-qI-0J0">
@@ -1266,14 +1262,6 @@
                                     <constraint firstItem="TUo-fB-Krl" firstAttribute="top" secondItem="jEn-kZ-4YC" secondAttribute="bottom" constant="5" id="xsR-mT-vo5"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔍扫描或输入药品条形码" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kwV-2K-oWh">
-                                <rect key="frame" x="0.0" y="23" width="600" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="72T-s5-Lxq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yvg-fQ-Xic">
                                 <rect key="frame" x="0.0" y="68" width="600" height="119"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1481,27 +1469,37 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔍扫描或输入药品条形码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYM-eM-s0I">
+                                <rect key="frame" x="20" y="23" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="vS4-Nb-9hP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="kwV-2K-oWh" secondAttribute="trailing" id="0DA-o3-c2H"/>
                             <constraint firstItem="Yvg-fQ-Xic" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leading" id="1bT-Fd-7mu"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="height" secondItem="yi6-If-UUn" secondAttribute="height" multiplier="0.333333" id="5F6-H8-6IT"/>
-                            <constraint firstItem="kwV-2K-oWh" firstAttribute="top" secondItem="tFt-RR-qy8" secondAttribute="bottom" constant="3" id="A3x-kn-5x3"/>
-                            <constraint firstItem="Yvg-fQ-Xic" firstAttribute="top" secondItem="kwV-2K-oWh" secondAttribute="bottom" constant="5" id="ECg-PT-RKP"/>
+                            <constraint firstItem="QYM-eM-s0I" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leadingMargin" id="DhT-xG-aQA"/>
+                            <constraint firstItem="QYM-eM-s0I" firstAttribute="top" secondItem="tFt-RR-qy8" secondAttribute="bottom" constant="3" id="NV0-Oy-BTt"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leading" id="NhC-kX-RmF"/>
                             <constraint firstAttribute="trailing" secondItem="Yvg-fQ-Xic" secondAttribute="trailing" id="NwV-r0-fYL"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="top" secondItem="2hH-5K-aZw" secondAttribute="bottom" constant="5" id="PEf-7E-8Ea"/>
                             <constraint firstItem="1HD-53-Tk9" firstAttribute="top" secondItem="SBN-5R-CBc" secondAttribute="bottom" id="Pyr-hI-mh2"/>
                             <constraint firstAttribute="trailing" secondItem="SBN-5R-CBc" secondAttribute="trailing" id="R0v-X5-DR9"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="width" secondItem="yi6-If-UUn" secondAttribute="width" id="W9L-IQ-hRO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QYM-eM-s0I" secondAttribute="trailing" id="bKd-jq-ZsS"/>
                             <constraint firstItem="2hH-5K-aZw" firstAttribute="top" secondItem="Yvg-fQ-Xic" secondAttribute="bottom" constant="8" id="iw3-lJ-A8t"/>
-                            <constraint firstItem="kwV-2K-oWh" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leading" id="ttg-Zq-Slo"/>
+                            <constraint firstItem="Yvg-fQ-Xic" firstAttribute="top" secondItem="QYM-eM-s0I" secondAttribute="bottom" constant="5" id="mbl-7w-aB7"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="width" secondItem="2hH-5K-aZw" secondAttribute="width" id="y7c-bl-GQl"/>
                             <constraint firstItem="2hH-5K-aZw" firstAttribute="centerX" secondItem="yi6-If-UUn" secondAttribute="centerX" id="zHZ-di-qHK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Search" destination="QYM-eM-s0I" id="0Ji-Wc-MwM"/>
                         <outlet property="ypetalon" destination="Fb2-2b-rbd" id="be2-hu-BSK"/>
                         <outlet property="ypgoods" destination="9ke-t0-ipN" id="42E-C3-YCD"/>
                         <outlet property="ypname" destination="UhB-Gs-VqR" id="2Ol-fZ-5F1"/>

@@ -138,7 +138,10 @@
 }
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
-
+    XL_PanDianViewController *pandian=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
+    [self.navigationController pushViewController:pandian animated:YES];
+    
+    
 }
 
 //跳转设置

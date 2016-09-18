@@ -96,41 +96,41 @@
 
 #pragma mark ----Login_Action
 - (IBAction)Login:(UIButton *)sender {
-    if ([_Name.text isEqual:@""]||[_Password.text isEqual:@""]) {
-        [WarningBox warningBoxModeText:@"请填写好账号信息哟~" andView:self.view];
-    }else if (NULL ==JuyuwangIP){
-        [WarningBox warningBoxModeText:@"请先设置网络连接" andView:self.view];
-    }else{
-       
-        [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
-        NSString *fangshi=@"/sys/login";
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_Name.text,@"loginName",_Password.text,@"password", nil];
-//自己写的网络请求    请求外网地址
-        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            @try {
-                if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                    NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
-                    [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"Name"];
-                    [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"Password"];
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
-                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
-                    
-                    [self jumpHome];
-                }
-                else{
-                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
-                }
-            } @catch (NSException *exception) {
-                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
-            }
-        } failure:^(NSError *error) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-            NSLog(@"%@",error);
-        }];
-   }
+//    if ([_Name.text isEqual:@""]||[_Password.text isEqual:@""]) {
+//        [WarningBox warningBoxModeText:@"请填写好账号信息哟~" andView:self.view];
+//    }else if (NULL ==JuyuwangIP){
+//        [WarningBox warningBoxModeText:@"请先设置网络连接" andView:self.view];
+//    }else{
+//       
+//        [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
+//        NSString *fangshi=@"/sys/login";
+//        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_Name.text,@"loginName",_Password.text,@"password", nil];
+////自己写的网络请求    请求外网地址
+//        [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+//            [WarningBox warningBoxHide:YES andView:self.view];
+//            @try {
+//                if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+//                    NSUserDefaults *user=[NSUserDefaults standardUserDefaults];
+//                    [user setObject:[NSString stringWithFormat:@"%@",_Name.text] forKey:@"Name"];
+//                    [user setObject:[NSString stringWithFormat:@"%@",_Password.text] forKey:@"Password"];
+//                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data" ] objectForKey:@"accessToken"]] forKey:@"accessToken"];
+//                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"mac"]] forKey:@"Mac"];
+//                    [user setObject:[NSString stringWithFormat:@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"userId"]] forKey:@"UserID"];
+//                    
+                   [self jumpHome];
+//                }
+//                else{
+//                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"msg"]] andView:self.view];
+//                }
+//            } @catch (NSException *exception) {
+//                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+//            }
+//        } failure:^(NSError *error) {
+//            [WarningBox warningBoxHide:YES andView:self.view];
+//            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+//            NSLog(@"%@",error);
+//        }];
+//   }
 }
 -(void)jumpHome{
     XLHomeViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];

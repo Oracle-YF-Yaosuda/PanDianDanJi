@@ -10,4 +10,17 @@
 
 @interface XL_PanDianViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *Search;
+
+
+
+
+
+@property (weak, nonatomic) IBOutlet UIView *ypname;
+@property (weak, nonatomic) IBOutlet UILabel *ypnumber;
+@property (weak, nonatomic) IBOutlet UILabel *ypgoods;
+@property (weak, nonatomic) IBOutlet UILabel *ypwenhao;
+@property (weak, nonatomic) IBOutlet UIView *ypvender;
+@property (weak, nonatomic) IBOutlet UILabel *ypetalon;
+
 @end
