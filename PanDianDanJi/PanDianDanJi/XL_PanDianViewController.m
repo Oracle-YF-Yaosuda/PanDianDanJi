@@ -7,7 +7,8 @@
 //
 
 #import "XL_PanDianViewController.h"
-
+#import "XL_ZhuJiMaViewController.h"
+#import "DSKyeboard.h"
 @interface XL_PanDianViewController ()
 
 @end
@@ -108,5 +109,10 @@
 }
 
 - (IBAction)zhujima:(id)sender {
+    
+    XL_ZhuJiMaViewController *zhuji=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zhujima"];
+    [self.navigationController pushViewController:zhuji animated:YES];
+    
+    
 }
 @end

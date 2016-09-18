@@ -128,6 +128,13 @@
 		D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */; };
 		D23ECB611D7E9135006EDD7D /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB601D7E9135006EDD7D /* btn_save.png */; };
 		D74F2C4A1D8922CE009AC061 /* XL_PanDianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */; };
+		D7BFB44D1D8E7D0000B57CC0 /* DSBaseKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4421D8E7D0000B57CC0 /* DSBaseKeyboard.m */; };
+		D7BFB44E1D8E7D0000B57CC0 /* DSKyeboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4441D8E7D0000B57CC0 /* DSKyeboard.m */; };
+		D7BFB44F1D8E7D0000B57CC0 /* DSLetterKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4461D8E7D0000B57CC0 /* DSLetterKeyboard.m */; };
+		D7BFB4501D8E7D0000B57CC0 /* DSLetterKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7BFB4471D8E7D0000B57CC0 /* DSLetterKeyboard.xib */; };
+		D7BFB4511D8E7D0000B57CC0 /* DSNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4491D8E7D0000B57CC0 /* DSNumberKeyboard.m */; };
+		D7BFB4521D8E7D0000B57CC0 /* DSSymbolKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB44B1D8E7D0000B57CC0 /* DSSymbolKeyboard.m */; };
+		D7BFB4531D8E7D0000B57CC0 /* DSSymbolKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7BFB44C1D8E7D0000B57CC0 /* DSSymbolKeyboard.xib */; };
 		D7DB64131D86526B00C40795 /* XLSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64121D86526B00C40795 /* XLSettingViewController.m */; };
 		D7DB64161D86529C00C40795 /* XLChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64151D86529C00C40795 /* XLChangeViewController.m */; };
 		D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64181D8652CC00C40795 /* XLRelationViewController.m */; };
@@ -318,6 +325,18 @@
 		D23ECB601D7E9135006EDD7D /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
 		D74F2C481D8922CE009AC061 /* XL_PanDianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_PanDianViewController.h; sourceTree = "<group>"; };
 		D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_PanDianViewController.m; sourceTree = "<group>"; };
+		D7BFB4411D8E7D0000B57CC0 /* DSBaseKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBaseKeyboard.h; sourceTree = "<group>"; };
+		D7BFB4421D8E7D0000B57CC0 /* DSBaseKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBaseKeyboard.m; sourceTree = "<group>"; };
+		D7BFB4431D8E7D0000B57CC0 /* DSKyeboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSKyeboard.h; sourceTree = "<group>"; };
+		D7BFB4441D8E7D0000B57CC0 /* DSKyeboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSKyeboard.m; sourceTree = "<group>"; };
+		D7BFB4451D8E7D0000B57CC0 /* DSLetterKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSLetterKeyboard.h; sourceTree = "<group>"; };
+		D7BFB4461D8E7D0000B57CC0 /* DSLetterKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLetterKeyboard.m; sourceTree = "<group>"; };
+		D7BFB4471D8E7D0000B57CC0 /* DSLetterKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSLetterKeyboard.xib; sourceTree = "<group>"; };
+		D7BFB4481D8E7D0000B57CC0 /* DSNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNumberKeyboard.h; sourceTree = "<group>"; };
+		D7BFB4491D8E7D0000B57CC0 /* DSNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNumberKeyboard.m; sourceTree = "<group>"; };
+		D7BFB44A1D8E7D0000B57CC0 /* DSSymbolKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSymbolKeyboard.h; sourceTree = "<group>"; };
+		D7BFB44B1D8E7D0000B57CC0 /* DSSymbolKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSymbolKeyboard.m; sourceTree = "<group>"; };
+		D7BFB44C1D8E7D0000B57CC0 /* DSSymbolKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSSymbolKeyboard.xib; sourceTree = "<group>"; };
 		D7DB64111D86526B00C40795 /* XLSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSettingViewController.h; sourceTree = "<group>"; };
 		D7DB64121D86526B00C40795 /* XLSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSettingViewController.m; sourceTree = "<group>"; };
 		D7DB64141D86529C00C40795 /* XLChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLChangeViewController.h; sourceTree = "<group>"; };
@@ -561,6 +580,7 @@
 		D23ECAA51D7E50B4006EDD7D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D7BFB4401D8E7CE800B57CC0 /* keyboard */,
 				D7DB64201D867E1500C40795 /* Color+Hex.h */,
 				D7DB64211D867E1500C40795 /* Color+Hex.m */,
 				D7DB64341D8692E800C40795 /* XL_FMDB.h */,
@@ -705,6 +725,25 @@
 				D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */,
 			);
 			name = "盘点相关";
+			sourceTree = "<group>";
+		};
+		D7BFB4401D8E7CE800B57CC0 /* keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D7BFB4411D8E7D0000B57CC0 /* DSBaseKeyboard.h */,
+				D7BFB4421D8E7D0000B57CC0 /* DSBaseKeyboard.m */,
+				D7BFB4431D8E7D0000B57CC0 /* DSKyeboard.h */,
+				D7BFB4441D8E7D0000B57CC0 /* DSKyeboard.m */,
+				D7BFB4451D8E7D0000B57CC0 /* DSLetterKeyboard.h */,
+				D7BFB4461D8E7D0000B57CC0 /* DSLetterKeyboard.m */,
+				D7BFB4471D8E7D0000B57CC0 /* DSLetterKeyboard.xib */,
+				D7BFB4481D8E7D0000B57CC0 /* DSNumberKeyboard.h */,
+				D7BFB4491D8E7D0000B57CC0 /* DSNumberKeyboard.m */,
+				D7BFB44A1D8E7D0000B57CC0 /* DSSymbolKeyboard.h */,
+				D7BFB44B1D8E7D0000B57CC0 /* DSSymbolKeyboard.m */,
+				D7BFB44C1D8E7D0000B57CC0 /* DSSymbolKeyboard.xib */,
+			);
+			name = keyboard;
 			sourceTree = "<group>";
 		};
 		D7DB641D1D867D3100C40795 /* 软件说明 */ = {
@@ -885,6 +924,7 @@
 				D23ECB091D7E5226006EDD7D /* jianpan_mr_34.png in Resources */,
 				D23ECB481D7E5472006EDD7D /* jianpan_dk_02_03_03.png in Resources */,
 				D23ECB061D7E5226006EDD7D /* jianpan_mr_25.png in Resources */,
+				D7BFB4501D8E7D0000B57CC0 /* DSLetterKeyboard.xib in Resources */,
 				D23ECB031D7E5226006EDD7D /* jianpan_mr_11.png in Resources */,
 				D23ECAEB1D7E5226006EDD7D /* ic_kefu.png in Resources */,
 				D23ECA7E1D7E5032006EDD7D /* LaunchScreen.storyboard in Resources */,
@@ -897,6 +937,7 @@
 				D23ECAE41D7E5226006EDD7D /* bg.png in Resources */,
 				D23ECB0F1D7E5226006EDD7D /* pd_07.png in Resources */,
 				D23ECB441D7E5472006EDD7D /* 盘点助手_主页.jpg in Resources */,
+				D7BFB4531D8E7D0000B57CC0 /* DSSymbolKeyboard.xib in Resources */,
 				D23ECA7B1D7E5032006EDD7D /* Assets.xcassets in Resources */,
 				D23ECB4E1D7E5472006EDD7D /* jianpan_mr_05.png in Resources */,
 				D23ECAE31D7E5226006EDD7D /* base_action_bar_bg.9.png in Resources */,
@@ -987,16 +1028,20 @@
 				D7F575C81D88D68500F8DA63 /* XL_ZhuJiMaViewController.m in Sources */,
 				D21A24F01D7FF845007BBDCE /* SBJsonStreamWriter.m in Sources */,
 				D23ECAA91D7E51D3006EDD7D /* XLLogin_ViewController.m in Sources */,
+				D7BFB44E1D8E7D0000B57CC0 /* DSKyeboard.m in Sources */,
 				D21A24CC1D7FF18C007BBDCE /* AFSecurityPolicy.m in Sources */,
 				D21A24ED1D7FF845007BBDCE /* SBJsonStreamParserAccumulator.m in Sources */,
 				D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */,
 				D216477A1D7FE71F004FA8D3 /* WarningBox.m in Sources */,
 				D21A24F11D7FF845007BBDCE /* SBJsonStreamWriterAccumulator.m in Sources */,
 				D7DB641C1D8652EC00C40795 /* XLExplainViewController.m in Sources */,
+				D7BFB4521D8E7D0000B57CC0 /* DSSymbolKeyboard.m in Sources */,
 				D7DB64461D86AC8000C40795 /* FMDatabase.m in Sources */,
 				D21A24CE1D7FF18C007BBDCE /* AFURLResponseSerialization.m in Sources */,
+				D7BFB44F1D8E7D0000B57CC0 /* DSLetterKeyboard.m in Sources */,
 				D21BF98A1D80FCE800D538DA /* XLHomeViewController.m in Sources */,
 				D21A24F31D7FF845007BBDCE /* SBJsonTokeniser.m in Sources */,
+				D7BFB44D1D8E7D0000B57CC0 /* DSBaseKeyboard.m in Sources */,
 				D7DB64221D867E1500C40795 /* Color+Hex.m in Sources */,
 				D21A24EA1D7FF845007BBDCE /* NSObject+SBJson.m in Sources */,
 				D7DB64161D86529C00C40795 /* XLChangeViewController.m in Sources */,
@@ -1013,6 +1058,7 @@
 				D23ECA731D7E5032006EDD7D /* AppDelegate.m in Sources */,
 				D21A24EC1D7FF845007BBDCE /* SBJsonStreamParser.m in Sources */,
 				D7DB64361D8692E800C40795 /* XL_FMDB.m in Sources */,
+				D7BFB4511D8E7D0000B57CC0 /* DSNumberKeyboard.m in Sources */,
 				D21A24CA1D7FF18C007BBDCE /* AFHTTPSessionManager.m in Sources */,
 				D21A24CD1D7FF18C007BBDCE /* AFURLRequestSerialization.m in Sources */,
 				D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */,
