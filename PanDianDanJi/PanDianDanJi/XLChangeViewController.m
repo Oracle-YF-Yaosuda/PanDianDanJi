@@ -171,14 +171,8 @@
                 NSLog(@"%@",error);
             }];
         }
-    
-    
-    }else
-    {
+    }else{
         [WarningBox warningBoxModeText:@"密码不能为空" andView:self.view];
     }
-
-    
-    
 }
 @end
