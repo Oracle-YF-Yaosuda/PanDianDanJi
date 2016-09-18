@@ -20,15 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //按钮圆角
-    self.QueRen_Button.layer.cornerRadius = 5.0;
-    //textfield 代理
-    _Oldpass_Field.delegate = self;
-    _Newpass_Field.delegate = self;
-    _Newpass_Field_2.delegate = self;
+   
     //限制textField位数
     [self xianzhi];
     [self navigatio];
+    [self delegate];
     // Do any additional setup after loading the view.
 }
 -(void)navigatio{
@@ -36,6 +32,17 @@
     UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
     
+}
+-(void)delegate{
+    //按钮圆角
+    self.QueRen_Button.layer.cornerRadius = 5.0;
+    //textfield 代理
+    _Oldpass_Field.delegate = self;
+    _Newpass_Field.delegate = self;
+    _Newpass_Field_2.delegate = self;
+    _Newpass_Field.keyboardType = UIKeyboardTypeNamePhonePad;
+    _Oldpass_Field.keyboardType = UIKeyboardTypeNamePhonePad;
+    _Newpass_Field_2.keyboardType=UIKeyboardTypeNamePhonePad;
 }
 -(void)fanhui{
     [self.navigationController popViewControllerAnimated:YES];
@@ -47,6 +54,7 @@
 }
 
 #pragma mark - textfield方法
+
 //光标下移
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
@@ -62,7 +70,7 @@
     {
         //结束编辑
         [self.view endEditing:YES];
-        [self QueRen_Button];
+        [self QueRen_Button:nil];
     }
     return YES;
 }
@@ -111,20 +119,22 @@
 
 -(BOOL)newpass_Deng:(NSString *)deng
 {
-    if (self.Newpass_Field_2.text != self.Newpass_Field.text) {
+    if (![self.Newpass_Field_2.text isEqualToString: self.Newpass_Field.text]) {
         return NO;
     }
     return YES;
 }
 
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 #pragma mark - 确认按钮
 - (IBAction)QueRen_Button:(id)sender {
     
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if (self.Oldpass_Field.text.length > 0 && self.Newpass_Field.text.length > 0 && self.Newpass_Field_2.text.length > 0)
     {
-        if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"pass"]])
+        if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"Password"]])
         {
             [WarningBox warningBoxModeText:@"旧密码不正确" andView:self.view];
         }
@@ -138,7 +148,28 @@
         }
         else
         {
-            
+            [WarningBox warningBoxModeIndeterminate:@"正在修改密码...." andView:self.view];
+            NSString *fangshi=@"/sys/modpass";
+            NSString * name=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]];
+            NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:name,@"loginName",_Oldpass_Field.text,@"oldpassword", _Newpass_Field.text,@"newspassword",nil];
+            //自己写的网络请求    请求外网地址
+            [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Get success:^(id responseObject) {
+                [WarningBox warningBoxHide:YES andView:self.view];
+                @try {
+                    NSLog(@"the xiugai\n\n\n%@\n\n\n",responseObject);
+                        [WarningBox warningBoxModeText:[responseObject objectForKey:@"msg"] andView:self.navigationController.view];
+                    if ([[responseObject objectForKey:@"code"]isEqualToString:@"0000"]) {
+                        [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"Password"];
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }
+                } @catch (NSException *exception) {
+                                [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+                }
+            } failure:^(NSError *error) {
+                [WarningBox warningBoxHide:YES andView:self.view];
+                 [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+                NSLog(@"%@",error);
+            }];
         }
     
     
