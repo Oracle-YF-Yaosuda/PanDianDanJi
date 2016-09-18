@@ -82,7 +82,8 @@
     [XL DataBase:db createTable:TongBuBiaoMing keyTypes:TongBuShiTiLei];
     //新建下载表，里边是本次盘点数据
     [XL DataBase:db createTable:XiaZaiBiaoMing keyTypes:XiaZaiShiTiLei];
-    
+    //新建上传表，里边是需要上传的盘点数据
+    [XL DataBase:db createTable:ShangChuanBiaoMing keyTypes:ShangChuanShiTiLei];
     
 }
 -(void)NavigationDeShezhi{
@@ -110,35 +111,30 @@
 }
 //提交盘点结果
 - (IBAction)TiJian_Button:(id)sender {
+    [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
     NSString *fangshi=@"/sys/upload";
     
-    NSNumber *aa=[NSNumber numberWithInt:20];
+//    NSNumber *aa=[NSNumber numberWithInt:20];
     
-    NSDictionary *list_ci =[NSDictionary dictionaryWithObjectsAndKeys:@"1010",@"checkId",@"100100",@"productCode",@"201605",@"prodBatchNo",aa,@"checkNum",@"0",@"status",@"2016-09-13 08:00:34",@"checkTime",@"药品名称01",@"productName",@"哈药六厂",@"manufacturer",@"100片/盒",@"specification",@"200010101",@"barCode",@"国药准字001",@"approvalNumber",@"ypmc01",@"pycode", nil];
-    
-    
-    NSArray *list=[NSArray arrayWithObjects:list_ci , nil];
+    NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+//    NSDictionary *list_ci =[NSDictionary dictionaryWithObjectsAndKeys:@"1010",@"checkId",@"100100",@"productCode",@"201605",@"prodBatchNo",aa,@"checkNum",@"0",@"status",@"2016-09-13 08:00:34",@"checkTime",@"药品名称01",@"productName",@"哈药六厂",@"manufacturer",@"100片/盒",@"specification",@"200010101",@"barCode",@"国药准字001",@"approvalNumber",@"ypmc01",@"pycode", nil];
+//    
+//    
+//    NSArray *list=[NSArray arrayWithObjects:list_ci , nil];
     
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",@"0",@"state",list,@"list",nil];
     NSLog(@"%@",rucan);
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
-        @try {
-            NSLog(@"\n\n\n%@\n\n\n",responseObject);
-            if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                
-            }
-        } @catch (NSException *exception) {
-            [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
-        }
+        NSLog(@"%@",responseObject);
+       
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
         NSLog(@"%@",error);
     }];
-    
-    NSLog(@"1");
+ 
 }
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
@@ -153,7 +149,6 @@
 -(void)tongbushuju{
     NSString *fangshi=@"/sys/products";
     
-    
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:nil type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
@@ -161,19 +156,12 @@
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:@"同步全部库存成功!" andView:self.view];
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-                NSLog(@"%@",list);
-                
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
-                
                 for (int i=0; i<list.count; i++) {
                     //向同步表中插入数据
                     [XL DataBase:db insertKeyValues:list[i] intoTable:TongBuBiaoMing];
                 }
-                
-                
-                
-                
             }
         } @catch (NSException *exception) {
             [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
@@ -191,7 +179,14 @@
     [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",ss] forKey:@"state"];
     NSString *fangshi=@"/sys/download";
     
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",@"",@"status", nil];
+    NSString * status;
+    if ([ss isEqualToString:@"0"]) {
+        status = @"0";
+    }else{
+        status = @"2";
+    }
+    
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",status,@"status", nil];
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
@@ -211,8 +206,8 @@
             [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
         }
     } failure:^(NSError *error) {
-        //        [WarningBox warningBoxHide:YES andView:self.view];
-        //        [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+                [WarningBox warningBoxHide:YES andView:self.view];
+                [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
         NSLog(@"%@",error);
     }];
     

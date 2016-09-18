@@ -24,11 +24,50 @@
 
 #define TongBuBiaoMing @"tongbu"
 
-#define XiaZaiShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"approvalNumber",@"text",@"barCode",@"text",@"checkId",@"text",@"checkNum",@"text",@"costPrice",@"text",@"id",@"text",@"manufacturer",@"text",@"oldpos",@"text",@"prodBatchNo",@"text",@"productCode",@"text",@"productName",@"text",@"purchaseBatchNo",@"text",@"pycode",@"text",@"salePrice",@"text",@"specification",@"text",@"status",@"text",@"stockNum",@"text",@"vipPrice", nil]
+#define XiaZaiShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"approvalNumber",@"text",@"barCode",@"text",@"checkId",@"text",@"checkNum",@"text",@"costPrice",@"text",@"id",@"text",@"manufacturer",@"text",@"oldpos",@"text",@"prodBatchNo",@"text",@"productCode",@"text",@"productName",@"text",@"purchaseBatchNo",@"text",@"pycode",@"text",@"salePrice",@"text",@"specification",@"text",@"status",@"integer",@"stockNum",@"text",@"vipPrice", nil]
 
 
 #define XiaZaiBiaoMing @"xiazai"
-
-#define ShangChuanShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"productCode",@"text",@"checkNum",@"text",@"prodBatchNo",@"text",@"status",@"text",@"checkTime",@"text",@"productName",@"text",@"manufacturer",@"text",@"specification",@"text",@"barCode",@"text",@"approvalNumber",@"text",@"pycode",@"text",@"checkId", nil]
+/*
+ //	盘点批次号
+    String checkId;
+	
+ //	药品编号
+	String productCode;
+	
+ //	药品名称
+	String productName;
+	
+ //	批号
+	String prodBatchNo;
+	
+ //	盘点数量
+	int checkNum;
+	
+ //	货位号
+	String newpos;
+	
+ //	生产厂家
+	String manufacturer;
+	
+ //	规格
+	String specification;
+	
+ //	条码号
+	String barCode;
+	
+ //	批准文号
+	String approvalNumber;
+	
+ //	助记码
+	String pycode;
+	
+ //	状态
+	String status;
+	
+ //	盘点时间
+	String checkTime;
+ */
+#define ShangChuanShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"productCode",@"text",@"checkNum",@"text",@"prodBatchNo",@"text",@"status",@"text",@"checkTime",@"text",@"productName",@"text",@"manufacturer",@"text",@"specification",@"text",@"barCode",@"text",@"approvalNumber",@"text",@"pycode",@"text",@"checkId",@"text",@"newpos", nil]
 
 #define ShangChuanBiaoMing @"shangchuan"
