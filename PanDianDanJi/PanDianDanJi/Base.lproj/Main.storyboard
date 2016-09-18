@@ -370,7 +370,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxO-5k-knq">
                                 <rect key="frame" x="0.0" y="40" width="600" height="40"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="change.png" translatesAutoresizingMaskIntoConstraints="NO" id="Pfl-CE-iL7">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="change2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Pfl-CE-iL7">
                                         <rect key="frame" x="15" y="10" width="20" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="2pR-zb-nQL"/>
@@ -430,7 +430,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Gwm-IO-cA2"/>
                                 </constraints>
-                                <state key="normal" title="确认">
+                                <state key="normal" title="确定">
                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -1138,68 +1138,110 @@
                                         <rect key="frame" x="243" y="5" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_07.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_mr_09.png"/>
+                                        <connections>
+                                            <action selector="nine:" destination="93X-9A-h6e" eventType="touchUpInside" id="ehc-xf-zHt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-ZY-T2D">
                                         <rect key="frame" x="362" y="5" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_36.png"/>
+                                        <connections>
+                                            <action selector="clear:" destination="93X-9A-h6e" eventType="touchUpInside" id="27d-oc-eIV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2k-c8-z82">
                                         <rect key="frame" x="481" y="5" width="114" height="60"/>
                                         <state key="normal" backgroundImage="助记码.png"/>
                                         <state key="highlighted" backgroundImage="助记码2.png"/>
+                                        <connections>
+                                            <action selector="zhujima:" destination="93X-9A-h6e" eventType="touchUpInside" id="HH3-9k-Ffw"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-fB-Krl">
                                         <rect key="frame" x="5" y="70" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_19.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_01_03_03.png"/>
+                                        <connections>
+                                            <action selector="four:" destination="93X-9A-h6e" eventType="touchUpInside" id="p3k-gE-jQq"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzF-vc-W9t">
                                         <rect key="frame" x="5" y="135" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_33.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_03.png"/>
+                                        <connections>
+                                            <action selector="one:" destination="93X-9A-h6e" eventType="touchUpInside" id="g5d-rV-Re7"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6n-Sy-w0K">
                                         <rect key="frame" x="124" y="70" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_21.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_02_03.png"/>
+                                        <connections>
+                                            <action selector="five:" destination="93X-9A-h6e" eventType="touchUpInside" id="wal-4c-q8O"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsB-ZV-X9N">
                                         <rect key="frame" x="124" y="135" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_34.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_01_03.png"/>
+                                        <connections>
+                                            <action selector="two:" destination="93X-9A-h6e" eventType="touchUpInside" id="TMD-iy-W88"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huu-Cx-wgP">
                                         <rect key="frame" x="243" y="70" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_23.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_02_03_03.png"/>
+                                        <connections>
+                                            <action selector="six:" destination="93X-9A-h6e" eventType="touchUpInside" id="qzb-cW-fVr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1c-Ik-Qib">
                                         <rect key="frame" x="243" y="135" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_35.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_02.png"/>
+                                        <connections>
+                                            <action selector="three:" destination="93X-9A-h6e" eventType="touchUpInside" id="YNV-c7-ack"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vs9-yp-Rtn">
                                         <rect key="frame" x="362" y="70" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_25.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_04_03.png"/>
+                                        <connections>
+                                            <action selector="zero:" destination="93X-9A-h6e" eventType="touchUpInside" id="7Aq-of-2Kt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuY-uI-KEi">
                                         <rect key="frame" x="362" y="135" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_08.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_04_13.png"/>
+                                        <connections>
+                                            <action selector="houtui:" destination="93X-9A-h6e" eventType="touchUpInside" id="qrC-1d-djt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUe-pB-DE9">
                                         <rect key="frame" x="124" y="5" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_05.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_mr_09_03.png"/>
+                                        <connections>
+                                            <action selector="eight:" destination="93X-9A-h6e" eventType="touchUpInside" id="HAF-xg-J1i"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCk-Pb-SpX">
                                         <rect key="frame" x="481" y="70" width="114" height="125"/>
+                                        <connections>
+                                            <action selector="check:" destination="93X-9A-h6e" eventType="touchUpInside" id="9sq-dX-HQo"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEn-kZ-4YC">
                                         <rect key="frame" x="5" y="5" width="114" height="60"/>
                                         <state key="normal" backgroundImage="jianpan_mr_03.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_02_03_03_03.png"/>
+                                        <connections>
+                                            <action selector="seven:" destination="93X-9A-h6e" eventType="touchUpInside" id="LK0-s9-QCc"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1518,6 +1560,7 @@
         <image name="bg.png" width="1080" height="1920"/>
         <image name="btn_save.png" width="900" height="130"/>
         <image name="change.png" width="46" height="67"/>
+        <image name="change2.png" width="30" height="42"/>
         <image name="ic_kefu.png" width="244" height="244"/>
         <image name="ic_qq.png" width="268" height="268"/>
         <image name="ic_weixin.png" width="228" height="228"/>

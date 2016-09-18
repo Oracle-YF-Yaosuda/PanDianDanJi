@@ -140,17 +140,14 @@
 }
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
-<<<<<<< Updated upstream
+
     XL_PanDianViewController *pandian=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
     [self.navigationController pushViewController:pandian animated:YES];
     
-    
-=======
-    
-    if (NULL == [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing]) {
-        
-    }
->>>>>>> Stashed changes
+//    if (NULL == [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing]) {
+//        
+//    }
+
 }
 
 //跳转设置

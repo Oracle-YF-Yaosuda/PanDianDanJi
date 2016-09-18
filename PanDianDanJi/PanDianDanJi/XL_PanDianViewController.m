@@ -20,7 +20,11 @@
      UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
     [_ypname addGestureRecognizer:labelTapGestureRecognizer];
     _ypname.userInteractionEnabled = YES;
-
+    _Search.textColor = [UIColor lightGrayColor];
+   
+    [_Search.layer setBorderWidth:1.0];
+    [_Search.layer setCornerRadius:5.0];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -59,4 +63,50 @@
     
 }
 
+
+- (IBAction)zero:(id)sender {
+    _Search.text = @"0";
+}
+
+- (IBAction)one:(id)sender {
+}
+
+- (IBAction)two:(id)sender {
+}
+
+- (IBAction)three:(id)sender {
+}
+
+- (IBAction)four:(id)sender {
+}
+
+- (IBAction)five:(id)sender {
+}
+
+- (IBAction)six:(id)sender {
+}
+
+- (IBAction)seven:(id)sender {
+}
+
+- (IBAction)eight:(id)sender {
+}
+
+- (IBAction)nine:(id)sender {
+}
+
+- (IBAction)houtui:(id)sender {
+}
+
+- (IBAction)clear:(id)sender {
+    
+  _Search.text = @"🔍扫描或输入药品条形码";
+    
+}
+
+- (IBAction)check:(id)sender {
+}
+
+- (IBAction)zhujima:(id)sender {
+}
 @end
