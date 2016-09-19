@@ -127,6 +127,7 @@
 		D23ECB5C1D7E63E7006EDD7D /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB5B1D7E63E7006EDD7D /* welcome.png */; };
 		D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */; };
 		D23ECB611D7E9135006EDD7D /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB601D7E9135006EDD7D /* btn_save.png */; };
+		D27816971D8FC97A00641402 /* TextFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D27816961D8FC97A00641402 /* TextFlowView.m */; };
 		D74F2C4A1D8922CE009AC061 /* XL_PanDianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */; };
 		D7BFB44D1D8E7D0000B57CC0 /* DSBaseKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4421D8E7D0000B57CC0 /* DSBaseKeyboard.m */; };
 		D7BFB44E1D8E7D0000B57CC0 /* DSKyeboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4441D8E7D0000B57CC0 /* DSKyeboard.m */; };
@@ -323,6 +324,8 @@
 		D23ECB5D1D7E6C2D006EDD7D /* XLNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNetworkViewController.h; sourceTree = "<group>"; };
 		D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNetworkViewController.m; sourceTree = "<group>"; };
 		D23ECB601D7E9135006EDD7D /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
+		D27816951D8FC97A00641402 /* TextFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFlowView.h; sourceTree = "<group>"; };
+		D27816961D8FC97A00641402 /* TextFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFlowView.m; sourceTree = "<group>"; };
 		D74F2C481D8922CE009AC061 /* XL_PanDianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_PanDianViewController.h; sourceTree = "<group>"; };
 		D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_PanDianViewController.m; sourceTree = "<group>"; };
 		D7BFB4411D8E7D0000B57CC0 /* DSBaseKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBaseKeyboard.h; sourceTree = "<group>"; };
@@ -580,14 +583,12 @@
 		D23ECAA51D7E50B4006EDD7D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D278169C1D8FCA1E00641402 /* 自定义全局 */,
+				D278169B1D8FC9F400641402 /* AFNetWorking封装 */,
+				D278169A1D8FC9D600641402 /* FMDB封装 */,
+				D27816991D8FC9C100641402 /* 颜色调配 */,
+				D27816981D8FC9AD00641402 /* 滚动字幕 */,
 				D7BFB4401D8E7CE800B57CC0 /* keyboard */,
-				D7DB64201D867E1500C40795 /* Color+Hex.h */,
-				D7DB64211D867E1500C40795 /* Color+Hex.m */,
-				D7DB64341D8692E800C40795 /* XL_FMDB.h */,
-				D7DB64351D8692E800C40795 /* XL_FMDB.m */,
-				D21647731D7FE555004FA8D3 /* XL_Header.h */,
-				D21A24F91D8006BF007BBDCE /* XL_WangLuo.h */,
-				D21A24FA1D8006BF007BBDCE /* XL_WangLuo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -716,6 +717,50 @@
 				D23ECB371D7E5472006EDD7D /* jianpan_mr_36.png */,
 			);
 			path = "计算器";
+			sourceTree = "<group>";
+		};
+		D27816981D8FC9AD00641402 /* 滚动字幕 */ = {
+			isa = PBXGroup;
+			children = (
+				D27816951D8FC97A00641402 /* TextFlowView.h */,
+				D27816961D8FC97A00641402 /* TextFlowView.m */,
+			);
+			name = "滚动字幕";
+			sourceTree = "<group>";
+		};
+		D27816991D8FC9C100641402 /* 颜色调配 */ = {
+			isa = PBXGroup;
+			children = (
+				D7DB64201D867E1500C40795 /* Color+Hex.h */,
+				D7DB64211D867E1500C40795 /* Color+Hex.m */,
+			);
+			name = "颜色调配";
+			sourceTree = "<group>";
+		};
+		D278169A1D8FC9D600641402 /* FMDB封装 */ = {
+			isa = PBXGroup;
+			children = (
+				D7DB64341D8692E800C40795 /* XL_FMDB.h */,
+				D7DB64351D8692E800C40795 /* XL_FMDB.m */,
+			);
+			name = "FMDB封装";
+			sourceTree = "<group>";
+		};
+		D278169B1D8FC9F400641402 /* AFNetWorking封装 */ = {
+			isa = PBXGroup;
+			children = (
+				D21A24F91D8006BF007BBDCE /* XL_WangLuo.h */,
+				D21A24FA1D8006BF007BBDCE /* XL_WangLuo.m */,
+			);
+			name = "AFNetWorking封装";
+			sourceTree = "<group>";
+		};
+		D278169C1D8FCA1E00641402 /* 自定义全局 */ = {
+			isa = PBXGroup;
+			children = (
+				D21647731D7FE555004FA8D3 /* XL_Header.h */,
+			);
+			name = "自定义全局";
 			sourceTree = "<group>";
 		};
 		D74F2C471D8922A6009AC061 /* 盘点相关 */ = {
@@ -1027,6 +1072,7 @@
 				D21A24F21D7FF845007BBDCE /* SBJsonStreamWriterState.m in Sources */,
 				D7F575C81D88D68500F8DA63 /* XL_ZhuJiMaViewController.m in Sources */,
 				D21A24F01D7FF845007BBDCE /* SBJsonStreamWriter.m in Sources */,
+				D27816971D8FC97A00641402 /* TextFlowView.m in Sources */,
 				D23ECAA91D7E51D3006EDD7D /* XLLogin_ViewController.m in Sources */,
 				D7BFB44E1D8E7D0000B57CC0 /* DSKyeboard.m in Sources */,
 				D21A24CC1D7FF18C007BBDCE /* AFSecurityPolicy.m in Sources */,

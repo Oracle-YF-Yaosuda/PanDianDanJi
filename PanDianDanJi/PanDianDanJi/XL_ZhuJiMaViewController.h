@@ -10,5 +10,6 @@
 
 @interface XL_ZhuJiMaViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *mytf;
+@property (weak, nonatomic) IBOutlet UITableView *table;
 
 @end

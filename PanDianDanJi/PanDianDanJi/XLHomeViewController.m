@@ -85,6 +85,7 @@
     //新建上传表，里边是需要上传的盘点数据
     [XL DataBase:db createTable:ShangChuanBiaoMing keyTypes:ShangChuanShiTiLei];
     
+    
 }
 -(void)NavigationDeShezhi{
     [self.navigationController setNavigationBarHidden:NO];
@@ -111,7 +112,9 @@
 }
 //提交盘点结果
 - (IBAction)TiJian_Button:(id)sender {
-    
+    /*
+     缺少字段
+     */
     NSString *fangshi=@"/sys/upload";
     NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
     /*    NSNumber *aa=[NSNumber numberWithInt:20];
@@ -163,7 +166,7 @@
         
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                
+                NSLog(@"%@",responseObject);
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
@@ -192,15 +195,17 @@
     if ([ss isEqualToString:@"0"]) {
         status = @"0";
     }else{
-        status = @"2";
+        status = @"0";
     }
-    
+    /*
+     checkId   缺少字段
+     */
     NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",status,@"status", nil];
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-            NSLog(@"\n\nxiazai____\n\n%@",responseObject);
+//            NSLog(@"\n\nxiazai____\n\n%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
@@ -210,6 +215,9 @@
                     //向下载表中插入数据
                     [XL DataBase:db insertKeyValues:list[i] intoTable:XiaZaiBiaoMing];
                 }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self ceshi];
+                });
             }
         } @catch (NSException *exception) {
             [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
@@ -220,5 +228,11 @@
         NSLog(@"%@",error);
     }];
     
+}
+
+-(void)ceshi{
+    NSArray*arr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing];
+    NSLog(@"the ---%@",arr);
+
 }
 @end

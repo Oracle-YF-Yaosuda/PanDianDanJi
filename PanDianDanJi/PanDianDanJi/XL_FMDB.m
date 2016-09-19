@@ -191,7 +191,10 @@ static XL_FMDB *fmdb =nil;
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereKey:(NSString *)key containStr:(NSString *)str{
     
     if ([self isOpenDatabese:db]) {
+       
     FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ LIKE '%%%@%%'",tableName, key, str]];
+       
+        
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
         return nil;
