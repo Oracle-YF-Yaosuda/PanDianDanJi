@@ -74,6 +74,7 @@
 -(void)delegate{
     _Name.delegate=self;
     _Password.delegate=self;
+    _Name.keyboardType=UIKeyboardTypeNamePhonePad;
     [_Name setClearButtonMode:UITextFieldViewModeWhileEditing];
     [_Password setClearButtonMode:UITextFieldViewModeWhileEditing];
     [_Password setSecureTextEntry:YES];
