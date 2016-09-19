@@ -149,6 +149,7 @@
 		D7DB64491D86AC8000C40795 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64411D86AC8000C40795 /* FMDatabaseQueue.m */; };
 		D7DB644A1D86AC8000C40795 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DB64441D86AC8000C40795 /* FMResultSet.m */; };
 		D7DB644B1D86AC8000C40795 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7DB64451D86AC8000C40795 /* Info.plist */; };
+		D7E652FF1D8FE72C003D1926 /* XL_SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E652FE1D8FE72C003D1926 /* XL_SearchViewController.m */; };
 		D7F575C81D88D68500F8DA63 /* XL_ZhuJiMaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7F575C71D88D68500F8DA63 /* XL_ZhuJiMaViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -365,6 +366,8 @@
 		D7DB64431D86AC8000C40795 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		D7DB64441D86AC8000C40795 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		D7DB64451D86AC8000C40795 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7E652FD1D8FE72C003D1926 /* XL_SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_SearchViewController.h; sourceTree = "<group>"; };
+		D7E652FE1D8FE72C003D1926 /* XL_SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_SearchViewController.m; sourceTree = "<group>"; };
 		D7F575C61D88D68500F8DA63 /* XL_ZhuJiMaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_ZhuJiMaViewController.h; sourceTree = "<group>"; };
 		D7F575C71D88D68500F8DA63 /* XL_ZhuJiMaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_ZhuJiMaViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -569,6 +572,8 @@
 				D21BF9821D80F0D000D538DA /* 登陆及密码相关 */,
 				D21BF9831D80F12D00D538DA /* 主页相关 */,
 				D21BF9871D80FA8E00D538DA /* 设置相关 */,
+				D7E652FD1D8FE72C003D1926 /* XL_SearchViewController.h */,
+				D7E652FE1D8FE72C003D1926 /* XL_SearchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1105,6 +1110,7 @@
 				D21A24EC1D7FF845007BBDCE /* SBJsonStreamParser.m in Sources */,
 				D7DB64361D8692E800C40795 /* XL_FMDB.m in Sources */,
 				D7BFB4511D8E7D0000B57CC0 /* DSNumberKeyboard.m in Sources */,
+				D7E652FF1D8FE72C003D1926 /* XL_SearchViewController.m in Sources */,
 				D21A24CA1D7FF18C007BBDCE /* AFHTTPSessionManager.m in Sources */,
 				D21A24CD1D7FF18C007BBDCE /* AFURLRequestSerialization.m in Sources */,
 				D7DB64191D8652CC00C40795 /* XLRelationViewController.m in Sources */,
