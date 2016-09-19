@@ -66,6 +66,7 @@
     textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     textField.layer.cornerRadius=5;
     textField.layer.borderWidth=1.0;
+    textField.keyboardType=UIKeyboardTypeNamePhonePad;
 }
 
 #pragma mark ------tableview
@@ -163,6 +164,16 @@
         [_table reloadData];
         _table.hidden=NO;
     }
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self tuijianpan];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self tuijianpan];
+}
+-(void)tuijianpan{
+    [self.view endEditing:YES];
+    _mytf.layer.borderColor = [[UIColor blackColor]CGColor];
 }
 -(void)navigation{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
