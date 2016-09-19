@@ -9,15 +9,30 @@
 #import "XL_PanDianViewController.h"
 #import "XL_ZhuJiMaViewController.h"
 #import "DSKyeboard.h"
-@interface XL_PanDianViewController ()
+@interface XL_PanDianViewController (){
+    /*判断传值*/
+    int chuanzhipanduan;
+}
 
 @end
 
 @implementation XL_PanDianViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    if (chuanzhipanduan==1) {
+        chuanzhipanduan=0;
+        
+        
+    }
+    else{
+        
+        
+    }
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    chuanzhipanduan=0;
      UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
     [_ypname addGestureRecognizer:labelTapGestureRecognizer];
     _ypname.userInteractionEnabled = YES;
@@ -43,28 +58,6 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-//视图上移的方法
-- (void) animateTextField: (CGFloat) textField up: (BOOL) up
-{
-    
-    //设置视图上移的距离，单位像素
-    const int movementDistance = textField; // tweak as needed
-    //三目运算，判定是否需要上移视图或者不变
-    int movement = (up ? movementDistance : -movementDistance);
-    //设置动画的名字
-    [UIView beginAnimations: @"Animation" context: nil];
-    //设置动画的开始移动位置
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    //设置动画的间隔时间
-    [UIView setAnimationDuration: 0.20];
-    //设置视图移动的位移
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-    //设置动画结束
-    [UIView commitAnimations];
-    
-}
-
-
 - (IBAction)zero:(id)sender {
     _Search.text = @"0";
 }
@@ -111,6 +104,12 @@
 - (IBAction)zhujima:(id)sender {
     
     XL_ZhuJiMaViewController *zhuji=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zhujima"];
+    [zhuji passValue:^(NSString *str) {
+        _Search.text=str;
+        chuanzhipanduan=1;
+        NSLog(@"%@",str);
+    }];
+
     [self.navigationController pushViewController:zhuji animated:YES];
     
     

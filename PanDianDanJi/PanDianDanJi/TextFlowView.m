@@ -56,9 +56,9 @@
         _alignLeft = direction;
         self.backgroundColor = backColor;
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAct:)];
-        tap.numberOfTapsRequired = 1;
-        [self addGestureRecognizer:tap];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAct:)];
+//        tap.numberOfTapsRequired = 1;
+//        [self addGestureRecognizer:tap];
         
         //初始化标签
         //判断是否需要滚动效果

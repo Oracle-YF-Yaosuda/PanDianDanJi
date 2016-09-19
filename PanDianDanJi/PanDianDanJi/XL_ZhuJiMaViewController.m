@@ -9,6 +9,9 @@
 #import "XL_ZhuJiMaViewController.h"
 #import "XL_FMDB.h"
 #import "XL_Header.h"
+#import "TextFlowView.h"
+#import "Color+Hex.h"
+#import "XL_PanDianViewController.h"
 
 @interface XL_ZhuJiMaViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
     XL_FMDB * XL;
@@ -53,14 +56,15 @@
     _mytf.keyboardType=UIKeyboardTypeDefault;
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    textField.layer.borderColor=[[UIColor greenColor] CGColor];
+    textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     textField.layer.borderWidth=1.0;
     NSString *sou= [textField.text stringByAppendingString:string];
     [self sousuo:sou];
     return YES;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    textField.layer.borderColor=[[UIColor greenColor] CGColor];
+    textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
+    textField.layer.cornerRadius=5;
     textField.layer.borderWidth=1.0;
 }
 
@@ -97,17 +101,19 @@
     }
     
     UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 33)];
-    lll.textColor=[UIColor grayColor];
-    lll.font=[UIFont boldSystemFontOfSize:17];
-    UIView *viewaa=[[UIView alloc] initWithFrame:CGRectMake(0,43 , self.view.frame.size.width, 1)];
-    viewaa.backgroundColor=[UIColor greenColor];
+    lll.textColor=[UIColor colorWithHexString:@"545454"];
+    lll.font=[UIFont boldSystemFontOfSize:18];
+    UIView *viewaa=[[UIView alloc] initWithFrame:CGRectMake(10,43 , self.view.frame.size.width, 2)];
+    viewaa.backgroundColor=[UIColor colorWithHexString:@"34C083"];
     UILabel * text=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33)];
-    text.textColor=[UIColor grayColor];
-    text.font=[UIFont boldSystemFontOfSize:17];
+    text.textColor=[UIColor colorWithHexString:@"646464"];
+    text.font=[UIFont boldSystemFontOfSize:18];
+    TextFlowView *techangview;
     
     if (indexPath.row==0) {
         lll.text=@"药品名称:";
-        text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productName"]];
+        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productName"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        [cell addSubview:techangview];
     }else if (indexPath.row==1){
         lll.text=@"药品编号:";
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]];
@@ -116,7 +122,8 @@
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"prodBatchNo"]];
     }else if (indexPath.row==3){
         lll.text=@"生产厂家:";
-        text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"manufacturer"]];
+        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"manufacturer"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        [cell addSubview:techangview];
     }else if (indexPath.row==4){
         lll.text=@"药品规格:";
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"specification"]];
@@ -134,8 +141,19 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld",(long)indexPath.row);
+    if (tableView == self.table) {
+        NSString *txm=[arr[(long)indexPath.section] objectForKey:@"barCode"];
+        if (self.passValueBlock!=nil) {
+            self.passValueBlock(txm);
+        }
+        [self fanhui];
+    }
 }
+-(void)passValue:(PassValueBlock)block{
+    
+    self.passValueBlock = block;
+}
+
 #pragma mark ------方法
 -(void)sousuo:(NSString *)str{
     if ([str isEqualToString:@""]) {
@@ -152,7 +170,12 @@
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{
-    [self.navigationController popViewControllerAnimated:YES];
+    XL_PanDianViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"pandian"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[pan class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 
 
