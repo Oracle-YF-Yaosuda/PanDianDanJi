@@ -59,7 +59,7 @@
     textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     textField.layer.borderWidth=1.0;
     NSString *sou= [textField.text stringByAppendingString:string];
-    [self sousuo:sou];
+    [self sousuo:sou :string];
     return YES;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -156,8 +156,8 @@
 }
 
 #pragma mark ------方法
--(void)sousuo:(NSString *)str{
-    if ([str isEqualToString:@""]) {
+-(void)sousuo:(NSString *)str :(NSString *)ss{
+    if (str.length==1&&[ss isEqualToString:@""]) {
         _table.hidden=YES;
     }else{
         arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@",str]];
