@@ -12,6 +12,8 @@
 #import "XL_Header.h"
 #import "XL_FMDB.h"
 #import "WarningBox.h"
+#import "TextFlowView.h"
+#import "Color+Hex.h"
 @interface XL_PanDianViewController (){
     
     XL_FMDB *XL;
@@ -183,8 +185,25 @@
        [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
        NSArray *arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:[NSString stringWithFormat:@"%@",_Search.text]];
-   
-        NSLog(@"%@",arr);
+      
+        UILabel *name = [[UILabel alloc]init];
+        name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
+        UILabel *chang = [[UILabel alloc]init];
+        chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
+        
+     TextFlowView *nameview;
+     nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:name.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        [self.InfoView addSubview:nameview];
+        
+    TextFlowView *changview;
+      changview =  [[TextFlowView alloc] initWithFrame:_ypvender.frame Text:chang.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        [self.InfoView addSubview:changview];
+        
+     _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"purchaseBatchNo"]];//药品编号
+     _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
+    _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
+     _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
+       NSLog(@"%@",arr);
     }
     
     

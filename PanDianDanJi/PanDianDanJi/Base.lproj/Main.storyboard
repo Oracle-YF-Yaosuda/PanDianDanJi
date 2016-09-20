@@ -1584,6 +1584,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="InfoView" destination="2hH-5K-aZw" id="4ZB-yl-eA0"/>
                         <outlet property="Search" destination="QYM-eM-s0I" id="0Ji-Wc-MwM"/>
                         <outlet property="ypetalon" destination="Fb2-2b-rbd" id="be2-hu-BSK"/>
                         <outlet property="ypgoods" destination="9ke-t0-ipN" id="42E-C3-YCD"/>

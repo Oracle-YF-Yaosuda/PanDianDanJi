@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *Search;
 
 
+@property (weak, nonatomic) IBOutlet UIView *InfoView;
 
 
 
