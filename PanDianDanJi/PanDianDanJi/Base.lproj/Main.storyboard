@@ -1273,6 +1273,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCk-Pb-SpX">
                                         <rect key="frame" x="481" y="70" width="114" height="125"/>
+                                        <state key="normal" backgroundImage="jianpan_mr_27.png"/>
                                         <connections>
                                             <action selector="check:" destination="93X-9A-h6e" eventType="touchUpInside" id="9sq-dX-HQo"/>
                                         </connections>
@@ -1636,6 +1637,7 @@
         <image name="jianpan_mr_21.png" width="190" height="154"/>
         <image name="jianpan_mr_23.png" width="190" height="154"/>
         <image name="jianpan_mr_25.png" width="190" height="154"/>
+        <image name="jianpan_mr_27.png" width="190" height="327"/>
         <image name="jianpan_mr_33.png" width="190" height="154"/>
         <image name="jianpan_mr_34.png" width="190" height="154"/>
         <image name="jianpan_mr_35.png" width="190" height="154"/>
