@@ -314,14 +314,19 @@
     _table.hidden=YES;
     //去除多余分割线
     self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
+    _table.backgroundColor = [UIColor clearColor];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [arr count];
  }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if ([arr count]==1){
     return 2;
+    }else{
+        return 1;
+    }
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -336,36 +341,64 @@
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         
     }
- 
-//    UILabel *pihaolab = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
-//    UILabel *shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
-//    UIView  *phview = [[UIView alloc]initWithFrame:CGRectMake(pihaolab.frame.size.width+10, 7, 90, 30)];
-//    UIView  *slview = [[UIView alloc]initWithFrame:CGRectMake(shulianglab.frame.size.width+10, 7, 80, 30)];
-    UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 33)];
-    lll.textColor=[UIColor colorWithHexString:@"545454"];
-    lll.font=[UIFont boldSystemFontOfSize:16];
-    UIView *viewaa=[[UIView alloc] initWithFrame:CGRectMake(10,43 , self.view.frame.size.width, 2)];
-    viewaa.backgroundColor=[UIColor colorWithHexString:@"34C083"];
-    UILabel * text=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33)];
-    text.textColor=[UIColor colorWithHexString:@"646464"];
-    text.font=[UIFont boldSystemFontOfSize:16];
+    for (UIView *v in [cell subviews]) {
+        [v removeFromSuperview];
+    }
+
+    UILabel*lll;
+    UIView *viewaa;
+    UILabel * text;
+    UILabel *shulianglab;
     TextFlowView *techangview;
     
-    if (indexPath.row==0) {
-        lll.text=@"数量:";
-         text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"checkNum"]];
-      
-    }else if (indexPath.row==1){
-        lll.text=@"批号:";
-        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
-        [cell addSubview:techangview];
-       
+    
+
+    if ([arr count]==1){
+        lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 33)];
+        viewaa=[[UIView alloc] initWithFrame:CGRectMake(lll.frame.size.width+15,10, self.view.frame.size.width-90, 30)];
+        text=[[UILabel alloc] initWithFrame:CGRectMake(75, 10, CGRectGetWidth(self.view.frame)-100,33)];
+        
+        if (indexPath.row==0) {
+            lll.text=@"数量:";
+            text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"checkNum"]];
+            
+        }else if (indexPath.row==1){
+            lll.text=@"批号:";
+            techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        }
+        
+    }else{
+    lll = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
+    viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
+    shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(viewaa.frame.origin.x+viewaa.frame.size.width+10, 7, 50, 30)];
+    text = [[UILabel alloc]initWithFrame:CGRectMake(shulianglab.frame.origin.x+shulianglab.frame.size.width+10, 7, 80, 30)];
+        
+        if (indexPath.row==0) {
+            lll.text=@"批号:";
+            techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+           
+            shulianglab.text=@"数量:";
+            text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"checkNum"]];
+        }
+        
+        
     }
+    
+    lll.textColor=[UIColor colorWithHexString:@"545454"];
+    lll.font=[UIFont boldSystemFontOfSize:16];
+    text.textColor=[UIColor colorWithHexString:@"646464"];
+    text.font=[UIFont boldSystemFontOfSize:16];
+    
+  
+    [text.layer setBorderWidth:1];
+    [text.layer setBorderColor:[[UIColor blackColor] CGColor]];
+    [text.layer setCornerRadius:3.0];
+    
     [cell addSubview:text];
     [cell addSubview:lll];
-
-  
-    
+    [cell addSubview:shulianglab];
+    [cell addSubview:techangview];
+ 
     //点击不变色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
