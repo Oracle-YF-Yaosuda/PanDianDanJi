@@ -22,6 +22,8 @@
     
     /*判断传值*/
     int chuanzhipanduan;
+    
+    NSArray *arr;//查找到的数组
 }
 
 @end
@@ -64,6 +66,9 @@
     
     
     [self shujuku];
+    [self tabledelegate];
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -219,13 +224,16 @@
 }
 //搜索
 -(void)chazhao{
-    NSArray *arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+    arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
     
   
     UILabel *name = [[UILabel alloc]init];
     UILabel *chang = [[UILabel alloc]init];
     
     if(arr.count==0){
+     // NSArray  *aarr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:@","];
+        
+        
         [self tishi];
         name.text  =@"";
         chang.text = @"";
@@ -265,7 +273,10 @@
     _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
     _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
     }
-    NSLog(@"%@",arr);
+    
+    [_table reloadData];
+    _table.hidden=NO;
+   // NSLog(@"%@",arr);
 }
 -(void)tishi{
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
@@ -296,11 +307,21 @@
     }];
 }
 #pragma mark --- tableview
+
+-(void)tabledelegate{
+    _table.delegate=self;
+    _table.dataSource=self;
+    _table.hidden=YES;
+    //去除多余分割线
+    self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return [arr count];
  }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return 2;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -316,11 +337,35 @@
         
     }
  
-//    UILabel *pihaolab = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 70, 30)];
-//    UILabel *shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(10, 7, 70, 30)];
-//    UIView  *phview = []
+//    UILabel *pihaolab = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
+//    UILabel *shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
+//    UIView  *phview = [[UIView alloc]initWithFrame:CGRectMake(pihaolab.frame.size.width+10, 7, 90, 30)];
+//    UIView  *slview = [[UIView alloc]initWithFrame:CGRectMake(shulianglab.frame.size.width+10, 7, 80, 30)];
+    UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 33)];
+    lll.textColor=[UIColor colorWithHexString:@"545454"];
+    lll.font=[UIFont boldSystemFontOfSize:16];
+    UIView *viewaa=[[UIView alloc] initWithFrame:CGRectMake(10,43 , self.view.frame.size.width, 2)];
+    viewaa.backgroundColor=[UIColor colorWithHexString:@"34C083"];
+    UILabel * text=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33)];
+    text.textColor=[UIColor colorWithHexString:@"646464"];
+    text.font=[UIFont boldSystemFontOfSize:16];
+    TextFlowView *techangview;
     
+    if (indexPath.row==0) {
+        lll.text=@"数量:";
+         text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"checkNum"]];
+      
+    }else if (indexPath.row==1){
+        lll.text=@"批号:";
+        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        [cell addSubview:techangview];
+       
+    }
+    [cell addSubview:text];
+    [cell addSubview:lll];
 
+  
+    
     //点击不变色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
