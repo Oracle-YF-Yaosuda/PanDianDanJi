@@ -10,5 +10,5 @@
 
 @interface XL_SearchViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *table;
-
+@property (strong,nonatomic)NSString *str;
 @end

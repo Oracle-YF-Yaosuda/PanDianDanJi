@@ -12,11 +12,13 @@
 #import "TextFlowView.h"
 #import "Color+Hex.h"
 #import "XL_PanDianViewController.h"
+#import "DSKyeboard.h"
 
 @interface XL_ZhuJiMaViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>{
     XL_FMDB * XL;
     FMDatabase *db;
     NSArray*arr;
+    int first;
 }
 
 @end
@@ -31,47 +33,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     [self navigation];
     [self textdelegate];
     [self tabledelegate];
     [self shujuku];
 }
+
 -(void)shujuku{
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
     db = [XL getDBWithDBName:@"pandian.sqlite"];
-    //    //新建同步表，里边是同步数据信息
-    //    [XL DataBase:db createTable:TongBuBiaoMing keyTypes:TongBuShiTiLei];
-    //新建下载表，里边是本次盘点数据
     [XL DataBase:db createTable:XiaZaiBiaoMing keyTypes:XiaZaiShiTiLei];
-    //    //新建上传表，里边是需要上传的盘点数据
-    //    [XL DataBase:db createTable:ShangChuanBiaoMing keyTypes:ShangChuanShiTiLei];
-    
-    
-    
 }
 #pragma mark ------textfield
 -(void)textdelegate{
     _mytf.delegate=self;
     _mytf.keyboardType=UIKeyboardTypeDefault;
 }
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
-    textField.layer.borderWidth=1.0;
-//    NSString *sou= [textField.text stringByAppendingString:string];
-    [self sousuo:textField.text :string];
-    return YES;
-}
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     textField.layer.cornerRadius=5;
     textField.layer.borderWidth=1.0;
     textField.keyboardType=UIKeyboardTypeNamePhonePad;
+    [self setupCustomedKeyboard:textField];
 }
-
+- (void)setupCustomedKeyboard:(UITextField*)tf {
+    tf.inputView = [DSKyeboard keyboardWithTextField:tf];
+    [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
+        
+        tf.text = fakePassword;
+        [self sousuo:tf.text];
+    } loginBlock:^(NSString *password) {
+        [tf resignFirstResponder];
+    }];
+}
 #pragma mark ------tableview
 -(void)tabledelegate{
-    //    _table.backgroundColor=[UIColor redColor];
     _table.delegate=self;
     _table.dataSource=self;
     _table.hidden=YES;
@@ -130,11 +128,6 @@
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"specification"]];
         [cell addSubview:viewaa];
     }
-    
-    
-    
-    
-    
     [cell addSubview:text];
     [cell addSubview:lll];
     //点击不变色
@@ -156,19 +149,12 @@
 }
 
 #pragma mark ------方法
--(void)sousuo:(NSString *)str :(NSString *)ss{
-    NSLog(@"\n\n%@-----------%@\n\n",str,ss);
-    if ([ss isEqualToString:@""]) {
-        if (str.length==1) {
-            _table.hidden=YES;
-        }else{
-            arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@",[str substringToIndex:str.length-1]]];
-            NSLog(@"\n\nshanchu ====%@\n\n",[str substringToIndex:str.length-1]);
-            [_table reloadData];
-            _table.hidden=NO;
-        }
+-(void)sousuo:(NSString *)str{
+    if ([str isEqualToString:@""]) {
+        _table.hidden=YES;
     }else{
-        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@%@",str,ss]];
+        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@",str]];
+        NSLog(@"\n\nshanchu ====%@\n\n",str);
         [_table reloadData];
         _table.hidden=NO;
     }
