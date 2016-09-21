@@ -38,6 +38,15 @@
         
     }
 
+    //判断搜索
+    if (![_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+        [self chazhao];
+    }else{
+    
+    }
+    
+    
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,6 +68,10 @@
 -(void)labelClick{
     NSLog(@"1");
 }
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -178,37 +191,7 @@
   _Search.text = @"🔍扫描或输入药品条形码";
     
 }
-
-- (IBAction)check:(id)sender {
-    
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-       [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
-    }else{
-       NSArray *arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:[NSString stringWithFormat:@"%@",_Search.text]];
-      
-        UILabel *name = [[UILabel alloc]init];
-        name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
-        UILabel *chang = [[UILabel alloc]init];
-        chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
-        
-     TextFlowView *nameview;
-     nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:name.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
-        [self.InfoView addSubview:nameview];
-        
-    TextFlowView *changview;
-      changview =  [[TextFlowView alloc] initWithFrame:_ypvender.frame Text:chang.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
-        [self.InfoView addSubview:changview];
-        
-     _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"purchaseBatchNo"]];//药品编号
-     _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
-    _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
-     _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
-       NSLog(@"%@",arr);
-    }
-    
-    
-}
-
+//助记码
 - (IBAction)zhujima:(id)sender {
     
     XL_ZhuJiMaViewController *zhuji=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zhujima"];
@@ -217,8 +200,97 @@
         chuanzhipanduan=1;
         NSLog(@"%@",str);
     }];
-
+    
     [self.navigationController pushViewController:zhuji animated:YES];
-   
+    
 }
+//确定按钮
+- (IBAction)check:(id)sender {
+    
+    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+       [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
+    }else{
+        [self chazhao];
+   
+    }
+    
+    
+}
+//搜索
+-(void)chazhao{
+    NSArray *arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:[NSString stringWithFormat:@"%@",_Search.text]];
+    
+  
+    UILabel *name = [[UILabel alloc]init];
+    UILabel *chang = [[UILabel alloc]init];
+    
+    if(arr.count==0){
+        [self tishi];
+        name.text  =@"";
+        chang.text = @"";
+        _ypwenhao.text = @"";
+        _ypetalon.text = @"";
+        _ypgoods.text = @"";
+        _ypnumber.text = @"";
+        for (UIView *v in [_InfoView subviews]) {
+            if (v.tag==101) {
+                [v removeFromSuperview];
+            }}
+        
+    }
+    else{
+    
+    name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
+    chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
+
+    for (UIView *v in [_InfoView subviews]) {
+        if (v.tag==101) {
+            [v removeFromSuperview];
+            
+        }
+    }
+    
+    TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:name.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+    TextFlowView *changview =  [[TextFlowView alloc] initWithFrame:_ypvender.frame Text:chang.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+    nameview.tag=101;
+    changview.tag=101;
+    [self.InfoView addSubview:nameview];
+    [self.InfoView addSubview:changview];
+    /*
+     显示的所有信息都不是固定的 最后需要重新更改
+     */
+    _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"purchaseBatchNo"]];//药品编号
+    _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
+    _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
+    _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
+    }
+    NSLog(@"%@",arr);
+}
+-(void)tishi{
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+     
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"新增");
+        
+    }];
+    UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        XL_ZhuJiMaViewController *zhuji=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zhujima"];
+        [self.navigationController pushViewController:zhuji animated:YES];
+        
+    }];
+    
+    [alert addAction:action2];
+    [alert addAction:action3];
+    [alert addAction:action1];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+}
+#pragma mark --- tableview
+
+
+
 @end
