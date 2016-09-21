@@ -219,7 +219,7 @@
 }
 //搜索
 -(void)chazhao{
-    NSArray *arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:[NSString stringWithFormat:@"%@",_Search.text]];
+    NSArray *arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
     
   
     UILabel *name = [[UILabel alloc]init];
@@ -316,6 +316,9 @@
         
     }
  
+//    UILabel *pihaolab = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 70, 30)];
+//    UILabel *shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(10, 7, 70, 30)];
+//    UIView  *phview = []
     
 
     //点击不变色
