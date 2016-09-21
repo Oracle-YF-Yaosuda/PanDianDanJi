@@ -8,6 +8,7 @@
 
 #import "XL_PanDianViewController.h"
 #import "XL_ZhuJiMaViewController.h"
+#import "XL_SearchViewController.h"
 #import "DSKyeboard.h"
 #import "XL_Header.h"
 #import "XL_FMDB.h"
@@ -29,9 +30,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     if (chuanzhipanduan==1) {
+         [self chazhao];
         chuanzhipanduan=0;
         
-        
+       
     }
     else{
         
@@ -39,11 +41,11 @@
     }
 
     //判断搜索
-    if (![_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        [self chazhao];
-    }else{
-    
-    }
+//    if (![_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+//        [self chazhao];
+//    }else{
+//    
+//    }
     
     
     
@@ -213,8 +215,7 @@
         [self chazhao];
    
     }
-    
-    
+
 }
 //搜索
 -(void)chazhao{
@@ -273,12 +274,17 @@
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
+        search.str=[NSString stringWithFormat:@"%@",_Search.text];
+        
+        [self.navigationController pushViewController:search animated:YES];
+   
         
     }];
     UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        XL_ZhuJiMaViewController *zhuji=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zhujima"];
-        [self.navigationController pushViewController:zhuji animated:YES];
         
+        [self zhujima:self];
+  
     }];
     
     [alert addAction:action2];
@@ -309,6 +315,7 @@
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         
     }
+ 
     
 
     //点击不变色
