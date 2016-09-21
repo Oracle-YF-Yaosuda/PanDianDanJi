@@ -58,8 +58,8 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     textField.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     textField.layer.borderWidth=1.0;
-    NSString *sou= [textField.text stringByAppendingString:string];
-    [self sousuo:sou :string];
+//    NSString *sou= [textField.text stringByAppendingString:string];
+    [self sousuo:textField.text :string];
     return YES;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -157,10 +157,18 @@
 
 #pragma mark ------方法
 -(void)sousuo:(NSString *)str :(NSString *)ss{
-    if (str.length==1&&[ss isEqualToString:@""]) {
-        _table.hidden=YES;
+    NSLog(@"\n\n%@-----------%@\n\n",str,ss);
+    if ([ss isEqualToString:@""]) {
+        if (str.length==1) {
+            _table.hidden=YES;
+        }else{
+            arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@",[str substringToIndex:str.length-1]]];
+            NSLog(@"\n\nshanchu ====%@\n\n",[str substringToIndex:str.length-1]);
+            [_table reloadData];
+            _table.hidden=NO;
+        }
     }else{
-        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@",str]];
+        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@%@",str,ss]];
         [_table reloadData];
         _table.hidden=NO;
     }

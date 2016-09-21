@@ -8,7 +8,9 @@
 
 #import "XL_SearchViewController.h"
 
-@interface XL_SearchViewController ()
+@interface XL_SearchViewController (){
+    NSArray * arr;
+}
 
 @end
 
@@ -17,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return  arr.count;
 }
 
 - (void)didReceiveMemoryWarning {
