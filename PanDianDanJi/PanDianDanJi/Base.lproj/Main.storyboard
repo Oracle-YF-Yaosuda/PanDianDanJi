@@ -770,7 +770,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如有问题，可通过以下方式联系到我们，我们将尽快做出反馈。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-NG-qan">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如有问题，可通过以下方式联系到我们，我们将尽快做出反馈。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-NG-qan">
                                 <rect key="frame" x="15" y="30" width="570" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1480,7 +1480,7 @@
                                             <constraint firstAttribute="height" constant="21" id="32O-Sg-VzL"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1560,7 +1560,7 @@
                                     <constraint firstAttribute="height" constant="40" id="vS4-Nb-9hP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1586,6 +1586,7 @@
                     <connections>
                         <outlet property="InfoView" destination="2hH-5K-aZw" id="4ZB-yl-eA0"/>
                         <outlet property="Search" destination="QYM-eM-s0I" id="0Ji-Wc-MwM"/>
+                        <outlet property="table" destination="Yvg-fQ-Xic" id="ukW-Rx-5vP"/>
                         <outlet property="ypetalon" destination="Fb2-2b-rbd" id="be2-hu-BSK"/>
                         <outlet property="ypgoods" destination="9ke-t0-ipN" id="42E-C3-YCD"/>
                         <outlet property="ypname" destination="UhB-Gs-VqR" id="2Ol-fZ-5F1"/>

@@ -272,7 +272,7 @@
      
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"新增");
+        
         
     }];
     UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -290,7 +290,38 @@
     }];
 }
 #pragma mark --- tableview
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+ }
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 44;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *str=@"cell";
+    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    if (cell==nil) {
+        
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+        
+    }
+    
+
+    //点击不变色
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.table) {
+    
+}
 
 
+
+}
 
 @end

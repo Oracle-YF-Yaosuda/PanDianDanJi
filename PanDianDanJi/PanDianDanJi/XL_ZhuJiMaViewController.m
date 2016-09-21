@@ -103,17 +103,17 @@
     
     UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 33)];
     lll.textColor=[UIColor colorWithHexString:@"545454"];
-    lll.font=[UIFont boldSystemFontOfSize:18];
+    lll.font=[UIFont boldSystemFontOfSize:16];
     UIView *viewaa=[[UIView alloc] initWithFrame:CGRectMake(10,43 , self.view.frame.size.width, 2)];
     viewaa.backgroundColor=[UIColor colorWithHexString:@"34C083"];
     UILabel * text=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33)];
     text.textColor=[UIColor colorWithHexString:@"646464"];
-    text.font=[UIFont boldSystemFontOfSize:18];
+    text.font=[UIFont boldSystemFontOfSize:16];
     TextFlowView *techangview;
     
     if (indexPath.row==0) {
         lll.text=@"药品名称:";
-        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productName"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productName"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
         [cell addSubview:techangview];
     }else if (indexPath.row==1){
         lll.text=@"药品编号:";
@@ -123,7 +123,7 @@
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"prodBatchNo"]];
     }else if (indexPath.row==3){
         lll.text=@"生产厂家:";
-        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"manufacturer"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"manufacturer"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
         [cell addSubview:techangview];
     }else if (indexPath.row==4){
         lll.text=@"药品规格:";
