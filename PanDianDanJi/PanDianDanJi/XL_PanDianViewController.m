@@ -24,6 +24,13 @@
     int chuanzhipanduan;
     
     NSArray *arr;//查找到的数组
+    
+  
+    UILabel*lll;
+    UIView *viewaa;
+    UILabel * text;
+    UILabel *shulianglab;
+    TextFlowView *techangview;
 }
 
 @end
@@ -55,11 +62,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     chuanzhipanduan=0;
-     UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)];
-    [_ypname addGestureRecognizer:labelTapGestureRecognizer];
-    _ypname.userInteractionEnabled = YES;
+    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
+    [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
+    _ypgoods.userInteractionEnabled = YES;
+    
+    
     _Search.textColor = [UIColor lightGrayColor];
-   
     [_Search.layer setBorderWidth:1.0];
     [_Search.layer setCornerRadius:5.0];
     
@@ -72,13 +80,6 @@
     // Do any additional setup after loading the view.
 }
 
--(void)labelClick{
-    NSLog(@"1");
-}
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -89,13 +90,58 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-
+//调用数据库
 -(void)shujuku {
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
     db = [XL getDBWithDBName:@"pandian.sqlite"];
     
 }
+
+//货位号点击方法
+-(void)labelClick:(UITapGestureRecognizer *)lableField{
+    
+    UITextField *goodstxt = [[UITextField alloc]init];
+    goodstxt.delegate = self;
+    [self.view addSubview:goodstxt];
+    UILabel*la =(UILabel *)lableField.self.view;
+    
+    [self setupCustomedKeyboard:goodstxt :la];
+    [goodstxt becomeFirstResponder];
+    
+}
+
+-(void)tishi{
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
+        search.str=[NSString stringWithFormat:@"%@",_Search.text];
+        
+        [self.navigationController pushViewController:search animated:YES];
+        
+        
+    }];
+    UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self zhujima:self];
+        
+    }];
+    
+    [alert addAction:action2];
+    [alert addAction:action3];
+    [alert addAction:action1];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+}
+
+
+
 
 #pragma mark  数字键盘
 - (IBAction)zero:(id)sender {
@@ -276,42 +322,16 @@
     
     [_table reloadData];
     _table.hidden=NO;
+    _oneview.hidden = YES;
    // NSLog(@"%@",arr);
 }
--(void)tishi{
-    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-     
-    }];
-    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
-        search.str=[NSString stringWithFormat:@"%@",_Search.text];
-        
-        [self.navigationController pushViewController:search animated:YES];
-   
-        
-    }];
-    UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [self zhujima:self];
-  
-    }];
-    
-    [alert addAction:action2];
-    [alert addAction:action3];
-    [alert addAction:action1];
-    
-    [self presentViewController:alert animated:YES completion:^{
-        
-    }];
-}
+
 #pragma mark --- tableview
 
 -(void)tabledelegate{
     _table.delegate=self;
     _table.dataSource=self;
-    _table.hidden=YES;
+    //_table.hidden=YES;
     //去除多余分割线
     self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _table.backgroundColor = [UIColor clearColor];
@@ -321,12 +341,12 @@
     return [arr count];
  }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([arr count]==1){
-    return 2;
-    }else{
-        return 1;
-    }
-    
+//    if ([arr count]==1){
+//    return 2;
+//    }else{
+//        return 1;
+//    }
+    return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -335,7 +355,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *str=@"cell";
-    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell;//=[tableView cellForRowAtIndexPath:indexPath];
+    cell = [tableView dequeueReusableCellWithIdentifier:str];
     if (cell==nil) {
         
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
@@ -345,45 +366,25 @@
         [v removeFromSuperview];
     }
 
-    UILabel*lll;
-    UIView *viewaa;
-    UILabel * text;
-    UILabel *shulianglab;
-    TextFlowView *techangview;
     
     
+    UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];
+    [text addGestureRecognizer:TapGestureRecognizer];
+    text.userInteractionEnabled = YES;
 
-    if ([arr count]==1){
-        lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 33)];
-        viewaa=[[UIView alloc] initWithFrame:CGRectMake(lll.frame.size.width+15,10, self.view.frame.size.width-90, 30)];
-        text=[[UILabel alloc] initWithFrame:CGRectMake(75, 10, CGRectGetWidth(self.view.frame)-100,33)];
-        
-        if (indexPath.row==0) {
-            lll.text=@"数量:";
-            text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"checkNum"]];
-            
-        }else if (indexPath.row==1){
-            lll.text=@"批号:";
-            techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
-        }
-        
-    }else{
     lll = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
     viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
     shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(viewaa.frame.origin.x+viewaa.frame.size.width+10, 7, 50, 30)];
+   
+        
     text = [[UILabel alloc]initWithFrame:CGRectMake(shulianglab.frame.origin.x+shulianglab.frame.size.width+10, 7, 80, 30)];
-        
-        if (indexPath.row==0) {
-            lll.text=@"批号:";
-            techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+    text.tag = 100+indexPath.section;
+    lll.text=@"批号:";
+    techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
            
-            shulianglab.text=@"数量:";
-            text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"checkNum"]];
-        }
-        
-        
-    }
-    
+    shulianglab.text=@"数量:";
+    text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"checkNum"]];
+
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
     text.textColor=[UIColor colorWithHexString:@"646464"];
@@ -403,13 +404,42 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == self.table) {
+//  NSLog(@"%ld,%ld",(long)indexPath.section,(long)indexPath.row);
+}
+
+-(void)shulClick:(UITapGestureRecognizer *)lableField{
+    UITableViewCell *cell=(UITableViewCell*)[(UILabel*)lableField.self.view superview];
+    
+    NSIndexPath *index=[self.table indexPathForCell:cell];
+    
+    NSLog(@"%@",index);
+    UILabel*oo=[cell viewWithTag:index.section+100];
+    
+    NSLog(@"%ld",(long)oo.tag);
+    UITextField *shulstxt = [[UITextField alloc]init];
+    shulstxt.delegate = self;
+    
+    [self.view addSubview:shulstxt];
+    [self setupCustomedKeyboard:shulstxt :oo];
+    
+    [shulstxt becomeFirstResponder];
     
 }
 
-
-
+#pragma mark-- 自定义键盘
+- (void)setupCustomedKeyboard:(UITextField*)tf :(UILabel *)ss {
+    
+    tf.inputView = [DSKyeboard keyboardWithTextField:tf];
+    [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
+        tf.text = fakePassword;
+        ss.text = tf.text;
+        
+    } loginBlock:^(NSString *password) {
+        [tf resignFirstResponder];
+    }];
 }
+
 
 @end
