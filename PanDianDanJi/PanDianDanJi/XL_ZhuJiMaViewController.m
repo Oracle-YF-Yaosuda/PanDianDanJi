@@ -117,7 +117,7 @@
         lll.text=@"药品编号:";
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]];
     }else if (indexPath.row==2){
-        lll.text=@"批      号:";
+        lll.text=@"批        号:";
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"prodBatchNo"]];
     }else if (indexPath.row==3){
         lll.text=@"生产厂家:";

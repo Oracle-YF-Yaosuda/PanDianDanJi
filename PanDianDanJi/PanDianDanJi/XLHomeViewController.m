@@ -168,6 +168,7 @@
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSLog(@"%@",responseObject);
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+                NSLog(@"\n\n\n\n-*-*-*-*同步-*-*-*-\n\n\n%@\n\n",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 for (int i=0; i<list.count; i++) {
@@ -215,9 +216,6 @@
                     //向下载表中插入数据
                     [XL DataBase:db insertKeyValues:list[i] intoTable:XiaZaiBiaoMing];
                 }
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self ceshi];
-                });
             }
         } @catch (NSException *exception) {
             [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
@@ -228,11 +226,5 @@
         NSLog(@"%@",error);
     }];
     
-}
-
--(void)ceshi{
-    NSArray*arr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing];
-    NSLog(@"the ---%@",arr);
-
 }
 @end

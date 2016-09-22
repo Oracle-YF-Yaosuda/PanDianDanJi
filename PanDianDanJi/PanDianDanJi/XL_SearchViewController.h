@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XL_SearchViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+typedef  void(^PassdicValueBlock)(NSDictionary *dic);
+@interface XL_SearchViewController : UIViewController<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong,nonatomic)NSString *str;
+
+
+@property (nonatomic,copy) PassdicValueBlock passdicValueBlock;
+//传值
+-(void)passdicValue:(PassdicValueBlock)block;
 @end

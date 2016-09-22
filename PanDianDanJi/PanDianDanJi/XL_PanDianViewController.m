@@ -22,9 +22,9 @@
     
     /*判断传值*/
     int chuanzhipanduan;
-    
+    int tianjiapanduan;
     NSArray *arr;//查找到的数组
-    
+    NSDictionary*tianjiade;
   
     UILabel*lll;
     UIView *viewaa;
@@ -44,8 +44,15 @@
         
        
     }
-    else{
+    else if(tianjiapanduan==1){
+        tianjiapanduan=0;
+        /*
+         这里把传回来的数据显示
+         因为只有一条，所有直接用view方法显示
+         */
+        NSLog(@"%@",tianjiade);
         
+    }else{
         
     }
 
@@ -62,6 +69,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     chuanzhipanduan=0;
+    tianjiapanduan=0;
     UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
     [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
     _ypgoods.userInteractionEnabled = YES;
@@ -119,6 +127,10 @@
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
+        [search passdicValue:^(NSDictionary *dic) {
+            tianjiapanduan=1;
+            tianjiade=[NSDictionary dictionaryWithDictionary:dic];
+        }];
         search.str=[NSString stringWithFormat:@"%@",_Search.text];
         
         [self.navigationController pushViewController:search animated:YES];

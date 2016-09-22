@@ -11,9 +11,10 @@
 #import "Color+Hex.h"
 #import "XL_FMDB.h"
 #import "XL_Header.h"
+#import "DSKyeboard.h"
 
 @interface XL_SearchViewController (){
-    NSArray * arr;
+    NSArray *  arr;
     XL_FMDB *   XL;
     FMDatabase *db;
 }
@@ -23,41 +24,56 @@
 @implementation XL_SearchViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-    arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@",_str]];
-    NSLog(@"\n\nchuanguolaide-*-*-*-*-*-*-*\n\n%@\n\n",_str);
-    if (NULL == arr) {
+    
+    arr=[XL  DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode", nil]];
+    NSLog(@"%@",_str);
+    NSLog(@"\n\nchuanguolaide-*-*-*-*-*-*-*\n\n%@\n\n",arr);
+    if (arr.count==0) {
         NSLog(@"arr==null");
     }else{
         [_table reloadData];
         _table.hidden=NO;
     }
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self tabledelegate];
     [self shujuku];
-    _table.hidden=YES;
 }
 -(void)shujuku{
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
     db = [XL getDBWithDBName:@"pandian.sqlite"];
-    [XL DataBase:db createTable:XiaZaiBiaoMing keyTypes:XiaZaiShiTiLei];
+    [XL DataBase:db createTable:TongBuBiaoMing keyTypes:TongBuShiTiLei];
 }
 #pragma mark ------tableview
 -(void)tabledelegate{
     _table.delegate=self;
     _table.dataSource=self;
-    _table.hidden=YES;
+    //    _table.hidden=YES;
     //去除多余分割线
     self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    //解决tableview多出的白条
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+-(NSArray*)gudingshuzu{
+    NSArray *guding =[NSArray arrayWithObjects:@"药品名称:",@"药品数量:",@"药品编号:",@"货        位:",@"助  记  码:",@"生产厂家:",@"药品规格:",@"批        号:", nil];
+    return guding;
+}
+-(NSArray *)xiabian{
+    NSArray*guding=[NSArray arrayWithObjects:@"药品名称:",@"药品编号:",@"批        号:",@"生产厂家:",@"药品规格:",nil];
+    return guding;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return  arr.count;
+    return  arr.count+1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    if (section==0) {
+        return 8;
+    }else
+        return 5;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -65,7 +81,8 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *str=@"cell";
-    
+    NSArray*guding=[self gudingshuzu];
+    NSArray*xiabian=[self xiabian];
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     
     if (cell==nil) {
@@ -78,37 +95,123 @@
     UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 33)];
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
-    UIView *viewaa=[[UIView alloc] initWithFrame:CGRectMake(10,43 , self.view.frame.size.width, 2)];
-    viewaa.backgroundColor=[UIColor colorWithHexString:@"34C083"];
-    UILabel * text=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33)];
+    UITextField * text=[[UITextField alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-110,33)];
     text.textColor=[UIColor colorWithHexString:@"646464"];
-    text.font=[UIFont boldSystemFontOfSize:16];
-    TextFlowView *techangview;
-    
-    if (indexPath.row==0) {
-        lll.text=@"药品名称:";
-        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productName"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
-        [cell addSubview:techangview];
-    }else if (indexPath.row==1){
-        lll.text=@"药品编号:";
-        text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]];
-    }else if (indexPath.row==2){
-        lll.text=@"批      号:";
-        text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"prodBatchNo"]];
-    }else if (indexPath.row==3){
-        lll.text=@"生产厂家:";
-        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"manufacturer"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
-        [cell addSubview:techangview];
-    }else if (indexPath.row==4){
-        lll.text=@"药品规格:";
-        text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"specification"]];
-        [cell addSubview:viewaa];
+    text.tag=100+indexPath.row;
+    text.layer.cornerRadius=5;
+    text.layer.borderWidth=1;
+    text.delegate=self;
+    text.layer.borderColor=[[UIColor grayColor] CGColor];
+    UILabel *text1=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-110,33)];
+    text1.textColor=[UIColor colorWithHexString:@"767676"];
+    if (indexPath.section==0) {
+        lll.text=guding[indexPath.row];
+        if(indexPath.row==0){
+            @try {
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productName"]];
+            } @catch (NSException *exception) {
+                text.text=@"";
+            }
+            
+        }else if (indexPath.row==1){
+        }else if (indexPath.row==2){
+            @try {
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]];
+            } @catch (NSException *exception) {
+                text.text=@"";
+            }
+        }else if (indexPath.row==3){
+            @try {
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"newpos"]];
+            } @catch (NSException *exception) {
+                text.text=@"";
+            }
+        }else if (indexPath.row==4){
+            @try {
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"approvalNumber"]];
+            } @catch (NSException *exception) {
+                text.text=@"";
+            }
+        }else if (indexPath.row==5){
+            @try {
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"manufacturer"]];
+            } @catch (NSException *exception) {
+                text.text=@"";
+            }
+        }else if (indexPath.row==6){
+            @try {
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"specification"]];
+            } @catch (NSException *exception) {
+                text.text=@"";
+            }
+        }else if (indexPath.row==7){
+            @try {
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"prodBatchNo"]];
+            } @catch (NSException *exception) {
+                text.text=@"";
+            }
+        }
+        [cell addSubview:text];
+    }else{
+        lll.text=xiabian[indexPath.row];
+        if(indexPath.row==0){
+            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productName"]];
+        }else if (indexPath.row==1){
+            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productCode"]];
+        }else if (indexPath.row==2){
+            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"prodBatchNo"]];
+        }else if (indexPath.row==3){
+            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"manufacturer"]];
+        }else if (indexPath.row==4){
+            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"specification"]];
+        }
+        [cell addSubview:text1];
     }
-    [cell addSubview:text];
+    
     [cell addSubview:lll];
-    //点击不变色
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)setupCustomedKeyboard:(UITextField*)tf {
+    tf.inputView = [DSKyeboard keyboardWithTextField:tf];
+    [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
+        
+        tf.text = fakePassword;
+    } loginBlock:^(NSString *password) {
+        [tf resignFirstResponder];
+    }];
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 5;
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
+#pragma mark-----text
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSLog(@"%ld",(long)textField.tag);
+    if (textField.tag==101) {
+        textField.keyboardType=UIKeyboardTypeNumberPad;
+    }else if (textField.tag==103||textField.tag==102||textField.tag==104||textField.tag==107){
+        [self setupCustomedKeyboard:textField];
+    }
+    return YES;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section!=0) {
+        NSLog(@"%@",arr[indexPath.section-1]);
+        NSDictionary*txm=[NSDictionary dictionaryWithDictionary:arr[indexPath.section-1]];
+        if (self.passdicValueBlock!=nil) {
+            self.passdicValueBlock(txm);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+-(void)passdicValue:(PassdicValueBlock)block{
+    self.passdicValueBlock = block;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -116,13 +219,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
