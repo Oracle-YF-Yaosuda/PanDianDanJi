@@ -27,11 +27,12 @@
     int onepand;//判断找到1条数据数量的输入
     int searcpd;//判断是不是搜索条输入
     
-    
+    UILabel*oo;
     NSArray *arr;//查找到的数组
     NSDictionary*tianjiade;
-  
-    UILabel * text;
+    
+    //UILabel * text;
+    
 }
 
 @end
@@ -40,10 +41,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     if (chuanzhipanduan==1) {
-         [self chazhao];
+        [self chazhao];
         chuanzhipanduan=0;
         
-       
+        
     }
     else if(tianjiapanduan==1){
         tianjiapanduan=0;
@@ -56,8 +57,8 @@
     }else{
         
     }
-
-   
+    
+    
     
     
 }
@@ -68,9 +69,9 @@
     UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
     [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
     _ypgoods.userInteractionEnabled = YES;
-
     
-   
+    
+    
     
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_onelabel addGestureRecognizer:TapGestureRecognizer];
@@ -160,20 +161,16 @@
     }];
 }
 -(void)shul:(UITapGestureRecognizer*)lab{
-   UILabel*la =(UILabel *)lab.self.view;
+    UILabel*la =(UILabel *)lab.self.view;
     if(la==_Search){
         _Search.layer.borderColor = [[UIColor greenColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
-        searcpd=1;
-        onepand=0;
-        NSLog(@"222");
+        onepand=1;
     }
     else if(la==_onelabel){
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor greenColor] CGColor];
-        onepand=1;
-        searcpd=0;
-        NSLog(@"333");
+        onepand=2;
     }
     
 }
@@ -182,171 +179,206 @@
 
 #pragma mark  数字键盘
 - (IBAction)zero:(id)sender {
-    if(onepand==1){
-   _onelabel.text = [_onelabel.text stringByAppendingString:@"0"];
+    if(onepand==2){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"0"];
     }
-    else if (searcpd==1){
-         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"0";
-         }else{
-        
-             _Search.text = [_Search.text stringByAppendingString:@"0"];
-         }
- 
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"0";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"0"];
+        }
+    }else{
+        oo.text= [oo.text stringByAppendingString:@"0"];
     }
-    
-    else{
-     
-        
-    }
-    
-   
-        
 }
 
 - (IBAction)one:(id)sender {
-
-    if (onepand==1){
-     _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
-    }else if (searcpd==1){
-    
-       if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-           _Search.text = @"1";
-        }else{
-           _Search.text = [_Search.text stringByAppendingString:@"1"];
-        }
-        
+    if(onepand==2){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
     }
-        
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"1";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"1"];
+        }
+    }else{
+        oo.text= [oo.text stringByAppendingString:@"1"];
+    }
 }
 
 - (IBAction)two:(id)sender {
-    
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
-    }else if (searcpd==1){
-    
-       if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-          _Search.text = @"2";
-        }else{
-           _Search.text = [_Search.text stringByAppendingString:@"2"];
-       }
-        
     }
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"2";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"2"];
+        }
+    }else{
+        oo.text= [oo.text stringByAppendingString:@"2"];
+    }
+
+    
 }
 
 - (IBAction)three:(id)sender {
     
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"3"];
-    }else if (searcpd==1){
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"3";
-    }else{
-        _Search.text = [_Search.text stringByAppendingString:@"3"];
     }
-        
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"3";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"3"];
+        }
+    }else{
+        oo.text= [oo.text stringByAppendingString:@"3"];
     }
 }
 
 - (IBAction)four:(id)sender {
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"4"];
-    }else if (searcpd==1){
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"4";
+    }
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"4";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"4"];
+        }
     }else{
-        _Search.text = [_Search.text stringByAppendingString:@"4"];
+        oo.text= [oo.text stringByAppendingString:@"4"];
     }
-        
-    }
+
 }
 
 - (IBAction)five:(id)sender {
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"5"];
-    }else if (searcpd==1){
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"5";
+    }
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"5";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"5"];
+        }
     }else{
-        _Search.text = [_Search.text stringByAppendingString:@"5"];
+        oo.text= [oo.text stringByAppendingString:@"5"];
     }
-    }
+
 }
 
 - (IBAction)six:(id)sender {
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"6"];
-    }else if (searcpd==1){
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"6";
+    }
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"6";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"6"];
+        }
     }else{
-        _Search.text = [_Search.text stringByAppendingString:@"6"];
+        oo.text= [oo.text stringByAppendingString:@"6"];
     }
-    }
+
 }
 
 - (IBAction)seven:(id)sender {
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"7"];
-    }else if (searcpd==1){
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"7";
+    }
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"7";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"7"];
+        }
     }else{
-        _Search.text = [_Search.text stringByAppendingString:@"7"];
+        oo.text= [oo.text stringByAppendingString:@"7"];
     }
-    }
+
 }
 
 
 - (IBAction)eight:(id)sender {
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"8"];
-    }else if (searcpd==1){
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"8";
+    }
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"8";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"8"];
+        }
     }else{
-        _Search.text = [_Search.text stringByAppendingString:@"8"];
+        oo.text= [oo.text stringByAppendingString:@"8"];
     }
-    }
+
 }
 
 - (IBAction)nine:(id)sender {
-    if (onepand==1){
+    if(onepand==2){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"9"];
-    }else if (searcpd==1){
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"9";
+    }
+    else if (onepand==1){
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"9";
+        }else{
+            _Search.text = [_Search.text stringByAppendingString:@"9"];
+        }
     }else{
-        _Search.text = [_Search.text stringByAppendingString:@"9"];
+        oo.text= [oo.text stringByAppendingString:@"9"];
     }
-    }
+
 }
 
 - (IBAction)houtui:(id)sender {
     if (onepand==1){
-        _onelabel.text= [_onelabel.text substringToIndex:[_onelabel.text length] - 1];
+       
     }else if (searcpd==1){
-        
-    if([_Search.text isEqualToString:@""]||[_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-     _Search.text = @"🔍扫描或输入药品条形码";
-    }else{
-     _Search.text= [_Search.text substringToIndex:[_Search.text length] - 1];
-        if(_Search.text.length==0){
-        _Search.text = @"🔍扫描或输入药品条形码";
+           }
+    if(onepand==2){
+        _onelabel.text= [_onelabel.text substringToIndex:[_onelabel.text length] - 1];
+    }
+    else if (onepand==1){
+        if([_Search.text isEqualToString:@""]||[_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.text = @"🔍扫描或输入药品条形码";
+        }else{
+            _Search.text= [_Search.text substringToIndex:[_Search.text length] - 1];
+            if(_Search.text.length==0){
+                _Search.text = @"🔍扫描或输入药品条形码";
+            }
         }
+    }else{
+       oo.text= [oo.text substringToIndex:[oo.text length] - 1];
     }
     
-        
-    }
+    
 }
 
 - (IBAction)clear:(id)sender {
     if (onepand==1){
-        _onelabel.text= @"";
+        
     }else if (searcpd==1){
-    _Search.text = @"🔍扫描或输入药品条形码";
+       
     }
+    
+    if(onepand==2){
+       _onelabel.text= @"";
+    }
+    else if (onepand==1){
+        _Search.text = @"🔍扫描或输入药品条形码";
+    }else{
+        oo.text= @"";
+    }
+    
+    
 }
 //助记码
 - (IBAction)zhujima:(id)sender {
@@ -363,26 +395,26 @@
 }
 //确定按钮
 - (IBAction)check:(id)sender {
-   // _oneview.hidden = YES;
+    // _oneview.hidden = YES;
     //[self.view bringSubviewToFront:_table];
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-       [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
+        [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
         [self chazhao];
-   
+        
     }
-
+    
 }
 //搜索
 -(void)chazhao{
     arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
     
-  
+    
     UILabel *name = [[UILabel alloc]init];
     UILabel *chang = [[UILabel alloc]init];
     
     if(arr.count==0){
-     // NSArray  *aarr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:@","];
+        // NSArray  *aarr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:@","];
         
         
         [self tishi];
@@ -398,37 +430,44 @@
             }}
         
     }
-    else{
+    else if(arr.count==1){
+        _oneview.hidden=NO;
+       TextFlowView* techangview = [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        [_oneview addSubview:techangview];
+     
     
-    name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
-    chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
-
-    for (UIView *v in [_InfoView subviews]) {
-        if (v.tag==101) {
-            [v removeFromSuperview];
-            
+    }else{
+    
+        name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
+        chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
+        for (UIView *v in [_InfoView subviews]) {
+            if (v.tag==101) {
+                [v removeFromSuperview];
+            }
         }
+        TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:name.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        TextFlowView *changview =  [[TextFlowView alloc] initWithFrame:_ypvender.frame Text:chang.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        nameview.tag=101;
+        changview.tag=101;
+        [self.InfoView addSubview:nameview];
+        [self.InfoView addSubview:changview];
+        /*
+         显示的所有信息都不是固定的 最后需要重新更改
+         */
+        _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"purchaseBatchNo"]];//药品编号
+        _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
+        _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
+        _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
+        [_table reloadData];
+        _table.hidden=NO;
+        _oneview.hidden = YES;
     }
     
-    TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:name.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
-    TextFlowView *changview =  [[TextFlowView alloc] initWithFrame:_ypvender.frame Text:chang.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
-     nameview.tag=101;
-     changview.tag=101;
-    [self.InfoView addSubview:nameview];
-    [self.InfoView addSubview:changview];
-    /*
-     显示的所有信息都不是固定的 最后需要重新更改
-     */
-    _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"purchaseBatchNo"]];//药品编号
-    _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
-    _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
-    _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
-    }
     
-    [_table reloadData];
-    _table.hidden=NO;
-    _oneview.hidden = YES;
-   // NSLog(@"%@",arr);
+    
+    
+    
+    // NSLog(@"%@",arr);
 }
 
 #pragma mark --- tableview
@@ -444,13 +483,13 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [arr count];
- }
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if ([arr count]==1){
-//    return 2;
-//    }else{
-//        return 1;
-//    }
+    //    if ([arr count]==1){
+    //    return 2;
+    //    }else{
+    //        return 1;
+    //    }
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -470,20 +509,21 @@
     for (UIView *v in [cell subviews]) {
         [v removeFromSuperview];
     }
-
+    
     
     UILabel*lll;
     UIView *viewaa;
-    //UILabel * text;
+    UILabel * text;
     UILabel *shulianglab;
     TextFlowView *techangview;
-
-
-
+    
+    
+    
     lll = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
     viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
     shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(viewaa.frame.origin.x+viewaa.frame.size.width+10, 7, 50, 30)];
     text = [[UILabel alloc]initWithFrame:CGRectMake(shulianglab.frame.origin.x+shulianglab.frame.size.width+10, 7, 80, 30)];
+    text.text=@"";
     text.tag = 100+indexPath.section;
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];
     [text addGestureRecognizer:TapGestureRecognizer];
@@ -492,16 +532,14 @@
     
     lll.text=@"批号:";
     techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
-           
+    
     shulianglab.text=@"数量:";
-    text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"checkNum"]];
-
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
     text.textColor=[UIColor colorWithHexString:@"646464"];
     text.font=[UIFont boldSystemFontOfSize:16];
     
-  
+    
     [text.layer setBorderWidth:1];
     [text.layer setBorderColor:[[UIColor blackColor] CGColor]];
     [text.layer setCornerRadius:3.0];
@@ -510,33 +548,40 @@
     [cell addSubview:lll];
     [cell addSubview:shulianglab];
     [cell addSubview:techangview];
- 
+    
     //点击不变色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//  NSLog(@"%ld,%ld",(long)indexPath.section,(long)indexPath.row);
+    //  NSLog(@"%ld,%ld",(long)indexPath.section,(long)indexPath.row);
+    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
+    NSIndexPath *index=[self.table indexPathForCell:cell];
+    
+    
 }
 
 -(void)shulClick:(UITapGestureRecognizer *)lableField {
+    onepand=4;
     UITableViewCell *cell=(UITableViewCell*)[(UILabel*)lableField.self.view superview];
     
     NSIndexPath *index=[self.table indexPathForCell:cell];
     
     NSLog(@"%@",index);
-    UILabel*oo=[cell viewWithTag:index.section+100];
+    oo=[cell viewWithTag:index.section+100];
+    
+   // oo.layer.borderColor = [[UIColor greenColor] CGColor];
     
     NSLog(@"%ld",(long)oo.tag);
-//    UITextField *shulstxt = [[UITextField alloc]init];
-//    shulstxt.delegate = self;
-//    
-//    [self.view addSubview:shulstxt];
-//    [self setupCustomedKeyboard:shulstxt :oo];
-//    
-//    [shulstxt becomeFirstResponder];
-//    
+    //    UITextField *shulstxt = [[UITextField alloc]init];
+    //    shulstxt.delegate = self;
+    //
+    //    [self.view addSubview:shulstxt];
+    //    [self setupCustomedKeyboard:shulstxt :oo];
+    //
+    //    [shulstxt becomeFirstResponder];
+    //
 }
 
 #pragma mark-- 自定义键盘

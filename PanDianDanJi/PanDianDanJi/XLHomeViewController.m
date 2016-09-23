@@ -166,9 +166,9 @@
         
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                NSLog(@"%@",responseObject);
+//                NSLog(@"%@",responseObject);
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-                NSLog(@"\n\n\n\n-*-*-*-*同步-*-*-*-\n\n\n%@\n\n",list);
+//                NSLog(@"\n\n\n\n-*-*-*-*同步-*-*-*-\n\n\n%@\n\n",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 for (int i=0; i<list.count; i++) {
@@ -206,7 +206,7 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-//            NSLog(@"\n\nxiazai____\n\n%@",responseObject);
+            NSLog(@"\n\nxiazai____\n\n%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
