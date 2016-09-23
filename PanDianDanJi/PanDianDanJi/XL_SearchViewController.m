@@ -12,11 +12,14 @@
 #import "XL_FMDB.h"
 #import "XL_Header.h"
 #import "DSKyeboard.h"
+#import "WarningBox/WarningBox.h"
 
 @interface XL_SearchViewController (){
     NSArray *  arr;
     XL_FMDB *   XL;
     FMDatabase *db;
+    
+    NSMutableDictionary*dic;
 }
 
 @end
@@ -29,17 +32,23 @@
     NSLog(@"%@",_str);
     NSLog(@"\n\nchuanguolaide-*-*-*-*-*-*-*\n\n%@\n\n",arr);
     if (arr.count==0) {
-        NSLog(@"arr==null");
+        dic=[[NSMutableDictionary alloc] init];
+        [self navigationyou];
+        
+        
     }else{
+        dic=[NSMutableDictionary dictionaryWithDictionary:arr[0]];
         [_table reloadData];
         _table.hidden=NO;
     }
+    
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self tabledelegate];
     [self shujuku];
+    [self navigation];
 }
 -(void)shujuku{
     XL = [XL_FMDB tool];
@@ -59,6 +68,10 @@
 }
 -(NSArray*)gudingshuzu{
     NSArray *guding =[NSArray arrayWithObjects:@"药品名称:",@"药品数量:",@"药品编号:",@"货        位:",@"助  记  码:",@"生产厂家:",@"药品规格:",@"批        号:", nil];
+    return guding;
+}
+-(NSArray *)duiying{
+    NSArray*guding=[NSArray arrayWithObjects:@"productName",@"shuliang",@"productCode",@"newpos",@"approvalNumber",@"manufacturer",@"specification",@"prodBatchNo",nil];
     return guding;
 }
 -(NSArray *)xiabian{
@@ -186,18 +199,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 5;
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-#pragma mark-----text
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    NSLog(@"%ld",(long)textField.tag);
-    if (textField.tag==101) {
-        textField.keyboardType=UIKeyboardTypeNumberPad;
-    }else if (textField.tag==103||textField.tag==102||textField.tag==104||textField.tag==107){
-        [self setupCustomedKeyboard:textField];
-    }
-    return YES;
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section!=0) {
@@ -207,8 +213,39 @@
             self.passdicValueBlock(txm);
         }
         [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.view endEditing:YES];
     }
     
+}
+#pragma mark-----text
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSLog(@"%ld",(long)textField.tag);
+    if (arr.count!=0) {
+        if (textField.tag==101) {
+            textField.keyboardType=UIKeyboardTypeNumberPad;
+            [self navigationyou];
+        }else
+            return NO;
+    }else{
+        if (textField.tag==101) {
+            textField.keyboardType=UIKeyboardTypeNumberPad;
+        }else if (textField.tag==103||textField.tag==102||textField.tag==104||textField.tag==107){
+            [self setupCustomedKeyboard:textField];
+        }
+    }
+    return YES;
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    UITableViewCell * cell=(UITableViewCell*)[textField superview];
+    NSIndexPath *indexPath=[_table indexPathForCell:cell];
+    
+    NSArray*guiding=[self duiying];
+    
+    
+    NSLog(@"%@",indexPath);
+    [dic setObject:textField.text forKey:[NSString stringWithFormat:@"%@",guiding[indexPath.row]]];
+    //    NSLog(@"%@",dic);
 }
 -(void)passdicValue:(PassdicValueBlock)block{
     self.passdicValueBlock = block;
@@ -217,7 +254,54 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark ------上边按钮
+-(void)navigation{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)navigationyou{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self  action:@selector(baocun)];
+    [self.navigationItem setRightBarButtonItem:left];
+}
+-(void)fanhui{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)baocun{
+    [self.view endEditing:YES];
+    if (arr.count==0) {
+        if ([dic allKeys].count==8) {
+            [self chuanshu];
+        }else
+            [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
 
+    }else{
+        if (NULL == [dic objectForKey:@"shuliang"]) {
+            [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
+        }else
+            [self chuanshu];
+    }
+}
+-(void)chuanshu{
+    int q=0;
+    for (NSString*ss in dic) {
+        if ([ss isEqualToString:@""]) {
+            q=1;
+        }
+    }
+    if (q==0) {
+        if (self.passdicValueBlock!=nil) {
+            self.passdicValueBlock(dic);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        NSLog(@"填写完整");
+    }else{
+        [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
+    }
+
+}
 /*
  #pragma mark - Navigation
  
