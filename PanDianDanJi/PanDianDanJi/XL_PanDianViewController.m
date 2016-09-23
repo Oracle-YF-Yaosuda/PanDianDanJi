@@ -31,7 +31,7 @@
     NSArray *arr;//查找到的数组
     NSDictionary*tianjiade;
   
-  
+    UILabel * text;
 }
 
 @end
@@ -70,17 +70,24 @@
     _ypgoods.userInteractionEnabled = YES;
 
     
-    _Search.textColor = [UIColor lightGrayColor];
-    [_Search.layer setBorderWidth:1.0];
-    [_Search.layer setCornerRadius:5.0];
+   
     
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_onelabel addGestureRecognizer:TapGestureRecognizer];
     _onelabel.userInteractionEnabled = YES;
+    [_onelabel.layer setBorderWidth:1.0];
+    [_onelabel.layer setCornerRadius:5.0];
+    
     
     UITapGestureRecognizer *searTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_Search addGestureRecognizer:searTapGestureRecognizer];
     _Search.userInteractionEnabled = YES;
+    
+    _Search.textColor = [UIColor lightGrayColor];
+    [_Search.layer setBorderWidth:1.0];
+    [_Search.layer setCornerRadius:5.0];
+    
+    
     [self.view bringSubviewToFront:_oneview];
     
     [self shujuku];
@@ -153,14 +160,17 @@
     }];
 }
 -(void)shul:(UITapGestureRecognizer*)lab{
-   
-    if(searcpd==0){
+   UILabel*la =(UILabel *)lab.self.view;
+    if(la==_Search){
+        _Search.layer.borderColor = [[UIColor greenColor] CGColor];
+        _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         searcpd=1;
         onepand=0;
         NSLog(@"222");
     }
-    else{
-        
+    else if(la==_onelabel){
+        _Search.layer.borderColor = [[UIColor blackColor] CGColor];
+        _onelabel.layer.borderColor = [[UIColor greenColor] CGColor];
         onepand=1;
         searcpd=0;
         NSLog(@"333");
@@ -175,14 +185,19 @@
     if(onepand==1){
    _onelabel.text = [_onelabel.text stringByAppendingString:@"0"];
     }
-    else{
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-    _Search.text = @"0";
-    }else{
+    else if (searcpd==1){
+         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+        _Search.text = @"0";
+         }else{
         
-        _Search.text = [_Search.text stringByAppendingString:@"0"];
-    }
+             _Search.text = [_Search.text stringByAppendingString:@"0"];
+         }
  
+    }
+    
+    else{
+     
+        
     }
     
    
@@ -195,11 +210,11 @@
      _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
     }else if (searcpd==1){
     
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"1";
-    }else{
-        _Search.text = [_Search.text stringByAppendingString:@"1"];
-    }
+       if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+           _Search.text = @"1";
+        }else{
+           _Search.text = [_Search.text stringByAppendingString:@"1"];
+        }
         
     }
         
@@ -211,11 +226,11 @@
         _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
     }else if (searcpd==1){
     
-    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-        _Search.text = @"2";
-    }else{
-        _Search.text = [_Search.text stringByAppendingString:@"2"];
-    }
+       if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+          _Search.text = @"2";
+        }else{
+           _Search.text = [_Search.text stringByAppendingString:@"2"];
+       }
         
     }
 }
@@ -348,7 +363,8 @@
 }
 //确定按钮
 - (IBAction)check:(id)sender {
-    //[_table bringSubviewToFront:self.view];
+   // _oneview.hidden = YES;
+    //[self.view bringSubviewToFront:_table];
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
        [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
@@ -396,8 +412,8 @@
     
     TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:_ypname.frame Text:name.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
     TextFlowView *changview =  [[TextFlowView alloc] initWithFrame:_ypvender.frame Text:chang.text textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
-    nameview.tag=101;
-    changview.tag=101;
+     nameview.tag=101;
+     changview.tag=101;
     [self.InfoView addSubview:nameview];
     [self.InfoView addSubview:changview];
     /*
@@ -458,23 +474,22 @@
     
     UILabel*lll;
     UIView *viewaa;
-    UILabel * text;
+    //UILabel * text;
     UILabel *shulianglab;
     TextFlowView *techangview;
-    
-    
-    
-    UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];
-    [text addGestureRecognizer:TapGestureRecognizer];
-    text.userInteractionEnabled = YES;
+
+
 
     lll = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
     viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
     shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(viewaa.frame.origin.x+viewaa.frame.size.width+10, 7, 50, 30)];
-   
-        
     text = [[UILabel alloc]initWithFrame:CGRectMake(shulianglab.frame.origin.x+shulianglab.frame.size.width+10, 7, 80, 30)];
     text.tag = 100+indexPath.section;
+    UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];
+    [text addGestureRecognizer:TapGestureRecognizer];
+    text.userInteractionEnabled = YES;
+    
+    
     lll.text=@"批号:";
     techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
            
@@ -505,7 +520,7 @@
 //  NSLog(@"%ld,%ld",(long)indexPath.section,(long)indexPath.row);
 }
 
--(void)shulClick:(UITapGestureRecognizer *)lableField{
+-(void)shulClick:(UITapGestureRecognizer *)lableField {
     UITableViewCell *cell=(UITableViewCell*)[(UILabel*)lableField.self.view superview];
     
     NSIndexPath *index=[self.table indexPathForCell:cell];
@@ -514,14 +529,14 @@
     UILabel*oo=[cell viewWithTag:index.section+100];
     
     NSLog(@"%ld",(long)oo.tag);
-    UITextField *shulstxt = [[UITextField alloc]init];
-    shulstxt.delegate = self;
-    
-    [self.view addSubview:shulstxt];
-    [self setupCustomedKeyboard:shulstxt :oo];
-    
-    [shulstxt becomeFirstResponder];
-    
+//    UITextField *shulstxt = [[UITextField alloc]init];
+//    shulstxt.delegate = self;
+//    
+//    [self.view addSubview:shulstxt];
+//    [self setupCustomedKeyboard:shulstxt :oo];
+//    
+//    [shulstxt becomeFirstResponder];
+//    
 }
 
 #pragma mark-- 自定义键盘
