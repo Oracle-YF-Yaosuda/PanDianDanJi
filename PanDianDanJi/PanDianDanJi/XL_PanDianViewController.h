@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface XL_PanDianViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
-
-@property (weak, nonatomic) IBOutlet UILabel *Search;
+@property (weak, nonatomic) IBOutlet UILabel *onelabel;
 @property (weak, nonatomic) IBOutlet UIView *oneview;
+
+@property (weak, nonatomic) IBOutlet UIView *gundview;
+@property (weak, nonatomic) IBOutlet UILabel *Search;
+
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
 

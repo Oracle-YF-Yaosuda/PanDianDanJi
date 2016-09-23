@@ -23,14 +23,15 @@
     /*判断传值*/
     int chuanzhipanduan;
     int tianjiapanduan;
+    
+    int onepand;//判断找到1条数据数量的输入
+    int searcpd;//判断是不是搜索条输入
+    
+    
     NSArray *arr;//查找到的数组
     NSDictionary*tianjiade;
   
-    UILabel*lll;
-    UIView *viewaa;
-    UILabel * text;
-    UILabel *shulianglab;
-    TextFlowView *techangview;
+  
 }
 
 @end
@@ -56,13 +57,7 @@
         
     }
 
-    //判断搜索
-//    if (![_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-//        [self chazhao];
-//    }else{
-//    
-//    }
-    
+   
     
     
 }
@@ -73,13 +68,20 @@
     UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
     [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
     _ypgoods.userInteractionEnabled = YES;
-    
+
     
     _Search.textColor = [UIColor lightGrayColor];
     [_Search.layer setBorderWidth:1.0];
     [_Search.layer setCornerRadius:5.0];
     
+    UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
+    [_onelabel addGestureRecognizer:TapGestureRecognizer];
+    _onelabel.userInteractionEnabled = YES;
     
+    UITapGestureRecognizer *searTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
+    [_Search addGestureRecognizer:searTapGestureRecognizer];
+    _Search.userInteractionEnabled = YES;
+    [self.view bringSubviewToFront:_oneview];
     
     [self shujuku];
     [self tabledelegate];
@@ -113,7 +115,6 @@
     goodstxt.delegate = self;
     [self.view addSubview:goodstxt];
     UILabel*la =(UILabel *)lableField.self.view;
-    
     [self setupCustomedKeyboard:goodstxt :la];
     [goodstxt becomeFirstResponder];
     
@@ -151,95 +152,167 @@
         
     }];
 }
-
+-(void)shul:(UITapGestureRecognizer*)lab{
+   
+    if(searcpd==0){
+        searcpd=1;
+        onepand=0;
+        NSLog(@"222");
+    }
+    else{
+        
+        onepand=1;
+        searcpd=0;
+        NSLog(@"333");
+    }
+    
+}
 
 
 
 #pragma mark  数字键盘
 - (IBAction)zero:(id)sender {
+    if(onepand==1){
+   _onelabel.text = [_onelabel.text stringByAppendingString:@"0"];
+    }
+    else{
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
     _Search.text = @"0";
     }else{
         
         _Search.text = [_Search.text stringByAppendingString:@"0"];
     }
+ 
+    }
+    
+   
+        
 }
 
 - (IBAction)one:(id)sender {
 
+    if (onepand==1){
+     _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
+    }else if (searcpd==1){
+    
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"1";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"1"];
     }
+        
+    }
+        
 }
 
 - (IBAction)two:(id)sender {
+    
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
+    }else if (searcpd==1){
+    
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"2";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"2"];
     }
+        
+    }
 }
 
 - (IBAction)three:(id)sender {
+    
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"3"];
+    }else if (searcpd==1){
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"3";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"3"];
     }
+        
+    }
 }
 
 - (IBAction)four:(id)sender {
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"4"];
+    }else if (searcpd==1){
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"4";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"4"];
     }
+        
+    }
 }
 
 - (IBAction)five:(id)sender {
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"5"];
+    }else if (searcpd==1){
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"5";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"5"];
     }
+    }
 }
 
 - (IBAction)six:(id)sender {
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"6"];
+    }else if (searcpd==1){
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"6";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"6"];
     }
+    }
 }
 
 - (IBAction)seven:(id)sender {
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"7"];
+    }else if (searcpd==1){
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"7";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"7"];
     }
+    }
 }
 
 
 - (IBAction)eight:(id)sender {
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"8"];
+    }else if (searcpd==1){
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"8";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"8"];
     }
+    }
 }
 
 - (IBAction)nine:(id)sender {
+    if (onepand==1){
+        _onelabel.text = [_onelabel.text stringByAppendingString:@"9"];
+    }else if (searcpd==1){
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.text = @"9";
     }else{
         _Search.text = [_Search.text stringByAppendingString:@"9"];
     }
+    }
 }
 
 - (IBAction)houtui:(id)sender {
+    if (onepand==1){
+        _onelabel.text= [_onelabel.text substringToIndex:[_onelabel.text length] - 1];
+    }else if (searcpd==1){
+        
     if([_Search.text isEqualToString:@""]||[_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
      _Search.text = @"🔍扫描或输入药品条形码";
     }else{
@@ -249,12 +322,16 @@
         }
     }
     
+        
+    }
 }
 
 - (IBAction)clear:(id)sender {
-    
-  _Search.text = @"🔍扫描或输入药品条形码";
-    
+    if (onepand==1){
+        _onelabel.text= @"";
+    }else if (searcpd==1){
+    _Search.text = @"🔍扫描或输入药品条形码";
+    }
 }
 //助记码
 - (IBAction)zhujima:(id)sender {
@@ -271,7 +348,7 @@
 }
 //确定按钮
 - (IBAction)check:(id)sender {
-    
+    //[_table bringSubviewToFront:self.view];
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
        [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
@@ -378,6 +455,13 @@
         [v removeFromSuperview];
     }
 
+    
+    UILabel*lll;
+    UIView *viewaa;
+    UILabel * text;
+    UILabel *shulianglab;
+    TextFlowView *techangview;
+    
     
     
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];

@@ -1587,7 +1587,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0M-QD-atx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0M-QD-atx">
                                         <rect key="frame" x="115" y="5" width="150" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="kaK-iB-zFo"/>
@@ -1598,7 +1598,6 @@
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bbj-Jb-PU0">
                                         <rect key="frame" x="117" y="46" width="468" height="29"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1651,6 +1650,8 @@
                     <connections>
                         <outlet property="InfoView" destination="2hH-5K-aZw" id="4ZB-yl-eA0"/>
                         <outlet property="Search" destination="QYM-eM-s0I" id="0Ji-Wc-MwM"/>
+                        <outlet property="gundview" destination="Bbj-Jb-PU0" id="136-ad-dvZ"/>
+                        <outlet property="onelabel" destination="W0M-QD-atx" id="65t-vq-fDJ"/>
                         <outlet property="oneview" destination="ne8-OL-5Tk" id="6Ib-gF-1w6"/>
                         <outlet property="table" destination="Yvg-fQ-Xic" id="ukW-Rx-5vP"/>
                         <outlet property="ypetalon" destination="Fb2-2b-rbd" id="be2-hu-BSK"/>
