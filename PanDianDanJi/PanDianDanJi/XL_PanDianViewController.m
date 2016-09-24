@@ -394,7 +394,6 @@
     [zhuji passValue:^(NSString *str) {
         _Search.text=str;
         chuanzhipanduan=1;
-        NSLog(@"%@",str);
     }];
     
     [self.navigationController pushViewController:zhuji animated:YES];
@@ -474,7 +473,6 @@
     
     
     
-    // NSLog(@"%@",arr);
 }
 
 #pragma mark --- tableview
@@ -562,7 +560,6 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //  NSLog(@"%ld,%ld",(long)indexPath.section,(long)indexPath.row);
     UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
     NSIndexPath *index=[self.table indexPathForCell:cell];
     
@@ -575,24 +572,10 @@
     
     NSIndexPath *index=[self.table indexPathForCell:cell];
     
-    NSLog(@"%@",index);
     oo=[cell viewWithTag:index.section+100];
     
     [self firstResponderInSubView];
     
-    
-    //    _Search.layer.borderColor = [[UIColor blackColor] CGColor];
-    //    _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
-    
-    NSLog(@"%ld",(long)oo.tag);
-    //    UITextField *shulstxt = [[UITextField alloc]init];
-    //    shulstxt.delegate = self;
-    //
-    //    [self.view addSubview:shulstxt];
-    //    [self setupCustomedKeyboard:shulstxt :oo];
-    //
-    //    [shulstxt becomeFirstResponder];
-    //
 }
 
 #pragma mark-- 自定义键盘
