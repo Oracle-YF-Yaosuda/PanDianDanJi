@@ -9,12 +9,15 @@
 #import "XL_PanDianViewController.h"
 #import "XL_ZhuJiMaViewController.h"
 #import "XL_SearchViewController.h"
+#import "XLHomeViewController.h"
 #import "DSKyeboard.h"
 #import "XL_Header.h"
 #import "XL_FMDB.h"
 #import "WarningBox.h"
 #import "TextFlowView.h"
 #import "Color+Hex.h"
+
+
 @interface XL_PanDianViewController (){
     
     XL_FMDB *XL;
@@ -599,6 +602,19 @@
     } loginBlock:^(NSString *password) {
         [tf resignFirstResponder];
     }];
+}
+-(void)navigation{
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
+    [self.navigationItem setLeftBarButtonItem:left];
+}
+-(void)fanhui{
+    XLHomeViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[pan class]]) {
+            [self.navigationController popToViewController:controller animated:YES];
+        }
+    }
 }
 
 

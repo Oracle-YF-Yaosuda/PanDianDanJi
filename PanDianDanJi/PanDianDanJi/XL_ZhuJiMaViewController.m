@@ -153,7 +153,7 @@
     if ([str isEqualToString:@""]) {
         _table.hidden=YES;
     }else{
-        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"approvalNumber" containStr:[NSString stringWithFormat:@"%@",str]];
+        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"pycode" containStr:[NSString stringWithFormat:@"%@",str]];
         NSLog(@"\n\nshanchu ====%@\n\n",str);
         [_table reloadData];
         _table.hidden=NO;

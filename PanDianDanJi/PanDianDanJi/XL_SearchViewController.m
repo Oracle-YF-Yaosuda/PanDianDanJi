@@ -71,7 +71,7 @@
     return guding;
 }
 -(NSArray *)duiying{
-    NSArray*guding=[NSArray arrayWithObjects:@"productName",@"shuliang",@"productCode",@"newpos",@"approvalNumber",@"manufacturer",@"specification",@"prodBatchNo",nil];
+    NSArray*guding=[NSArray arrayWithObjects:@"productName",@"shuliang",@"productCode",@"newpos",@"pycode",@"manufacturer",@"specification",@"prodBatchNo",nil];
     return guding;
 }
 -(NSArray *)xiabian{
@@ -135,13 +135,14 @@
             }
         }else if (indexPath.row==3){
             @try {
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"newpos"]];
+                /*同步表里没有货位号这个字段*/
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"oldpos"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
         }else if (indexPath.row==4){
             @try {
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"approvalNumber"]];
+                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"pycode"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }

@@ -117,9 +117,7 @@
      */
     NSString *fangshi=@"/sys/upload";
     NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
-    /*    NSNumber *aa=[NSNumber numberWithInt:20];
-     NSDictionary *list_ci =[NSDictionary dictionaryWithObjectsAndKeys:@"1010",@"checkId",@"100100",@"productCode",@"201605",@"prodBatchNo",aa,@"checkNum",@"0",@"status",@"2016-09-13 08:00:34",@"checkTime",@"药品名称01",@"productName",@"哈药六厂",@"manufacturer",@"100片/盒",@"specification",@"200010101",@"barCode",@"国药准字001",@"approvalNumber",@"ypmc01",@"pycode", nil];
-     NSArray *list=[NSArray arrayWithObjects:list_ci , nil];*/
+    
     if (list.count==0) {
         [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
     }else{
