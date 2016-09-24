@@ -36,6 +36,9 @@
     
     //UILabel * text;
     
+    
+    //cell 复用
+    NSMutableDictionary *buyaoFuyong;
 }
 
 @end
@@ -69,6 +72,9 @@
     [super viewDidLoad];
     chuanzhipanduan=0;
     tianjiapanduan=0;
+    buyaoFuyong=[[NSMutableDictionary alloc] init];
+    
+    
     UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
     [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
     _ypgoods.userInteractionEnabled = YES;
@@ -99,8 +105,8 @@
     
     [self shujuku];
     [self tabledelegate];
+    [self navigation];
 }
-
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
@@ -176,10 +182,16 @@
             _Search.text = [_Search.text stringByAppendingString:@"0"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"0"];
+        [self lableFuzhi:@"0"];
     }
 }
-
+-(void)lableFuzhi:(NSString*)ss{
+    oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
+    [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
+    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
+    
+    [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 - (IBAction)one:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
@@ -191,10 +203,9 @@
             _Search.text = [_Search.text stringByAppendingString:@"1"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"1"];
+        [self lableFuzhi:@"1"];
     }
 }
-
 - (IBAction)two:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
@@ -206,12 +217,11 @@
             _Search.text = [_Search.text stringByAppendingString:@"2"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"2"];
+       [self lableFuzhi:@"2"];
     }
     
     
 }
-
 - (IBAction)three:(id)sender {
     
     if(onepand==3){
@@ -224,10 +234,9 @@
             _Search.text = [_Search.text stringByAppendingString:@"3"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"3"];
+        [self lableFuzhi:@"3"];
     }
 }
-
 - (IBAction)four:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"4"];
@@ -239,11 +248,10 @@
             _Search.text = [_Search.text stringByAppendingString:@"4"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"4"];
+        [self lableFuzhi:@"4"];
     }
     
 }
-
 - (IBAction)five:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"5"];
@@ -255,11 +263,10 @@
             _Search.text = [_Search.text stringByAppendingString:@"5"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"5"];
+    [self lableFuzhi:@"5"];
     }
     
 }
-
 - (IBAction)six:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"6"];
@@ -271,11 +278,10 @@
             _Search.text = [_Search.text stringByAppendingString:@"6"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"6"];
+        [self lableFuzhi:@"6"];
     }
     
 }
-
 - (IBAction)seven:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"7"];
@@ -287,12 +293,10 @@
             _Search.text = [_Search.text stringByAppendingString:@"7"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"7"];
+        [self lableFuzhi:@"7"];
     }
     
 }
-
-
 - (IBAction)eight:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"8"];
@@ -304,11 +308,10 @@
             _Search.text = [_Search.text stringByAppendingString:@"8"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"8"];
+        [self lableFuzhi:@"8"];
     }
     
 }
-
 - (IBAction)nine:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"9"];
@@ -320,36 +323,38 @@
             _Search.text = [_Search.text stringByAppendingString:@"9"];
         }
     }else{
-        oo.text= [oo.text stringByAppendingString:@"9"];
+        [self lableFuzhi:@"9"];
     }
     
 }
-
 - (IBAction)houtui:(id)sender {
     if(onepand==3){
         if(_onelabel.text.length!=0)
-        _onelabel.text= [_onelabel.text substringToIndex:[_onelabel.text length] - 1];
+            _onelabel.text= [_onelabel.text substringToIndex:[_onelabel.text length] - 1];
     }
     else if (onepand==1){
         if([_Search.text isEqualToString:@""]||[_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
             _Search.text = @"🔍扫描或输入药品条形码";
         }else{
             if(_Search.text.length!=0)
-            _Search.text= [_Search.text substringToIndex:[_Search.text length] - 1];
+                _Search.text= [_Search.text substringToIndex:[_Search.text length] - 1];
             if (_Search.text.length==0) {
                 _Search.text = @"🔍扫描或输入药品条形码";
             }
         }
     }else{
         if (oo.text.length!=0) {
-             oo.text= [oo.text substringToIndex:[oo.text length] - 1];
+            oo.text= [oo.text substringToIndex:[oo.text length] - 1];
+            [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
+            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
+            
+            [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-       
+        
     }
     
     
 }
-
 - (IBAction)clear:(id)sender {
     if (onepand==1){
         
@@ -364,6 +369,10 @@
         _Search.text = @"🔍扫描或输入药品条形码";
     }else{
         oo.text= @"";
+        [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
+        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
+        
+        [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     
     
@@ -382,18 +391,17 @@
 }
 //确定按钮
 - (IBAction)check:(id)sender {
-    // _oneview.hidden = YES;
-    //[self.view bringSubviewToFront:_table];
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
         [self chazhao];
-        
     }
-    
 }
 //搜索
 -(void)chazhao{
+    
+    buyaoFuyong=[[NSMutableDictionary alloc] init];
+    
     arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
     
     
@@ -449,11 +457,6 @@
         _table.hidden=NO;
         _oneview.hidden = YES;
     }
-    
-    
-    
-    
-    
 }
 
 #pragma mark --- tableview
@@ -471,15 +474,9 @@
     return [arr count];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    if ([arr count]==1){
-    //    return 2;
-    //    }else{
-    //        return 1;
-    //    }
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     return 44;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -488,63 +485,62 @@
     UITableViewCell *cell;//=[tableView cellForRowAtIndexPath:indexPath];
     cell = [tableView dequeueReusableCellWithIdentifier:str];
     if (cell==nil) {
-        
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
-        
     }
     for (UIView *v in [cell subviews]) {
         [v removeFromSuperview];
     }
-    
-    
     UILabel*lll;
     UIView *viewaa;
     UILabel * text;
     UILabel *shulianglab;
     TextFlowView *techangview;
     
-    
-    
     lll = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
     viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
     shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(viewaa.frame.origin.x+viewaa.frame.size.width+10, 7, 50, 30)];
     text = [[UILabel alloc]initWithFrame:CGRectMake(shulianglab.frame.origin.x+shulianglab.frame.size.width+10, 7, 80, 30)];
-    text.text=@"";
+    
     text.tag = 100+indexPath.section;
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];
     [text addGestureRecognizer:TapGestureRecognizer];
     text.userInteractionEnabled = YES;
-    
-    
     lll.text=@"批号:";
     techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
-    
     shulianglab.text=@"数量:";
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
     text.textColor=[UIColor colorWithHexString:@"646464"];
     text.font=[UIFont boldSystemFontOfSize:16];
-    
+    if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
+        text.text=@"";
+    }else
+        text.text=[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]];
+   
     
     [text.layer setBorderWidth:1];
     [text.layer setBorderColor:[[UIColor blackColor] CGColor]];
     [text.layer setCornerRadius:3.0];
     
+    if (oo.tag==text.tag) {
+        [oo.layer setBorderColor:[[UIColor blackColor] CGColor]];
+    }
     [cell addSubview:text];
     [cell addSubview:lll];
     [cell addSubview:shulianglab];
     [cell addSubview:techangview];
     
+    
+    
     //点击不变色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
     NSIndexPath *index=[self.table indexPathForCell:cell];
-    
-    
 }
 
 -(void)shulClick:(UITapGestureRecognizer *)lableField {
@@ -584,7 +580,6 @@
         }
     }
 }
-
 - (void)firstResponderInSubView{
     if (onepand==1) {
         _Search.layer.borderColor = [[UIColor greenColor] CGColor];
@@ -620,7 +615,7 @@
 -(void)tableviewhide{
     for (UIView * vv in _table.visibleCells) {
         for (UILabel* view in vv.subviews) {
-        view.layer.borderColor=[[UIColor blackColor] CGColor];
+            view.layer.borderColor=[[UIColor blackColor] CGColor];
         }
     }
 }
