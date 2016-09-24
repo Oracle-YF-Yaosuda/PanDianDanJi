@@ -114,7 +114,7 @@
     _Search.userInteractionEnabled = YES;
     _Search.tag=1000;
     _Search.textColor = [UIColor lightGrayColor];
-    [_Search.layer setBorderWidth:1.0];
+    [_Search.layer setBorderWidth:1.5];
     [_Search.layer setCornerRadius:5.0];
     
     [self.view bringSubviewToFront:_oneview];
@@ -377,8 +377,8 @@
         for (UIView *v in [_InfoView subviews]) {
             if (v.tag==101) {
                 [v removeFromSuperview];
-            }}
-        
+            }
+        }
     }
     else if(arr.count==1){
         _oneview.hidden=NO;
@@ -465,9 +465,10 @@
     
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
-    text.textColor=[UIColor colorWithHexString:@"646464"];
+    
     text.font=[UIFont boldSystemFontOfSize:16];
-    text.textAlignment =NSTextAlignmentRight;
+    text.textColor=[UIColor colorWithHexString:@"34C083"];
+    text.textAlignment =NSTextAlignmentCenter;
     if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
         text.text=@"";
     }else
@@ -483,7 +484,9 @@
     [cell addSubview:shulianglab];
     [cell addSubview:techangview];
     
-    
+    if(oo.tag==text.tag){
+        oo.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
+    }
     
     //点击不变色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -540,19 +543,19 @@
 #pragma  mark ----边框变色
 - (void)firstResponderInSubView{
     if (onepand==1) {
-        _Search.layer.borderColor = [[UIColor greenColor] CGColor];
+        _Search.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
     }else if(onepand==2){
-        _ypgoods.layer.borderColor = [[UIColor greenColor] CGColor];
+        _ypgoods.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
     }else if(onepand==3){
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
-        _onelabel.layer.borderColor = [[UIColor greenColor] CGColor];
+        _onelabel.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         [self tableviewhide];
     }else{
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -561,7 +564,7 @@
         for (UIView * vv in _table.visibleCells) {
             for (UILabel* view in vv.subviews) {
                 if (view.tag==oo.tag) {
-                    view.layer.borderColor=[[UIColor greenColor] CGColor];
+                    view.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
                 }
                 else{
                     view.layer.borderColor=[[UIColor blackColor] CGColor];
