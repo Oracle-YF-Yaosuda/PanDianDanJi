@@ -72,7 +72,10 @@
     UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
     [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
     _ypgoods.userInteractionEnabled = YES;
-    
+    _ypgoods.layer.borderWidth=1;
+    _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
+    _ypgoods.layer.cornerRadius=5;
+    _ypgoods.tag=1001;
     
     
     
@@ -86,7 +89,7 @@
     UITapGestureRecognizer *searTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_Search addGestureRecognizer:searTapGestureRecognizer];
     _Search.userInteractionEnabled = YES;
-    
+    _Search.tag=1000;
     _Search.textColor = [UIColor lightGrayColor];
     [_Search.layer setBorderWidth:1.0];
     [_Search.layer setCornerRadius:5.0];
@@ -121,13 +124,15 @@
 
 //货位号点击方法
 -(void)labelClick:(UITapGestureRecognizer *)lableField{
-    
+    onepand=2;
+    [self firstResponderInSubView];
     UITextField *goodstxt = [[UITextField alloc]init];
     goodstxt.delegate = self;
     [self.view addSubview:goodstxt];
     UILabel*la =(UILabel *)lableField.self.view;
     [self setupCustomedKeyboard:goodstxt :la];
     [goodstxt becomeFirstResponder];
+    
     
 }
 
@@ -164,17 +169,16 @@
     }];
 }
 -(void)shul:(UITapGestureRecognizer*)lab{
+    
     UILabel*la =(UILabel *)lab.self.view;
     if(la==_Search){
-        _Search.layer.borderColor = [[UIColor greenColor] CGColor];
-        _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
+
         onepand=1;
     }
     else if(la==_onelabel){
-        _Search.layer.borderColor = [[UIColor blackColor] CGColor];
-        _onelabel.layer.borderColor = [[UIColor greenColor] CGColor];
-        onepand=2;
+        onepand=3;
     }
+    [self firstResponderInSubView];
     
 }
 
@@ -224,7 +228,7 @@
     }else{
         oo.text= [oo.text stringByAppendingString:@"2"];
     }
-
+    
     
 }
 
@@ -257,7 +261,7 @@
     }else{
         oo.text= [oo.text stringByAppendingString:@"4"];
     }
-
+    
 }
 
 - (IBAction)five:(id)sender {
@@ -273,7 +277,7 @@
     }else{
         oo.text= [oo.text stringByAppendingString:@"5"];
     }
-
+    
 }
 
 - (IBAction)six:(id)sender {
@@ -289,7 +293,7 @@
     }else{
         oo.text= [oo.text stringByAppendingString:@"6"];
     }
-
+    
 }
 
 - (IBAction)seven:(id)sender {
@@ -305,7 +309,7 @@
     }else{
         oo.text= [oo.text stringByAppendingString:@"7"];
     }
-
+    
 }
 
 
@@ -322,7 +326,7 @@
     }else{
         oo.text= [oo.text stringByAppendingString:@"8"];
     }
-
+    
 }
 
 - (IBAction)nine:(id)sender {
@@ -338,14 +342,14 @@
     }else{
         oo.text= [oo.text stringByAppendingString:@"9"];
     }
-
+    
 }
 
 - (IBAction)houtui:(id)sender {
     if (onepand==1){
-       
+        
     }else if (searcpd==1){
-           }
+    }
     if(onepand==2){
         _onelabel.text= [_onelabel.text substringToIndex:[_onelabel.text length] - 1];
     }
@@ -359,7 +363,7 @@
             }
         }
     }else{
-       oo.text= [oo.text substringToIndex:[oo.text length] - 1];
+        oo.text= [oo.text substringToIndex:[oo.text length] - 1];
     }
     
     
@@ -369,11 +373,11 @@
     if (onepand==1){
         
     }else if (searcpd==1){
-       
+        
     }
     
     if(onepand==2){
-       _onelabel.text= @"";
+        _onelabel.text= @"";
     }
     else if (onepand==1){
         _Search.text = @"🔍扫描或输入药品条形码";
@@ -435,12 +439,12 @@
     }
     else if(arr.count==1){
         _oneview.hidden=NO;
-       TextFlowView* techangview = [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        TextFlowView* techangview = [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
         [_oneview addSubview:techangview];
-     
-    
+        
+        
     }else{
-    
+        
         name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
         chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
         for (UIView *v in [_InfoView subviews]) {
@@ -574,11 +578,11 @@
     NSLog(@"%@",index);
     oo=[cell viewWithTag:index.section+100];
     
-         oo.layer.borderColor = [[UIColor greenColor] CGColor];
+    [self firstResponderInSubView];
     
-   
-    _Search.layer.borderColor = [[UIColor blackColor] CGColor];
-    _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    //    _Search.layer.borderColor = [[UIColor blackColor] CGColor];
+    //    _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
     
     NSLog(@"%ld",(long)oo.tag);
     //    UITextField *shulstxt = [[UITextField alloc]init];
@@ -617,5 +621,43 @@
     }
 }
 
-
+- (void)firstResponderInSubView{
+    if (onepand==1) {
+        _Search.layer.borderColor = [[UIColor greenColor] CGColor];
+        _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
+        _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
+        [self tableviewhide];
+    }else if(onepand==2){
+        _ypgoods.layer.borderColor = [[UIColor greenColor] CGColor];
+        _Search.layer.borderColor = [[UIColor blackColor] CGColor];
+        _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
+        [self tableviewhide];
+    }else if(onepand==3){
+        _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
+        _Search.layer.borderColor = [[UIColor blackColor] CGColor];
+        _onelabel.layer.borderColor = [[UIColor greenColor] CGColor];
+        [self tableviewhide];
+    }else{
+        _Search.layer.borderColor = [[UIColor blackColor] CGColor];
+        _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
+        _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
+        for (UIView * vv in _table.visibleCells) {
+            for (UILabel* view in vv.subviews) {
+                if (view.tag==oo.tag) {
+                    view.layer.borderColor=[[UIColor greenColor] CGColor];
+                }
+                else{
+                    view.layer.borderColor=[[UIColor blackColor] CGColor];
+                }
+            }
+        }
+    }
+}
+-(void)tableviewhide{
+    for (UIView * vv in _table.visibleCells) {
+        for (UILabel* view in vv.subviews) {
+        view.layer.borderColor=[[UIColor blackColor] CGColor];
+        }
+    }
+}
 @end
