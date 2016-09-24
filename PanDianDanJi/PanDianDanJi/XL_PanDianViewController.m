@@ -34,7 +34,26 @@
     NSArray *arr;//查找到的数组
     NSDictionary*tianjiade;
     
-    //UILabel * text;
+    ///添加批号
+    //新建界面
+    UIView * dabeijing;
+    UIView * jiemian;
+    //界面中的数据
+    UILabel *ming1;//名称
+    UITextField *pi1;//批号
+    UITextField *shu1;//数量
+    UILabel *wei1;//货位
+    UILabel *bian1;//编号
+    UILabel *ge1;//规格
+    ///添加条码
+    //新建界面
+    UIView*jiemian1;
+    //界面中的数据
+    UILabel * tiaoma1;//条码
+    UITextField *liang1;//数量
+    UITextField *hao1;//批号
+    UITextField *hwei1;//货位
+    UITextField *biaohaoaa1;//编号
     
     
     //cell 复用
@@ -106,6 +125,9 @@
     [self shujuku];
     [self tabledelegate];
     [self navigation];
+    [self tianjiapihao];
+    [self tianjiatiaoma];
+
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -571,6 +593,11 @@
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
+    
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+    UIBarButtonItem*right=[[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self  action:@selector(tjpihao)];
+    [self.navigationItem setRightBarButtonItem:right];
+    
 }
 -(void)fanhui{
     XLHomeViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
@@ -619,4 +646,185 @@
         }
     }
 }
+-(void)tjpihao{
+    dabeijing.hidden = NO;
+    jiemian.hidden = NO;
+    //jiemian1.hidden = NO;
+}
+-(void)tianjiapihao{
+    float width = [[UIScreen mainScreen] bounds].size.width;
+    float height= [[UIScreen mainScreen] bounds].size.height;
+    //新加添加view
+    dabeijing=[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    dabeijing.backgroundColor=[UIColor blackColor];
+    dabeijing.alpha=0.7;
+    [self.view addSubview:dabeijing];
+    dabeijing.hidden=YES;
+    //信息展示
+    jiemian=[[UIView alloc] initWithFrame:CGRectMake(5, 150, width-10, 350)];
+    [jiemian.layer setCornerRadius:5];
+    jiemian.backgroundColor=[UIColor whiteColor];
+    jiemian.alpha=1;
+    [self.view addSubview:jiemian];
+    jiemian.hidden=YES;
+    UILabel*xinxi=[[UILabel alloc] initWithFrame:CGRectMake(5, 2,200, 40)];
+    xinxi.font=[UIFont systemFontOfSize:20 weight:1.5];
+    UIView * xianhe=[[UIView alloc] initWithFrame:CGRectMake(0, 40, jiemian.bounds.size.width, 1)];
+    xianhe.backgroundColor=[UIColor  blackColor];
+    UILabel *ming=[[UILabel alloc] initWithFrame:CGRectMake(10, 43, 100, 40)];
+    UILabel *pi=[[UILabel alloc] initWithFrame:CGRectMake(10, 84, 100, 40)];
+    UILabel *shu=[[UILabel alloc] initWithFrame:CGRectMake(10, 125, 100, 40)];
+    UILabel *wei=[[UILabel alloc] initWithFrame:CGRectMake(10, 166, 100, 40)];
+    UILabel *bian=[[UILabel alloc] initWithFrame:CGRectMake(10, 207, 100, 40)];
+    UILabel *ge=[[UILabel alloc] initWithFrame:CGRectMake(10, 248, 100, 40)];
+    xinxi.text=@"请添加药品信息";
+    ming.text =@"药品名称:";
+    pi.text   =@"药品批号:";
+    shu.text  =@"药品数量:";
+    wei.text  =@"货        位:";
+    bian.text =@"药品编号:";
+    ge.text   =@"药品规格:";
+    UIView *baoqu=[[UIView alloc] initWithFrame:CGRectMake(20, 300, jiemian.bounds.size.width-40, 40)];
+    UIButton *baocun=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, width/3, 30)];
+    UIButton *quxiao=[[UIButton alloc] initWithFrame:CGRectMake(baoqu.bounds.size.width-width/3, 0, width/3, 30)];
+    baocun.tintColor=[UIColor blackColor];
+    baocun.backgroundColor=[UIColor colorWithHexString:@"34c083"];
+    quxiao.backgroundColor=[UIColor colorWithHexString:@"34c083"];
+    [baocun addTarget:self action:@selector(baobao) forControlEvents:UIControlEventTouchUpInside];
+    [quxiao addTarget:self action:@selector(ququ) forControlEvents:UIControlEventTouchUpInside];
+    [baocun setTitle:@"保存" forState:UIControlStateNormal];
+    [quxiao setTitle:@"取消" forState:UIControlStateNormal];
+    [baocun.layer setCornerRadius:5];
+    [quxiao.layer setCornerRadius:5];
+    [jiemian addSubview:xinxi];
+    [jiemian addSubview:xianhe];
+    [jiemian addSubview:ming];
+    [jiemian addSubview:pi];
+    [jiemian addSubview:shu];
+    [jiemian addSubview:wei];
+    [jiemian addSubview:bian];
+    [jiemian addSubview:ge];
+    [baoqu addSubview:baocun];
+    [baoqu addSubview:quxiao];
+    [jiemian addSubview:baoqu];
+    
+    ming1=[[UILabel alloc] initWithFrame:CGRectMake(110, 43, jiemian.bounds.size.width-110-20, 40)];
+    pi1=[[UITextField alloc] initWithFrame:CGRectMake(110, 94, jiemian.bounds.size.width-110-20, 30)];
+    pi1.delegate=self;
+    pi1.layer.borderColor=[[UIColor grayColor] CGColor];
+    [pi1.layer setBorderWidth:1];
+    [pi1.layer setCornerRadius:5];
+    shu1=[[UITextField alloc] initWithFrame:CGRectMake(110, 135, jiemian.bounds.size.width-110-20, 30)];
+  //[ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:shu1 Delegate:self];
+    shu1.delegate=self;
+    shu1.layer.borderColor=[[UIColor grayColor] CGColor];
+    [shu1.layer setBorderWidth:1];
+    [shu1.layer setCornerRadius:5];
+    wei1=[[UILabel alloc] initWithFrame:CGRectMake(110, 166, 100, 40)];
+    bian1=[[UILabel alloc] initWithFrame:CGRectMake(110, 207, 100, 40)];
+    ge1=[[UILabel alloc] initWithFrame:CGRectMake(110, 248, 200, 40)];
+    shu1.keyboardType=UIKeyboardTypeNumberPad;
+    [jiemian addSubview:ming1];
+    [jiemian addSubview:pi1];
+    [jiemian addSubview:shu1];
+    [jiemian addSubview:bian1];
+    [jiemian addSubview:ge1];
+    [jiemian addSubview:wei1];
+    
+    
+    
+}
+
+-(void)baobao{
+    [self.view endEditing:YES];
+    dabeijing.hidden=YES;
+    jiemian.hidden=YES;
+}
+-(void)ququ{
+    [self.view endEditing:YES];
+    dabeijing.hidden=YES;
+    jiemian.hidden=YES;
+}
+-(void)tianjiatiaoma{
+    float width = [[UIScreen mainScreen] bounds].size.width;
+    //float height= [[UIScreen mainScreen] bounds].size.height;
+    
+    //信息展示
+    jiemian1=[[UIView alloc] initWithFrame:CGRectMake(5, 150, width-10, 350)];
+    jiemian1.backgroundColor=[UIColor whiteColor];
+    jiemian1.alpha=1;
+    [jiemian1.layer setCornerRadius:10];
+    [self.view addSubview:jiemian1];
+    jiemian1.hidden=YES;
+    UILabel*xinxi=[[UILabel alloc] initWithFrame:CGRectMake(5, 2,200, 40)];
+    xinxi.font=[UIFont systemFontOfSize:20 weight:1.5];
+    UIView * xianhe=[[UIView alloc] initWithFrame:CGRectMake(0, 40, jiemian1.bounds.size.width, 1)];
+    xianhe.backgroundColor=[UIColor  blackColor];
+    UILabel *ming=[[UILabel alloc] initWithFrame:CGRectMake(10, 43, 100, 40)];
+    UILabel *pi=[[UILabel alloc] initWithFrame:CGRectMake(10, 84, 100, 40)];
+    UILabel *shu=[[UILabel alloc] initWithFrame:CGRectMake(10, 125, 100, 40)];
+    UILabel *wei=[[UILabel alloc] initWithFrame:CGRectMake(10, 166, 100, 40)];
+    UILabel *bian=[[UILabel alloc] initWithFrame:CGRectMake(10, 207, 100, 40)];
+    
+    xinxi.text=@"请添加药品信息";
+    ming.text =@"条  形  码:";
+    pi.text   =@"药品批号:";
+    shu.text  =@"药品数量:";
+    wei.text  =@"货        位:";
+    bian.text =@"药品编号:";
+    
+    UIView *baoqu=[[UIView alloc] initWithFrame:CGRectMake(20, 300, jiemian1.bounds.size.width-40, 40)];
+    UIButton *baocun=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, width/3, 30)];
+    UIButton *quxiao=[[UIButton alloc] initWithFrame:CGRectMake(baoqu.bounds.size.width-width/3, 0, width/3, 30)];
+    baocun.tintColor=[UIColor blackColor];
+    baocun.backgroundColor=[UIColor colorWithHexString:@"34c083"];
+    quxiao.backgroundColor=[UIColor colorWithHexString:@"34c083"];
+    //[baocun addTarget:self action:@selector(cuncun) forControlEvents:UIControlEventTouchUpInside];
+    //[quxiao addTarget:self action:@selector(xiaoxiao) forControlEvents:UIControlEventTouchUpInside];
+    [baocun setTitle:@"保存" forState:UIControlStateNormal];
+    [quxiao setTitle:@"取消" forState:UIControlStateNormal];
+    [baocun.layer setCornerRadius:5];
+    [quxiao.layer setCornerRadius:5];
+    [jiemian1 addSubview:xinxi];
+    [jiemian1 addSubview:xianhe];
+    [jiemian1 addSubview:ming];
+    [jiemian1 addSubview:pi];
+    [jiemian1 addSubview:shu];
+    [jiemian1 addSubview:wei];
+    [jiemian1 addSubview:bian];
+    
+    [baoqu addSubview:baocun];
+    [baoqu addSubview:quxiao];
+    [jiemian1 addSubview:baoqu];
+    
+    tiaoma1=[[UILabel alloc] initWithFrame:CGRectMake(110, 43, jiemian1.bounds.size.width-110-20, 40)];
+    hao1=[[UITextField alloc] initWithFrame:CGRectMake(110, 94, jiemian1.bounds.size.width-110-20, 30)];
+    hao1.delegate=self;
+    hao1.layer.borderColor=[[UIColor grayColor] CGColor];
+    [hao1.layer setBorderWidth:1];
+    [hao1.layer setCornerRadius:5];
+    liang1=[[UITextField alloc] initWithFrame:CGRectMake(110, 135, jiemian1.bounds.size.width-110-20, 30)];
+    //[ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:liang1 Delegate:self];
+    liang1.delegate=self;
+    liang1.layer.borderColor=[[UIColor grayColor] CGColor];
+    [liang1.layer setBorderWidth:1];
+    [liang1.layer setCornerRadius:5];
+    hwei1=[[UITextField alloc] initWithFrame:CGRectMake(110, 176, jiemian1.bounds.size.width-110-20, 30)];
+    hwei1.delegate=self;
+    hwei1.layer.borderColor=[[UIColor grayColor] CGColor];
+    [hwei1.layer setBorderWidth:1];
+    [hwei1.layer setCornerRadius:5];
+    biaohaoaa1=[[UITextField alloc] initWithFrame:CGRectMake(110, 217, jiemian1.bounds.size.width-110-20, 30)];
+    biaohaoaa1.delegate=self;
+    biaohaoaa1.layer.borderColor=[[UIColor grayColor] CGColor];
+    [biaohaoaa1.layer setBorderWidth:1];
+    [biaohaoaa1.layer setCornerRadius:5];
+    liang1.keyboardType=UIKeyboardTypeNumberPad;
+    [jiemian1 addSubview:tiaoma1];
+    [jiemian1 addSubview:hao1];
+    [jiemian1 addSubview:liang1];
+    [jiemian1 addSubview:biaohaoaa1];
+    [jiemian1 addSubview:hwei1];
+}
+
 @end
