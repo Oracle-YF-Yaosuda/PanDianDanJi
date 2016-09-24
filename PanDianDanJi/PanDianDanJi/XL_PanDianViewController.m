@@ -82,20 +82,12 @@
     }else{
         
     }
-    
-    
-    
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     chuanzhipanduan=0;
     tianjiapanduan=0;
     buyaoFuyong=[[NSMutableDictionary alloc] init];
-    
-    
-  
-    
     [self shujuku];
     [self tabledelegate];
     [self navigation];
@@ -110,15 +102,12 @@
     _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
     _ypgoods.layer.cornerRadius=5;
     _ypgoods.tag=1001;
-    
-    
-    
+
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_onelabel addGestureRecognizer:TapGestureRecognizer];
     _onelabel.userInteractionEnabled = YES;
     [_onelabel.layer setBorderWidth:1.0];
     [_onelabel.layer setCornerRadius:5.0];
-    
     
     UITapGestureRecognizer *searTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_Search addGestureRecognizer:searTapGestureRecognizer];
@@ -127,7 +116,6 @@
     _Search.textColor = [UIColor lightGrayColor];
     [_Search.layer setBorderWidth:1.0];
     [_Search.layer setCornerRadius:5.0];
-    
     
     [self.view bringSubviewToFront:_oneview];
 }
@@ -325,18 +313,10 @@
         if (oo.text.length!=0) {
             oo.text= [oo.text substringToIndex:[oo.text length] - 1];
             [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
-            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
-            [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
 }
 - (IBAction)clear:(id)sender {
-    if (onepand==1){
-        
-    }else if (searcpd==1){
-        
-    }
-    
     if(onepand==3){
         _onelabel.text= @"";
     }
@@ -345,12 +325,7 @@
     }else{
         oo.text= @"";
         [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
-        NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
-        
-        [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     }
-    
-    
 }
 -(void)lableFuzhi:(NSString*)ss{
     oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
@@ -364,9 +339,7 @@
         _Search.text=str;
         chuanzhipanduan=1;
     }];
-    
     [self.navigationController pushViewController:zhuji animated:YES];
-    
 }
 //确定按钮
 #pragma  mark ----查找及确定
@@ -394,9 +367,6 @@
     UILabel *name = [[UILabel alloc]init];
     UILabel *chang = [[UILabel alloc]init];
     if(arr.count==0){
-        // NSArray  *aarr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:@","];
-        
-        
         [self tishi];
         name.text  =@"";
         chang.text = @"";
@@ -414,10 +384,7 @@
         _oneview.hidden=NO;
         TextFlowView* techangview = [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
         [_oneview addSubview:techangview];
-        
-        
     }else{
-        
         name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
         chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
         for (UIView *v in [_InfoView subviews]) {
@@ -436,7 +403,7 @@
          */
         _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"purchaseBatchNo"]];//药品编号
         _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
-        _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
+        _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"approvalNumber"]];//批准文号
         _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
         [_table reloadData];
         _table.hidden=NO;
@@ -716,16 +683,13 @@
         
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
         XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
         [search passdicValue:^(NSDictionary *dic) {
             tianjiapanduan=1;
             tianjiade=[NSDictionary dictionaryWithDictionary:dic];
         }];
         search.str=[NSString stringWithFormat:@"%@",_Search.text];
-        
         [self.navigationController pushViewController:search animated:YES];
-        
         
     }];
     UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -733,11 +697,9 @@
         [self zhujima:self];
         
     }];
-    
     [alert addAction:action2];
     [alert addAction:action3];
     [alert addAction:action1];
-    
     [self presentViewController:alert animated:YES completion:^{
         
     }];
