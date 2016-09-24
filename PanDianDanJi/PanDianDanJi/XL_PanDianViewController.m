@@ -210,9 +210,9 @@
 -(void)lableFuzhi:(NSString*)ss{
     oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
     [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
-    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
+   // NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
     
-    [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+   // [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 - (IBAction)one:(id)sender {
     if(onepand==3){
@@ -528,12 +528,15 @@
     [text addGestureRecognizer:TapGestureRecognizer];
     text.userInteractionEnabled = YES;
     lll.text=@"批号:";
+ 
     techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
     shulianglab.text=@"数量:";
+  
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
     text.textColor=[UIColor colorWithHexString:@"646464"];
     text.font=[UIFont boldSystemFontOfSize:16];
+       text.textAlignment =NSTextAlignmentRight;
     if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
         text.text=@"";
     }else
@@ -561,13 +564,14 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
-    NSIndexPath *index=[self.table indexPathForCell:cell];
+//    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
+//    NSIndexPath *index=[self.table indexPathForCell:cell];
 }
 
 -(void)shulClick:(UITapGestureRecognizer *)lableField {
     onepand=4;
     UITableViewCell *cell=(UITableViewCell*)[(UILabel*)lableField.self.view superview];
+    
     
     NSIndexPath *index=[self.table indexPathForCell:cell];
     
