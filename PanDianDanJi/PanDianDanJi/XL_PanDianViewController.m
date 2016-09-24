@@ -99,17 +99,7 @@
     
     [self shujuku];
     [self tabledelegate];
-    
-    
-    // Do any additional setup after loading the view.
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -119,9 +109,7 @@
     XL = [XL_FMDB tool];
     [XL_FMDB allocWithZone:NULL];
     db = [XL getDBWithDBName:@"pandian.sqlite"];
-    
 }
-
 //货位号点击方法
 -(void)labelClick:(UITapGestureRecognizer *)lableField{
     onepand=2;
@@ -132,10 +120,7 @@
     UILabel*la =(UILabel *)lableField.self.view;
     [self setupCustomedKeyboard:goodstxt :la];
     [goodstxt becomeFirstResponder];
-    
-    
 }
-
 -(void)tishi{
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -172,21 +157,16 @@
     
     UILabel*la =(UILabel *)lab.self.view;
     if(la==_Search){
-
         onepand=1;
     }
     else if(la==_onelabel){
         onepand=3;
     }
     [self firstResponderInSubView];
-    
 }
-
-
-
 #pragma mark  数字键盘
 - (IBAction)zero:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"0"];
     }
     else if (onepand==1){
@@ -201,7 +181,7 @@
 }
 
 - (IBAction)one:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
     }
     else if (onepand==1){
@@ -216,7 +196,7 @@
 }
 
 - (IBAction)two:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
     }
     else if (onepand==1){
@@ -234,7 +214,7 @@
 
 - (IBAction)three:(id)sender {
     
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"3"];
     }
     else if (onepand==1){
@@ -249,7 +229,7 @@
 }
 
 - (IBAction)four:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"4"];
     }
     else if (onepand==1){
@@ -265,7 +245,7 @@
 }
 
 - (IBAction)five:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"5"];
     }
     else if (onepand==1){
@@ -281,7 +261,7 @@
 }
 
 - (IBAction)six:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"6"];
     }
     else if (onepand==1){
@@ -297,7 +277,7 @@
 }
 
 - (IBAction)seven:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"7"];
     }
     else if (onepand==1){
@@ -314,7 +294,7 @@
 
 
 - (IBAction)eight:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"8"];
     }
     else if (onepand==1){
@@ -330,7 +310,7 @@
 }
 
 - (IBAction)nine:(id)sender {
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"9"];
     }
     else if (onepand==1){
@@ -346,24 +326,25 @@
 }
 
 - (IBAction)houtui:(id)sender {
-    if (onepand==1){
-        
-    }else if (searcpd==1){
-    }
-    if(onepand==2){
+    if(onepand==3){
+        if(_onelabel.text.length!=0)
         _onelabel.text= [_onelabel.text substringToIndex:[_onelabel.text length] - 1];
     }
     else if (onepand==1){
         if([_Search.text isEqualToString:@""]||[_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
             _Search.text = @"🔍扫描或输入药品条形码";
         }else{
+            if(_Search.text.length!=0)
             _Search.text= [_Search.text substringToIndex:[_Search.text length] - 1];
-            if(_Search.text.length==0){
+            if (_Search.text.length==0) {
                 _Search.text = @"🔍扫描或输入药品条形码";
             }
         }
     }else{
-        oo.text= [oo.text substringToIndex:[oo.text length] - 1];
+        if (oo.text.length!=0) {
+             oo.text= [oo.text substringToIndex:[oo.text length] - 1];
+        }
+       
     }
     
     
@@ -376,7 +357,7 @@
         
     }
     
-    if(onepand==2){
+    if(onepand==3){
         _onelabel.text= @"";
     }
     else if (onepand==1){
