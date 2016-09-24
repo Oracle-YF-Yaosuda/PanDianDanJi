@@ -94,6 +94,15 @@
     buyaoFuyong=[[NSMutableDictionary alloc] init];
     
     
+  
+    
+    [self shujuku];
+    [self tabledelegate];
+    [self navigation];
+    [self tianjiapihao];
+    [self shoushi];
+}
+-(void)shoushi{
     UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick:)];
     [_ypgoods addGestureRecognizer:labelTapGestureRecognizer];
     _ypgoods.userInteractionEnabled = YES;
@@ -121,13 +130,6 @@
     
     
     [self.view bringSubviewToFront:_oneview];
-    
-    [self shujuku];
-    [self tabledelegate];
-    [self navigation];
-    [self tianjiapihao];
-    [self tianjiatiaoma];
-
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -149,38 +151,7 @@
     [self setupCustomedKeyboard:goodstxt :la];
     [goodstxt becomeFirstResponder];
 }
--(void)tishi{
-    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
-        [search passdicValue:^(NSDictionary *dic) {
-            tianjiapanduan=1;
-            tianjiade=[NSDictionary dictionaryWithDictionary:dic];
-        }];
-        search.str=[NSString stringWithFormat:@"%@",_Search.text];
-        
-        [self.navigationController pushViewController:search animated:YES];
-        
-        
-    }];
-    UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [self zhujima:self];
-        
-    }];
-    
-    [alert addAction:action2];
-    [alert addAction:action3];
-    [alert addAction:action1];
-    
-    [self presentViewController:alert animated:YES completion:^{
-        
-    }];
-}
+#pragma mark ---非tableview的点击事件
 -(void)shul:(UITapGestureRecognizer*)lab{
     
     UILabel*la =(UILabel *)lab.self.view;
@@ -207,13 +178,7 @@
         [self lableFuzhi:@"0"];
     }
 }
--(void)lableFuzhi:(NSString*)ss{
-    oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
-    [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
-   // NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
-    
-   // [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-}
+
 - (IBAction)one:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
@@ -239,10 +204,8 @@
             _Search.text = [_Search.text stringByAppendingString:@"2"];
         }
     }else{
-       [self lableFuzhi:@"2"];
+        [self lableFuzhi:@"2"];
     }
-    
-    
 }
 - (IBAction)three:(id)sender {
     
@@ -272,7 +235,6 @@
     }else{
         [self lableFuzhi:@"4"];
     }
-    
 }
 - (IBAction)five:(id)sender {
     if(onepand==3){
@@ -285,9 +247,8 @@
             _Search.text = [_Search.text stringByAppendingString:@"5"];
         }
     }else{
-    [self lableFuzhi:@"5"];
+        [self lableFuzhi:@"5"];
     }
-    
 }
 - (IBAction)six:(id)sender {
     if(onepand==3){
@@ -302,7 +263,6 @@
     }else{
         [self lableFuzhi:@"6"];
     }
-    
 }
 - (IBAction)seven:(id)sender {
     if(onepand==3){
@@ -317,7 +277,6 @@
     }else{
         [self lableFuzhi:@"7"];
     }
-    
 }
 - (IBAction)eight:(id)sender {
     if(onepand==3){
@@ -332,7 +291,6 @@
     }else{
         [self lableFuzhi:@"8"];
     }
-    
 }
 - (IBAction)nine:(id)sender {
     if(onepand==3){
@@ -347,7 +305,6 @@
     }else{
         [self lableFuzhi:@"9"];
     }
-    
 }
 - (IBAction)houtui:(id)sender {
     if(onepand==3){
@@ -369,13 +326,9 @@
             oo.text= [oo.text substringToIndex:[oo.text length] - 1];
             [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
             NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:oo.tag-100];
-            
             [_table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-        
     }
-    
-    
 }
 - (IBAction)clear:(id)sender {
     if (onepand==1){
@@ -399,7 +352,11 @@
     
     
 }
-//助记码
+-(void)lableFuzhi:(NSString*)ss{
+    oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
+    [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
+}
+#pragma mark -----助记码
 - (IBAction)zhujima:(id)sender {
     
     XL_ZhuJiMaViewController *zhuji=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"zhujima"];
@@ -412,7 +369,9 @@
     
 }
 //确定按钮
+#pragma  mark ----查找及确定
 - (IBAction)check:(id)sender {
+    /*没写呢*/
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
@@ -420,16 +379,20 @@
     }
 }
 //搜索
+#pragma  mark -----搜索方法
 -(void)chazhao{
-    
+    /*没写呢*/
     buyaoFuyong=[[NSMutableDictionary alloc] init];
     
     arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
     
     
+    
+    [self xianshi];
+}
+-(void)xianshi{
     UILabel *name = [[UILabel alloc]init];
     UILabel *chang = [[UILabel alloc]init];
-    
     if(arr.count==0){
         // NSArray  *aarr = [XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"barCode" containStr:@","];
         
@@ -479,8 +442,8 @@
         _table.hidden=NO;
         _oneview.hidden = YES;
     }
+    
 }
-
 #pragma mark --- tableview
 
 -(void)tabledelegate{
@@ -501,6 +464,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;
 }
+#pragma  mark ---- tableview 界面显示
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *str=@"cell";
@@ -528,28 +492,25 @@
     [text addGestureRecognizer:TapGestureRecognizer];
     text.userInteractionEnabled = YES;
     lll.text=@"批号:";
- 
+    
     techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
     shulianglab.text=@"数量:";
-  
+    
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
     text.textColor=[UIColor colorWithHexString:@"646464"];
     text.font=[UIFont boldSystemFontOfSize:16];
-       text.textAlignment =NSTextAlignmentRight;
+    text.textAlignment =NSTextAlignmentRight;
     if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
         text.text=@"";
     }else
         text.text=[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]];
-   
+    
     
     [text.layer setBorderWidth:1];
     [text.layer setBorderColor:[[UIColor blackColor] CGColor]];
     [text.layer setCornerRadius:3.0];
     
-    if (oo.tag==text.tag) {
-        [oo.layer setBorderColor:[[UIColor blackColor] CGColor]];
-    }
     [cell addSubview:text];
     [cell addSubview:lll];
     [cell addSubview:shulianglab];
@@ -563,11 +524,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
-//    NSIndexPath *index=[self.table indexPathForCell:cell];
-}
-
+#pragma  mark ---- tableview中的点击事件
 -(void)shulClick:(UITapGestureRecognizer *)lableField {
     onepand=4;
     UITableViewCell *cell=(UITableViewCell*)[(UILabel*)lableField.self.view superview];
@@ -593,6 +550,7 @@
         [tf resignFirstResponder];
     }];
 }
+#pragma  mark ----左上、右上的按钮
 -(void)navigation{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
@@ -603,6 +561,7 @@
     [self.navigationItem setRightBarButtonItem:right];
     
 }
+#pragma  mark ----返回到主页面
 -(void)fanhui{
     XLHomeViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
     for (UIViewController *controller in self.navigationController.viewControllers) {
@@ -611,6 +570,7 @@
         }
     }
 }
+#pragma  mark ----边框变色
 - (void)firstResponderInSubView{
     if (onepand==1) {
         _Search.layer.borderColor = [[UIColor greenColor] CGColor];
@@ -643,6 +603,7 @@
         }
     }
 }
+/*不要动*/
 -(void)tableviewhide{
     for (UIView * vv in _table.visibleCells) {
         for (UILabel* view in vv.subviews) {
@@ -650,11 +611,14 @@
         }
     }
 }
+#pragma  mark ----添加批号判断
 -(void)tjpihao{
+    /*判断没写呢*/
     dabeijing.hidden = NO;
     jiemian.hidden = NO;
     //jiemian1.hidden = NO;
 }
+#pragma  mark ----添加批号界面
 -(void)tianjiapihao{
     float width = [[UIScreen mainScreen] bounds].size.width;
     float height= [[UIScreen mainScreen] bounds].size.height;
@@ -719,7 +683,6 @@
     [pi1.layer setBorderWidth:1];
     [pi1.layer setCornerRadius:5];
     shu1=[[UITextField alloc] initWithFrame:CGRectMake(110, 135, jiemian.bounds.size.width-110-20, 30)];
-  //[ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:shu1 Delegate:self];
     shu1.delegate=self;
     shu1.layer.borderColor=[[UIColor grayColor] CGColor];
     [shu1.layer setBorderWidth:1];
@@ -734,11 +697,8 @@
     [jiemian addSubview:bian1];
     [jiemian addSubview:ge1];
     [jiemian addSubview:wei1];
-    
-    
-    
 }
-
+#pragma  mark ----批号的保存与取消
 -(void)baobao{
     [self.view endEditing:YES];
     dabeijing.hidden=YES;
@@ -749,86 +709,38 @@
     dabeijing.hidden=YES;
     jiemian.hidden=YES;
 }
--(void)tianjiatiaoma{
-    float width = [[UIScreen mainScreen] bounds].size.width;
-    //float height= [[UIScreen mainScreen] bounds].size.height;
+#pragma  mark ---搜索提示
+-(void)tishi{
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
+        [search passdicValue:^(NSDictionary *dic) {
+            tianjiapanduan=1;
+            tianjiade=[NSDictionary dictionaryWithDictionary:dic];
+        }];
+        search.str=[NSString stringWithFormat:@"%@",_Search.text];
+        
+        [self.navigationController pushViewController:search animated:YES];
+        
+        
+    }];
+    UIAlertAction*action3=[UIAlertAction actionWithTitle:@"助记码查询" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self zhujima:self];
+        
+    }];
     
-    //信息展示
-    jiemian1=[[UIView alloc] initWithFrame:CGRectMake(5, 150, width-10, 350)];
-    jiemian1.backgroundColor=[UIColor whiteColor];
-    jiemian1.alpha=1;
-    [jiemian1.layer setCornerRadius:10];
-    [self.view addSubview:jiemian1];
-    jiemian1.hidden=YES;
-    UILabel*xinxi=[[UILabel alloc] initWithFrame:CGRectMake(5, 2,200, 40)];
-    xinxi.font=[UIFont systemFontOfSize:20 weight:1.5];
-    UIView * xianhe=[[UIView alloc] initWithFrame:CGRectMake(0, 40, jiemian1.bounds.size.width, 1)];
-    xianhe.backgroundColor=[UIColor  blackColor];
-    UILabel *ming=[[UILabel alloc] initWithFrame:CGRectMake(10, 43, 100, 40)];
-    UILabel *pi=[[UILabel alloc] initWithFrame:CGRectMake(10, 84, 100, 40)];
-    UILabel *shu=[[UILabel alloc] initWithFrame:CGRectMake(10, 125, 100, 40)];
-    UILabel *wei=[[UILabel alloc] initWithFrame:CGRectMake(10, 166, 100, 40)];
-    UILabel *bian=[[UILabel alloc] initWithFrame:CGRectMake(10, 207, 100, 40)];
+    [alert addAction:action2];
+    [alert addAction:action3];
+    [alert addAction:action1];
     
-    xinxi.text=@"请添加药品信息";
-    ming.text =@"条  形  码:";
-    pi.text   =@"药品批号:";
-    shu.text  =@"药品数量:";
-    wei.text  =@"货        位:";
-    bian.text =@"药品编号:";
-    
-    UIView *baoqu=[[UIView alloc] initWithFrame:CGRectMake(20, 300, jiemian1.bounds.size.width-40, 40)];
-    UIButton *baocun=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, width/3, 30)];
-    UIButton *quxiao=[[UIButton alloc] initWithFrame:CGRectMake(baoqu.bounds.size.width-width/3, 0, width/3, 30)];
-    baocun.tintColor=[UIColor blackColor];
-    baocun.backgroundColor=[UIColor colorWithHexString:@"34c083"];
-    quxiao.backgroundColor=[UIColor colorWithHexString:@"34c083"];
-    //[baocun addTarget:self action:@selector(cuncun) forControlEvents:UIControlEventTouchUpInside];
-    //[quxiao addTarget:self action:@selector(xiaoxiao) forControlEvents:UIControlEventTouchUpInside];
-    [baocun setTitle:@"保存" forState:UIControlStateNormal];
-    [quxiao setTitle:@"取消" forState:UIControlStateNormal];
-    [baocun.layer setCornerRadius:5];
-    [quxiao.layer setCornerRadius:5];
-    [jiemian1 addSubview:xinxi];
-    [jiemian1 addSubview:xianhe];
-    [jiemian1 addSubview:ming];
-    [jiemian1 addSubview:pi];
-    [jiemian1 addSubview:shu];
-    [jiemian1 addSubview:wei];
-    [jiemian1 addSubview:bian];
-    
-    [baoqu addSubview:baocun];
-    [baoqu addSubview:quxiao];
-    [jiemian1 addSubview:baoqu];
-    
-    tiaoma1=[[UILabel alloc] initWithFrame:CGRectMake(110, 43, jiemian1.bounds.size.width-110-20, 40)];
-    hao1=[[UITextField alloc] initWithFrame:CGRectMake(110, 94, jiemian1.bounds.size.width-110-20, 30)];
-    hao1.delegate=self;
-    hao1.layer.borderColor=[[UIColor grayColor] CGColor];
-    [hao1.layer setBorderWidth:1];
-    [hao1.layer setCornerRadius:5];
-    liang1=[[UITextField alloc] initWithFrame:CGRectMake(110, 135, jiemian1.bounds.size.width-110-20, 30)];
-    //[ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:liang1 Delegate:self];
-    liang1.delegate=self;
-    liang1.layer.borderColor=[[UIColor grayColor] CGColor];
-    [liang1.layer setBorderWidth:1];
-    [liang1.layer setCornerRadius:5];
-    hwei1=[[UITextField alloc] initWithFrame:CGRectMake(110, 176, jiemian1.bounds.size.width-110-20, 30)];
-    hwei1.delegate=self;
-    hwei1.layer.borderColor=[[UIColor grayColor] CGColor];
-    [hwei1.layer setBorderWidth:1];
-    [hwei1.layer setCornerRadius:5];
-    biaohaoaa1=[[UITextField alloc] initWithFrame:CGRectMake(110, 217, jiemian1.bounds.size.width-110-20, 30)];
-    biaohaoaa1.delegate=self;
-    biaohaoaa1.layer.borderColor=[[UIColor grayColor] CGColor];
-    [biaohaoaa1.layer setBorderWidth:1];
-    [biaohaoaa1.layer setCornerRadius:5];
-    liang1.keyboardType=UIKeyboardTypeNumberPad;
-    [jiemian1 addSubview:tiaoma1];
-    [jiemian1 addSubview:hao1];
-    [jiemian1 addSubview:liang1];
-    [jiemian1 addSubview:biaohaoaa1];
-    [jiemian1 addSubview:hwei1];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
 }
 
 @end
