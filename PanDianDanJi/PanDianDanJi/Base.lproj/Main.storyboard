@@ -1587,11 +1587,8 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0M-QD-atx">
-                                        <rect key="frame" x="115" y="5" width="150" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="kaK-iB-zFo"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0M-QD-atx">
+                                        <rect key="frame" x="115" y="8" width="470" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1605,11 +1602,12 @@
                                     <constraint firstAttribute="bottom" secondItem="Bbj-Jb-PU0" secondAttribute="bottom" constant="5" id="77w-9q-EmM"/>
                                     <constraint firstItem="XjM-2C-Pde" firstAttribute="centerY" secondItem="ne8-OL-5Tk" secondAttribute="centerY" id="DgV-eG-vYk"/>
                                     <constraint firstItem="W4p-Y4-t1R" firstAttribute="leading" secondItem="ne8-OL-5Tk" secondAttribute="leading" constant="15" id="Dtx-KV-bTb"/>
-                                    <constraint firstItem="W0M-QD-atx" firstAttribute="top" secondItem="ne8-OL-5Tk" secondAttribute="top" constant="5" id="EAP-JX-Ur1"/>
+                                    <constraint firstItem="W0M-QD-atx" firstAttribute="top" secondItem="ne8-OL-5Tk" secondAttribute="top" constant="8" id="EAP-JX-Ur1"/>
                                     <constraint firstItem="XjM-2C-Pde" firstAttribute="centerX" secondItem="ne8-OL-5Tk" secondAttribute="centerX" id="F1t-jl-HHT"/>
+                                    <constraint firstAttribute="trailing" secondItem="W0M-QD-atx" secondAttribute="trailing" constant="15" id="HtY-cf-9BG"/>
                                     <constraint firstAttribute="bottom" secondItem="W4p-Y4-t1R" secondAttribute="bottom" constant="8" id="Lc2-Vj-Ee0"/>
                                     <constraint firstItem="6Uz-r1-Fxn" firstAttribute="top" secondItem="ne8-OL-5Tk" secondAttribute="top" constant="8" id="LiQ-b9-kou"/>
-                                    <constraint firstItem="XjM-2C-Pde" firstAttribute="top" secondItem="W0M-QD-atx" secondAttribute="bottom" constant="5" id="Mgv-22-0Jn"/>
+                                    <constraint firstItem="XjM-2C-Pde" firstAttribute="top" secondItem="W0M-QD-atx" secondAttribute="bottom" constant="8" id="Mgv-22-0Jn"/>
                                     <constraint firstItem="6Uz-r1-Fxn" firstAttribute="leading" secondItem="ne8-OL-5Tk" secondAttribute="leading" constant="15" id="QuE-Yp-FWT"/>
                                     <constraint firstAttribute="trailing" secondItem="Bbj-Jb-PU0" secondAttribute="trailing" constant="15" id="VXo-62-32G"/>
                                     <constraint firstItem="Bbj-Jb-PU0" firstAttribute="top" secondItem="XjM-2C-Pde" secondAttribute="bottom" constant="5" id="h8X-O3-k6V"/>
