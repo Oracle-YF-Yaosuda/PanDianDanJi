@@ -571,7 +571,11 @@
     NSLog(@"%@",index);
     oo=[cell viewWithTag:index.section+100];
     
-   // oo.layer.borderColor = [[UIColor greenColor] CGColor];
+         oo.layer.borderColor = [[UIColor greenColor] CGColor];
+    
+   
+    _Search.layer.borderColor = [[UIColor blackColor] CGColor];
+    _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
     
     NSLog(@"%ld",(long)oo.tag);
     //    UITextField *shulstxt = [[UITextField alloc]init];
