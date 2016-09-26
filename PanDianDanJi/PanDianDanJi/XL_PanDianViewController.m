@@ -93,7 +93,7 @@
     _ypgoods.layer.borderColor=[[UIColor blackColor] CGColor];
     _ypgoods.layer.cornerRadius=5;
     _ypgoods.tag=1001;
-
+    
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shul:)];
     [_onelabel addGestureRecognizer:TapGestureRecognizer];
     _onelabel.userInteractionEnabled = YES;
@@ -437,7 +437,6 @@
         [v removeFromSuperview];
     }
     
-    
     UILabel*lll;
     UIView *viewaa;
     UILabel * text;
@@ -448,12 +447,6 @@
     viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
     text = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-120, 11, 95, 25)];
     shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(text.frame.origin.x-55, 7, 50, 30)];
-
-    
-    
-    
-    
-    
     text.tag = 100+indexPath.section;
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];
     [text addGestureRecognizer:TapGestureRecognizer];
@@ -474,19 +467,14 @@
         text.text=@"";
     }else
         text.text=[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]];
-    
-    
     [text.layer setBorderWidth:1];
     [text.layer setBorderColor:[[UIColor blackColor] CGColor]];
     [text.layer setCornerRadius:5.0];
-    
     [cell.contentView addSubview:text];
     [cell.contentView addSubview:lll];
     [cell.contentView addSubview:shulianglab];
     [cell.contentView addSubview:techangview];
     
-    
-   
     if((long)oo.tag==(long)text.tag){
         text.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     }
@@ -500,13 +488,10 @@
 #pragma  mark ---- tableview中的点击事件
 -(void)shulClick:(UITapGestureRecognizer *)lableField {
     onepand=4;
+    [self.view endEditing:YES];
     UITableViewCell *cell=(UITableViewCell*)[[(UILabel*)lableField.self.view superview] superview ];
-    
-    
     NSIndexPath *index=[self.table indexPathForCell:cell];
-    
     oo=[cell viewWithTag:index.section+100];
-    
     [self firstResponderInSubView];
     
 }
@@ -547,26 +532,26 @@
 - (void)firstResponderInSubView{
     if (onepand==1) {
         
-         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun.png"] forState:UIControlStateNormal];
-       
+        [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun.png"] forState:UIControlStateNormal];
+        
         _Search.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
     }else if(onepand==2){
-         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
+        [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         _ypgoods.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
     }else if(onepand==3){
-         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
+        [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         [self tableviewhide];
     }else{
-         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
+        [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -575,7 +560,7 @@
             for (UIView* vv1 in vv.subviews) {
                 
                 for (UILabel*view in vv1.subviews) {
-
+                    
                     if (view.tag==oo.tag) {
                         
                         view.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
@@ -583,17 +568,18 @@
                     else{
                         view.layer.borderColor=[[UIColor blackColor] CGColor];
                     }
-
                 }
-                            }
+            }
         }
     }
 }
 /*不要动*/
 -(void)tableviewhide{
     for (UIView * vv in _table.visibleCells) {
-        for (UILabel* view in vv.subviews) {
-            view.layer.borderColor=[[UIColor blackColor] CGColor];
+        for (UIView* vv1 in vv.subviews) {
+            for (UILabel*view in vv1.subviews) {
+                view.layer.borderColor=[[UIColor blackColor] CGColor];
+            }
         }
     }
 }
@@ -605,7 +591,7 @@
     [self.view bringSubviewToFront:jiemian];
     dabeijing.hidden = NO;
     jiemian.hidden = NO;
- 
+    
 }
 #pragma  mark ----添加批号界面
 -(void)tianjiapihao{
