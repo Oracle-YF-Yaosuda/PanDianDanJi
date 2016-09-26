@@ -45,15 +45,6 @@
     UILabel *wei1;//货位
     UILabel *bian1;//编号
     UILabel *ge1;//规格
-    ///添加条码
-    //新建界面
-    UIView*jiemian1;
-    //界面中的数据
-    UILabel * tiaoma1;//条码
-    UITextField *liang1;//数量
-    UITextField *hao1;//批号
-    UITextField *hwei1;//货位
-    UITextField *biaohaoaa1;//编号
     
     
     //cell 复用
@@ -383,6 +374,7 @@
     else if(arr.count==1){
         _oneview.hidden=NO;
         TextFlowView* techangview = [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        _table.hidden = YES;
         [_oneview addSubview:techangview];
     }else{
         name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
@@ -418,6 +410,7 @@
     _table.dataSource=self;
     //_table.hidden=YES;
     //去除多余分割线
+    //_table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _table.backgroundColor = [UIColor clearColor];
 }
@@ -440,9 +433,11 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
     }
-    for (UIView *v in [cell subviews]) {
+    for (UIView *v in [cell.contentView subviews]) {
         [v removeFromSuperview];
     }
+    
+    
     UILabel*lll;
     UIView *viewaa;
     UILabel * text;
@@ -451,8 +446,13 @@
     
     lll = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
     viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
-    shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(viewaa.frame.origin.x+viewaa.frame.size.width+10, 7, 50, 30)];
-    text = [[UILabel alloc]initWithFrame:CGRectMake(shulianglab.frame.origin.x+shulianglab.frame.size.width+10, 7, 80, 30)];
+    text = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-120, 11, 95, 25)];
+    shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(text.frame.origin.x-55, 7, 50, 30)];
+
+    
+    
+    
+    
     
     text.tag = 100+indexPath.section;
     UITapGestureRecognizer *TapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shulClick:)];
@@ -468,6 +468,7 @@
     
     text.font=[UIFont boldSystemFontOfSize:16];
     text.textColor=[UIColor colorWithHexString:@"34C083"];
+    
     text.textAlignment =NSTextAlignmentCenter;
     if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
         text.text=@"";
@@ -477,12 +478,12 @@
     
     [text.layer setBorderWidth:1];
     [text.layer setBorderColor:[[UIColor blackColor] CGColor]];
-    [text.layer setCornerRadius:3.0];
+    [text.layer setCornerRadius:5.0];
     
-    [cell addSubview:text];
-    [cell addSubview:lll];
-    [cell addSubview:shulianglab];
-    [cell addSubview:techangview];
+    [cell.contentView addSubview:text];
+    [cell.contentView addSubview:lll];
+    [cell.contentView addSubview:shulianglab];
+    [cell.contentView addSubview:techangview];
     
     if(oo.tag==text.tag){
         oo.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
@@ -584,9 +585,12 @@
 #pragma  mark ----添加批号判断
 -(void)tjpihao{
     /*判断没写呢*/
+    
+    [self.view bringSubviewToFront:dabeijing];
+    [self.view bringSubviewToFront:jiemian];
     dabeijing.hidden = NO;
     jiemian.hidden = NO;
-    //jiemian1.hidden = NO;
+ 
 }
 #pragma  mark ----添加批号界面
 -(void)tianjiapihao{
