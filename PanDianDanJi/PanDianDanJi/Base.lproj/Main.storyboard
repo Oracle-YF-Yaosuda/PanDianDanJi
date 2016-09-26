@@ -1653,6 +1653,7 @@
                         <outlet property="gundview" destination="Bbj-Jb-PU0" id="136-ad-dvZ"/>
                         <outlet property="onelabel" destination="W0M-QD-atx" id="65t-vq-fDJ"/>
                         <outlet property="oneview" destination="ne8-OL-5Tk" id="6Ib-gF-1w6"/>
+                        <outlet property="surebtn" destination="NCk-Pb-SpX" id="joN-OX-6LY"/>
                         <outlet property="table" destination="Yvg-fQ-Xic" id="ukW-Rx-5vP"/>
                         <outlet property="ypetalon" destination="Fb2-2b-rbd" id="be2-hu-BSK"/>
                         <outlet property="ypgoods" destination="9ke-t0-ipN" id="42E-C3-YCD"/>

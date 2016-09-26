@@ -485,8 +485,10 @@
     [cell.contentView addSubview:shulianglab];
     [cell.contentView addSubview:techangview];
     
-    if(oo.tag==text.tag){
-        oo.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
+    
+   
+    if((long)oo.tag==(long)text.tag){
+        text.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     }
     
     //点击不变色
@@ -498,7 +500,7 @@
 #pragma  mark ---- tableview中的点击事件
 -(void)shulClick:(UITapGestureRecognizer *)lableField {
     onepand=4;
-    UITableViewCell *cell=(UITableViewCell*)[(UILabel*)lableField.self.view superview];
+    UITableViewCell *cell=(UITableViewCell*)[[(UILabel*)lableField.self.view superview] superview ];
     
     
     NSIndexPath *index=[self.table indexPathForCell:cell];
@@ -544,33 +546,46 @@
 #pragma  mark ----边框变色
 - (void)firstResponderInSubView{
     if (onepand==1) {
+        
+         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun.png"] forState:UIControlStateNormal];
+       
         _Search.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
     }else if(onepand==2){
+         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         _ypgoods.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
     }else if(onepand==3){
+         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         [self tableviewhide];
     }else{
+         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         for (UIView * vv in _table.visibleCells) {
-            for (UILabel* view in vv.subviews) {
-                if (view.tag==oo.tag) {
-                    view.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
+            
+            for (UIView* vv1 in vv.subviews) {
+                
+                for (UILabel*view in vv1.subviews) {
+
+                    if (view.tag==oo.tag) {
+                        
+                        view.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
+                    }
+                    else{
+                        view.layer.borderColor=[[UIColor blackColor] CGColor];
+                    }
+
                 }
-                else{
-                    view.layer.borderColor=[[UIColor blackColor] CGColor];
-                }
-            }
+                            }
         }
     }
 }

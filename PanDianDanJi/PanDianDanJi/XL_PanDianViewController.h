@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *InfoView;
 
+@property (weak, nonatomic) IBOutlet UIButton *surebtn;
+
 
 
 @property (weak, nonatomic) IBOutlet UIView *ypname;
