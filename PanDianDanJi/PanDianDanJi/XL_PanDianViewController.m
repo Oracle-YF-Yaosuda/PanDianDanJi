@@ -49,6 +49,9 @@
     
     //cell 复用
     NSMutableDictionary *buyaoFuyong;
+    
+    int qued;
+    
 }
 
 @end
@@ -339,13 +342,19 @@
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
-        [self chazhao];
+    if(onepand==1){
+     [self chazhao];
+    }
+    else{
+        [self quedin];
+    }
     }
 }
 //搜索
 #pragma  mark -----搜索方法
 -(void)chazhao{
     /*没写呢*/
+    
     buyaoFuyong=[[NSMutableDictionary alloc] init];
     
     arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
@@ -371,12 +380,7 @@
             }
         }
     }
-    else if(arr.count==1){
-        _oneview.hidden=NO;
-        TextFlowView* techangview = [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
-        _table.hidden = YES;
-        [_oneview addSubview:techangview];
-    }else{
+    else{
         name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
         chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
         for (UIView *v in [_InfoView subviews]) {
@@ -390,19 +394,52 @@
         changview.tag=101;
         [self.InfoView addSubview:nameview];
         [self.InfoView addSubview:changview];
-        /*
-         显示的所有信息都不是固定的 最后需要重新更改
-         */
+                /*
+                 显示的所有信息都不是固定的 最后需要重新更改
+                 */
         _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"purchaseBatchNo"]];//药品编号
         _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
         _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"approvalNumber"]];//批准文号
         _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
+        
+    if(arr.count==1){
+        _oneview.hidden=NO;
+        for (UIView *vv in [_oneview subviews]) {
+        if (vv.tag==110){
+            [vv removeFromSuperview];
+        }
+    }
+        TextFlowView* techangview= [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        techangview.tag =110;
+        _table.hidden = YES;
+        [_oneview addSubview:techangview];
+
+    }else{
         [_table reloadData];
         _table.hidden=NO;
         _oneview.hidden = YES;
     }
     
+  }
 }
+
+//确定方法
+-(void)quedin{
+    
+    if(arr.count==1){
+        //_onelabel.text;
+    }else{
+    
+    for (NSString *s in [buyaoFuyong allKeys]) {
+        
+        NSLog(@"the shul --%@",s);
+    }
+    
+    
+        
+    }
+}
+
 #pragma mark --- tableview
 
 -(void)tabledelegate{
@@ -587,16 +624,29 @@
         }
     }
 }
+
+
 #pragma  mark ----添加批号判断
 -(void)tjpihao{
-    /*判断没写呢*/
+    /*应该没问题了*/
     
-    [self.view bringSubviewToFront:dabeijing];
-    [self.view bringSubviewToFront:jiemian];
-    dabeijing.hidden = NO;
-    jiemian.hidden = NO;
+    if([_Search.text  isEqualToString:@"🔍扫描或输入药品条形码"]){
+    [WarningBox warningBoxModeText:@"查询药品后才可进行新增批号" andView:self.view];
+    }
+    else if ([_onelabel.text isEqual:@""]&&[arr count]==1){
+    [WarningBox warningBoxModeText:@"请输入当前页面的药品数量" andView:self.view];
+    }
+    else{
+        [self.view bringSubviewToFront:dabeijing];
+        [self.view bringSubviewToFront:jiemian];
+        dabeijing.hidden = NO;
+        jiemian.hidden = NO;
+    }
+    
+
     
 }
+
 #pragma  mark ----添加批号界面
 -(void)tianjiapihao{
     float width = [[UIScreen mainScreen] bounds].size.width;
@@ -677,17 +727,22 @@
     [jiemian addSubview:ge1];
     [jiemian addSubview:wei1];
 }
+
 #pragma  mark ----批号的保存与取消
 -(void)baobao{
+    /*新增批号逻辑没写*/
     [self.view endEditing:YES];
     dabeijing.hidden=YES;
     jiemian.hidden=YES;
 }
 -(void)ququ{
+
     [self.view endEditing:YES];
     dabeijing.hidden=YES;
     jiemian.hidden=YES;
 }
+
+
 #pragma  mark ---搜索提示
 -(void)tishi{
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];

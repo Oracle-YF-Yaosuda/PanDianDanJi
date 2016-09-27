@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface XL_PanDianViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *onelabel;
-@property (weak, nonatomic) IBOutlet UIView *oneview;
+@property (weak, nonatomic) IBOutlet UILabel *onelabel;//一条数据的药品数量
+@property (weak, nonatomic) IBOutlet UIView *oneview;//一条数据的view
 
-@property (weak, nonatomic) IBOutlet UIView *gundview;
-@property (weak, nonatomic) IBOutlet UILabel *Search;
+@property (weak, nonatomic) IBOutlet UIView *gundview;//一条数据的批号
+@property (weak, nonatomic) IBOutlet UILabel *Search;//搜索框
 
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
