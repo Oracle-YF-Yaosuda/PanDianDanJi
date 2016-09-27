@@ -49,9 +49,8 @@
     
     //cell 复用
     NSMutableDictionary *buyaoFuyong;
-    
-    int qued;
-    
+ 
+    NSMutableArray *shularr;
 }
 
 @end
@@ -82,6 +81,7 @@
     chuanzhipanduan=0;
     tianjiapanduan=0;
     buyaoFuyong=[[NSMutableDictionary alloc] init];
+    shularr = [[NSMutableArray alloc]init];
     [self shujuku];
     [self tabledelegate];
     [self navigation];
@@ -358,7 +358,7 @@
     buyaoFuyong=[[NSMutableDictionary alloc] init];
     
     arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
-    
+    //NSLog(@"%@",arr);
     
     
     [self xianshi];
@@ -414,7 +414,9 @@
         _table.hidden = YES;
         [_oneview addSubview:techangview];
 
-    }else{
+    }
+    else{
+        
         [_table reloadData];
         _table.hidden=NO;
         _oneview.hidden = YES;
@@ -425,17 +427,36 @@
 
 //确定方法
 -(void)quedin{
-    
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
     if(arr.count==1){
-        //_onelabel.text;
-    }else{
-    
-    for (NSString *s in [buyaoFuyong allKeys]) {
+       /*status 不确定上传几*/
+    [XL DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:[arr[0] objectForKey:@"status"],@"status",[arr[0] objectForKey:@"barCode"],@"barCode",[arr[0] objectForKey:@"checkId"],@"checkId",[arr[0] objectForKey:@"manufacturer"],@"manufacturer",[arr[0] objectForKey:@"pycode"],@"pycode",[arr[0] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[0] objectForKey:@"approvalNumber"],@"approvalNumber",[arr[0] objectForKey:@"productCode"],@"productCode",[arr[0] objectForKey:@"productName"],@"productName",[arr[0] objectForKey:@"specification"],@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum", nil] intoTable:ShangChuanBiaoMing];
         
-        NSLog(@"the shul --%@",s);
-    }
-    
-    
+    }else{
+        //拿到列表中的数量 ，shularr 存放填写的数量
+       shularr = [[NSMutableArray alloc]init];
+        for (int i=0; i<[arr count]; i++) {
+        if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]){
+            [shularr addObject:@"0"];
+          }
+          else{
+             [ shularr addObject:[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]];
+           }
+        }
+      
+        for (int i=0; i<[arr count]; i++){
+        //所有信息插入上传表中
+         [XL DataBase:db insertKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:[arr[0] objectForKey:@"status"],@"status",[arr[0] objectForKey:@"barCode"],@"barCode",[arr[0] objectForKey:@"checkId"],@"checkId",[arr[0] objectForKey:@"manufacturer"],@"manufacturer",[arr[0] objectForKey:@"pycode"],@"pycode",[arr[0] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[0] objectForKey:@"approvalNumber"],@"approvalNumber",[arr[0] objectForKey:@"productCode"],@"productCode",[arr[0] objectForKey:@"productName"],@"productName",[arr[0] objectForKey:@"specification"],@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum", nil] intoTable:ShangChuanBiaoMing];
+         
+           //修改下载表中的药品数量
+         [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum", nil] whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"productCode"],@"productCode", nil]];
+       
+            
+        }
+        
         
     }
 }
@@ -500,6 +521,7 @@
     text.textColor=[UIColor colorWithHexString:@"34C083"];
     
     text.textAlignment =NSTextAlignmentCenter;
+    
     if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
         text.text=@"";
     }else
@@ -515,7 +537,8 @@
     if((long)oo.tag==(long)text.tag){
         text.layer.borderColor=[[UIColor colorWithHexString:@"34C083"] CGColor];
     }
-    
+   
+  
     //点击不变色
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
