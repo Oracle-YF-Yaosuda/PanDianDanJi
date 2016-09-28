@@ -115,6 +115,8 @@
     /*
      缺少字段
      */
+    
+    
     NSString *fangshi=@"/sys/upload";
     NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
     
