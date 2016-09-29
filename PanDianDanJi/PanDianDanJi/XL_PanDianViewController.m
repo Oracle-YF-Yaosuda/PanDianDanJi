@@ -55,6 +55,7 @@
     
     int tianpihao;
     
+    
 }
 
 @end
@@ -168,7 +169,6 @@
         [self lableFuzhi:@"0"];
     }
 }
-
 - (IBAction)one:(id)sender {
     if(onepand==3){
         _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
@@ -389,7 +389,7 @@
     _table.hidden = YES;
     [_oneview addSubview:techangview];
     
-    
+    _Search.text =@"🔍扫描或输入药品条形码";
     _table.hidden=YES;
     _onelabel.text=@"";
     _ypwenhao.text = @"";
@@ -528,10 +528,16 @@
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
     }
+  
     
     [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo", nil]];
     NSLog(@"%@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
     
+}
+-(void)xztianjia:(int)i{
+    NSDictionary *dic =[NSDictionary dictionaryWithObjectsAndKeys:[arr[i]objectForKey:@"approvalNumber"],@"approvalNumber",[arr[i]objectForKey:@"vipPrice"],@"vipPrice",[arr[i]objectForKey:@"stockNum"],@"stockNum",[arr[i]objectForKey:@"status"],@"status",[arr[i]objectForKey:@"specification"],@"specification",[arr[i]objectForKey:@"salePrice"],@"salePrice",[arr[i]objectForKey:@"pycode"],@"pycode",[arr[i]objectForKey:@"purchaseBatchNo"],@"purchaseBatchNo",[arr[i]objectForKey:@"productName"],@"productName",[arr[i]objectForKey:@"productCode"],@"productCode",[arr[i]objectForKey:@"oldpos"],@"oldpos",[arr[i]objectForKey:@"manufacturer"],@"manufacturer",[arr[i]objectForKey:@"id"],@"id",[arr[i]objectForKey:@"costPrice"],@"costPrice",[arr[i]objectForKey:@"checkId"],@"checkId",[arr[i]objectForKey:@"barCode"],@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", nil];
+    
+    [XL DataBase:db insertKeyValues:dic intoTable:XiaZaiBiaoMing];
 }
 -(void)scxiugai:(int)i{
     if ([shularr[i] isEqual:@""]) {
@@ -539,7 +545,6 @@
     }
     [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo", nil]];
 }
-
 -(void)sccharu:(int)i{
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -551,10 +556,7 @@
     [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
     
 }
-
-
-
-
+//没写完呢
 -(void)czshangchuan{
     scarr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
     if (scarr.count==0){
@@ -737,7 +739,7 @@
             for (UIView* vv1 in vv.subviews) {
                 
                 for (UILabel*view in vv1.subviews) {
-                    NSLog(@"%ld-------%ld",(long)view.tag,(long)oo.tag);
+        
                     
                     if (view.tag==oo.tag) {
                         
@@ -765,8 +767,6 @@
 
 #pragma  mark ----添加批号判断
 -(void)tjpihao{
-    
-    
     if([_Search.text  isEqualToString:@"🔍扫描或输入药品条形码"]){
         [WarningBox warningBoxModeText:@"查询药品后才可进行新增批号" andView:self.view];
     }
@@ -774,10 +774,29 @@
         if (tianpihao==0) {
             [WarningBox warningBoxModeText:@"请先查询药品!" andView:self.view];
         }else{
+            ming1.text =@"";
+            NSString* aaa=[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
+            TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:ming1.frame Text:aaa textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
+            
+            for (UIView *vv  in jiemian.subviews) {
+                if(vv.tag==120){
+                [vv removeFromSuperview];
+                }
+            }
+            nameview.tag = 120;
+            [jiemian addSubview:nameview];
+            wei1.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
+            bian1.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productCode"]];//药品编号
+            ge1.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
             [self.view bringSubviewToFront:dabeijing];
             [self.view bringSubviewToFront:jiemian];
+            
+            if (arr.count==1&&[_onelabel.text isEqual:@""]){
+            [WarningBox warningBoxModeText:@"请输入当前药品的数量" andView:self.view];
+            }else{
             dabeijing.hidden = NO;
             jiemian.hidden = NO;
+            }
         }
     }
     
@@ -812,7 +831,7 @@
     UILabel *wei=[[UILabel alloc] initWithFrame:CGRectMake(10, 166, 100, 40)];
     UILabel *bian=[[UILabel alloc] initWithFrame:CGRectMake(10, 207, 100, 40)];
     UILabel *ge=[[UILabel alloc] initWithFrame:CGRectMake(10, 248, 100, 40)];
-    xinxi.text=@"请添加药品信息";
+    xinxi.text=@"新增药品信息";
     ming.text =@"药品名称:";
     pi.text   =@"药品批号:";
     shu.text  =@"药品数量:";
@@ -842,7 +861,6 @@
     [baoqu addSubview:baocun];
     [baoqu addSubview:quxiao];
     [jiemian addSubview:baoqu];
-    
     ming1=[[UILabel alloc] initWithFrame:CGRectMake(110, 43, jiemian.bounds.size.width-110-20, 40)];
     pi1=[[UITextField alloc] initWithFrame:CGRectMake(110, 94, jiemian.bounds.size.width-110-20, 30)];
     pi1.delegate=self;
@@ -868,18 +886,43 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     [self setupCustomedKeyboard:textField :nil];
+
     return YES;
 }
 
 #pragma  mark ----批号的保存与取消
 -(void)baobao{
     /*新增批号逻辑没写*/
+    [self xztianjia:0];
+    if(arr.count==1){
+        shularr=[[NSMutableArray alloc] init];
+        [shularr addObject:[NSString stringWithFormat:@"%@",_onelabel.text]];
+        [self xzxiugai:0];
+    }else{
+        shularr = [[NSMutableArray alloc]init];
+       for (int i=0; i<[arr count]; i++) {
+        if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]){
+            [shularr addObject:@"0"];
+        }
+        else{
+            [ shularr addObject:[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]];
+        }
+      }
+      for (int i=0; i<arr.count; i++) {
+        [self xzxiugai:i];
+        
+        }
+    
+    }
+    [self chazhao];
+    pi1.text = @"";
+    shu1.text = @"";
     [self.view endEditing:YES];
     dabeijing.hidden=YES;
     jiemian.hidden=YES;
 }
 -(void)ququ{
-    
+    [self qingkong];
     [self.view endEditing:YES];
     dabeijing.hidden=YES;
     jiemian.hidden=YES;
@@ -915,5 +958,7 @@
         
     }];
 }
+
+
 
 @end
