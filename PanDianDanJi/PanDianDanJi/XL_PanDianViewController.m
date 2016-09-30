@@ -72,18 +72,29 @@
         
     }
     else if(tianjiapanduan==1){
-        tianjiapanduan=0;
+       
         
         /*
          这里把传回来的数据显示
          因为只有一条，所有直接用view方法显示
          */
-        NSLog(@"%@",tianjiade);
+        arr=[[NSMutableArray alloc] initWithObjects:tianjiade, nil];
+        NSLog(@"------   %@",arr);
+        [self xianshi:arr];
+        //[arr[0]setObject:@"" forKey:@"salePrice"];
+        _onelabel.text=[arr[0] objectForKey:@"shuliang"];
+        
+        
+        [self xztianjia:0];
+        [self sccharu:0];
+        
+        
+         tianjiapanduan=0;
         
     }else{
-        
+     
+        }
     }
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     chuanzhipanduan=0;
@@ -389,7 +400,7 @@
     _table.hidden = YES;
     [_oneview addSubview:techangview];
     
-    _Search.text =@"🔍扫描或输入药品条形码";
+    
     _table.hidden=YES;
     _onelabel.text=@"";
     _ypwenhao.text = @"";
@@ -436,8 +447,12 @@
              显示的所有信息都不是固定的 最后需要重新更改
              */
             _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productCode"]];//药品编号
+            if (NULL==[arr[0]objectForKey:@"oldpos"]) {
+                _ypgoods.text =@"";
+            }else{
             _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
-            _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"approvalNumber"]];//批准文号
+            }
+            _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
             _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
             
             if(arr.count==1){
@@ -524,6 +539,7 @@
         [self firstResponderInSubView];
     }
 }
+#pragma mark 数据库操作
 -(void)xzxiugai:(int)i{
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
@@ -535,8 +551,15 @@
     
 }
 -(void)xztianjia:(int)i{
-    NSDictionary *dic =[NSDictionary dictionaryWithObjectsAndKeys:[arr[i]objectForKey:@"approvalNumber"],@"approvalNumber",[arr[i]objectForKey:@"vipPrice"],@"vipPrice",[arr[i]objectForKey:@"stockNum"],@"stockNum",[arr[i]objectForKey:@"status"],@"status",[arr[i]objectForKey:@"specification"],@"specification",[arr[i]objectForKey:@"salePrice"],@"salePrice",[arr[i]objectForKey:@"pycode"],@"pycode",[arr[i]objectForKey:@"purchaseBatchNo"],@"purchaseBatchNo",[arr[i]objectForKey:@"productName"],@"productName",[arr[i]objectForKey:@"productCode"],@"productCode",[arr[i]objectForKey:@"oldpos"],@"oldpos",[arr[i]objectForKey:@"manufacturer"],@"manufacturer",[arr[i]objectForKey:@"id"],@"id",[arr[i]objectForKey:@"costPrice"],@"costPrice",[arr[i]objectForKey:@"checkId"],@"checkId",[arr[i]objectForKey:@"barCode"],@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", nil];
-    
+    NSDictionary *dic;
+    if (tianjiapanduan==1) {
+      
+     dic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"vipPrice"],@"vipPrice",@"",@"stockNum",[tianjiade objectForKey:@"specification"],@"specification",[tianjiade objectForKey:@"salePrice"],@"salePrice",[tianjiade objectForKey:@"pycode"],@"pycode",@"",@"purchaseBatchNo",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"id"],@"id",[tianjiade objectForKey:@"costPrice"],@"costPrice",@"",@"checkId",[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",@"",@"status",@"",@"checkNum",@"",@"oldpos", nil];
+        NSLog(@"the dic is -----%@",dic);
+        
+    }else{
+    dic =[NSDictionary dictionaryWithObjectsAndKeys:[arr[i]objectForKey:@"approvalNumber"],@"approvalNumber",[arr[i]objectForKey:@"vipPrice"],@"vipPrice",[arr[i]objectForKey:@"stockNum"],@"stockNum",[arr[i]objectForKey:@"status"],@"status",[arr[i]objectForKey:@"specification"],@"specification",[arr[i]objectForKey:@"salePrice"],@"salePrice",[arr[i]objectForKey:@"pycode"],@"pycode",[arr[i]objectForKey:@"purchaseBatchNo"],@"purchaseBatchNo",[arr[i]objectForKey:@"productName"],@"productName",[arr[i]objectForKey:@"productCode"],@"productCode",[arr[i]objectForKey:@"oldpos"],@"oldpos",[arr[i]objectForKey:@"manufacturer"],@"manufacturer",[arr[i]objectForKey:@"id"],@"id",[arr[i]objectForKey:@"costPrice"],@"costPrice",[arr[i]objectForKey:@"checkId"],@"checkId",[arr[i]objectForKey:@"barCode"],@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", nil];
+    }
     [XL DataBase:db insertKeyValues:dic intoTable:XiaZaiBiaoMing];
 }
 -(void)scxiugai:(int)i{
@@ -550,8 +573,18 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
-    
-    NSDictionary  *scdic =[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"status"],@"status",[arr[i] objectForKey:@"barCode"],@"barCode",[arr[i] objectForKey:@"checkId"],@"checkId",[arr[i] objectForKey:@"manufacturer"],@"manufacturer",[arr[i] objectForKey:@"pycode"],@"pycode",[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"approvalNumber"],@"approvalNumber",[arr[i] objectForKey:@"productCode"],@"productCode",[arr[i] objectForKey:@"productName"],@"productName",[arr[i]objectForKey:@"specification"],@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum", nil];
+    NSDictionary  *scdic;
+    if (tianjiapanduan==1) {
+     
+        NSString *huoweihao;
+        if (NULL == [tianjiade objectForKey:@"oldpos"]) {
+            huoweihao=@"";
+        }else
+        huoweihao=[tianjiade objectForKey:@"oldpos"];
+      scdic =[NSDictionary dictionaryWithObjectsAndKeys:@"",@"status",[tianjiade objectForKey:@"barCode"],@"barCode",@"",@"checkId",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"pycode"],@"pycode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",@"",@"approvalNumber",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"productName"],@"productName",@"",@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum", nil];
+       
+    }else
+   scdic =[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"status"],@"status",[arr[i] objectForKey:@"barCode"],@"barCode",[arr[i] objectForKey:@"checkId"],@"checkId",[arr[i] objectForKey:@"manufacturer"],@"manufacturer",[arr[i] objectForKey:@"pycode"],@"pycode",[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"approvalNumber"],@"approvalNumber",[arr[i] objectForKey:@"productCode"],@"productCode",[arr[i] objectForKey:@"productName"],@"productName",[arr[i]objectForKey:@"specification"],@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum", nil];
     
     [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
     
@@ -695,13 +728,29 @@
 }
 #pragma  mark ----返回到主页面
 -(void)fanhui{
-    /*返回逻辑没写*/
-    XLHomeViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[pan class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
+  
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"退出提示" message:@"确定要结束本次盘点吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        XLHomeViewController*pan=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[pan class]]) {
+                [self.navigationController popToViewController:controller animated:YES];
+            }
         }
-    }
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+    
+    
+    
+    
 }
 #pragma  mark ----边框变色
 - (void)firstResponderInSubView{

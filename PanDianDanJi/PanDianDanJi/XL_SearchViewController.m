@@ -71,7 +71,7 @@
     return guding;
 }
 -(NSArray *)duiying{
-    NSArray*guding=[NSArray arrayWithObjects:@"productName",@"shuliang",@"productCode",@"newpos",@"pycode",@"manufacturer",@"specification",@"prodBatchNo",nil];
+    NSArray*guding=[NSArray arrayWithObjects:@"productName",@"shuliang",@"productCode",@"oldpos",@"pycode",@"manufacturer",@"specification",@"prodBatchNo",nil];
     return guding;
 }
 -(NSArray *)xiabian{
@@ -105,17 +105,17 @@
         
     }
     
-    UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 33)];
+    UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 7, 100, 30)];
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
-    UITextField * text=[[UITextField alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-110,33)];
+    UITextField * text=[[UITextField alloc] initWithFrame:CGRectMake(100, 7, CGRectGetWidth(self.view.frame)-110,30)];
     text.textColor=[UIColor colorWithHexString:@"646464"];
     text.tag=100+indexPath.row;
     text.layer.cornerRadius=5;
     text.layer.borderWidth=1;
     text.delegate=self;
     text.layer.borderColor=[[UIColor grayColor] CGColor];
-    UILabel *text1=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-110,33)];
+    UILabel *text1=[[UILabel alloc] initWithFrame:CGRectMake(100, 7, CGRectGetWidth(self.view.frame)-110,30)];
     text1.textColor=[UIColor colorWithHexString:@"767676"];
     if (indexPath.section==0) {
         lll.text=guding[indexPath.row];
@@ -134,12 +134,12 @@
                 text.text=@"";
             }
         }else if (indexPath.row==3){
-            @try {
-                /*同步表里没有货位号这个字段*/
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"oldpos"]];
-            } @catch (NSException *exception) {
+//            @try {
+//                /*同步表里没有货位号这个字段*/
+//                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"oldpos"]];
+//            } @catch (NSException *exception) {
                 text.text=@"";
-            }
+            //}
         }else if (indexPath.row==4){
             @try {
                 text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"pycode"]];
@@ -226,6 +226,8 @@
         if (textField.tag==101) {
             textField.keyboardType=UIKeyboardTypeNumberPad;
             [self navigationyou];
+        }else if (textField.tag==103){
+            [self setupCustomedKeyboard:textField];
         }else
             return NO;
     }else{
@@ -293,6 +295,7 @@
     }
     if (q==0) {
         if (self.passdicValueBlock!=nil) {
+            NSLog(@"======   %@"   ,dic);
             self.passdicValueBlock(dic);
         }
         [self.navigationController popViewControllerAnimated:YES];
