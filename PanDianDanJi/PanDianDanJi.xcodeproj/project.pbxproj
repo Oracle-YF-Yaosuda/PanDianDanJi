@@ -128,6 +128,8 @@
 		D23ECB5F1D7E6C2D006EDD7D /* XLNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECB5E1D7E6C2D006EDD7D /* XLNetworkViewController.m */; };
 		D23ECB611D7E9135006EDD7D /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = D23ECB601D7E9135006EDD7D /* btn_save.png */; };
 		D27816971D8FC97A00641402 /* TextFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = D27816961D8FC97A00641402 /* TextFlowView.m */; };
+		D7403B871DA89127000B6AC4 /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = D7403B851DA89127000B6AC4 /* dot.png */; };
+		D7403B881DA89127000B6AC4 /* dots.png in Resources */ = {isa = PBXBuildFile; fileRef = D7403B861DA89127000B6AC4 /* dots.png */; };
 		D74F2C4A1D8922CE009AC061 /* XL_PanDianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */; };
 		D7BFB44D1D8E7D0000B57CC0 /* DSBaseKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4421D8E7D0000B57CC0 /* DSBaseKeyboard.m */; };
 		D7BFB44E1D8E7D0000B57CC0 /* DSKyeboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB4441D8E7D0000B57CC0 /* DSKyeboard.m */; };
@@ -327,6 +329,8 @@
 		D23ECB601D7E9135006EDD7D /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
 		D27816951D8FC97A00641402 /* TextFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFlowView.h; sourceTree = "<group>"; };
 		D27816961D8FC97A00641402 /* TextFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFlowView.m; sourceTree = "<group>"; };
+		D7403B851DA89127000B6AC4 /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot.png; sourceTree = "<group>"; };
+		D7403B861DA89127000B6AC4 /* dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dots.png; sourceTree = "<group>"; };
 		D74F2C481D8922CE009AC061 /* XL_PanDianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_PanDianViewController.h; sourceTree = "<group>"; };
 		D74F2C491D8922CE009AC061 /* XL_PanDianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_PanDianViewController.m; sourceTree = "<group>"; };
 		D7BFB4411D8E7D0000B57CC0 /* DSBaseKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBaseKeyboard.h; sourceTree = "<group>"; };
@@ -617,6 +621,8 @@
 			children = (
 				D23ECB151D7E5472006EDD7D /* images */,
 				D23ECAAB1D7E5226006EDD7D /* about.png */,
+				D7403B851DA89127000B6AC4 /* dot.png */,
+				D7403B861DA89127000B6AC4 /* dots.png */,
 				D23ECAAC1D7E5226006EDD7D /* actionbar_back.png */,
 				D23ECAAD1D7E5226006EDD7D /* bar.png */,
 				D23ECAAE1D7E5226006EDD7D /* base_action_bar_bg.9.png */,
@@ -972,6 +978,7 @@
 				D23ECB3B1D7E5472006EDD7D /* icon_02_14.png in Resources */,
 				D23ECAF31D7E5226006EDD7D /* icon_02_03.png in Resources */,
 				D23ECB091D7E5226006EDD7D /* jianpan_mr_34.png in Resources */,
+				D7403B881DA89127000B6AC4 /* dots.png in Resources */,
 				D23ECB481D7E5472006EDD7D /* jianpan_dk_02_03_03.png in Resources */,
 				D23ECB061D7E5226006EDD7D /* jianpan_mr_25.png in Resources */,
 				D7BFB4501D8E7D0000B57CC0 /* DSLetterKeyboard.xib in Resources */,
@@ -988,6 +995,7 @@
 				D23ECB0F1D7E5226006EDD7D /* pd_07.png in Resources */,
 				D23ECB441D7E5472006EDD7D /* 盘点助手_主页.jpg in Resources */,
 				D7BFB4531D8E7D0000B57CC0 /* DSSymbolKeyboard.xib in Resources */,
+				D7403B871DA89127000B6AC4 /* dot.png in Resources */,
 				D23ECA7B1D7E5032006EDD7D /* Assets.xcassets in Resources */,
 				D23ECB4E1D7E5472006EDD7D /* jianpan_mr_05.png in Resources */,
 				D23ECAE31D7E5226006EDD7D /* base_action_bar_bg.9.png in Resources */,

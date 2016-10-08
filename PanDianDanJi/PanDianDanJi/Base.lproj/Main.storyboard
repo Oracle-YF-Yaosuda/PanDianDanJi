@@ -1186,9 +1186,10 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-ZY-T2D">
                                         <rect key="frame" x="362" y="5" width="114" height="60"/>
-                                        <state key="normal" backgroundImage="jianpan_mr_36.png"/>
+                                        <state key="normal" backgroundImage="jianpan_mr_08.png"/>
+                                        <state key="highlighted" backgroundImage="jianpan_dk_04_13.png"/>
                                         <connections>
-                                            <action selector="clear:" destination="93X-9A-h6e" eventType="touchUpInside" id="27d-oc-eIV"/>
+                                            <action selector="houtui:" destination="93X-9A-h6e" eventType="touchUpInside" id="Ep4-bZ-Zoz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2k-c8-z82">
@@ -1249,18 +1250,18 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vs9-yp-Rtn">
                                         <rect key="frame" x="362" y="70" width="114" height="60"/>
-                                        <state key="normal" backgroundImage="jianpan_mr_25.png"/>
-                                        <state key="highlighted" backgroundImage="jianpan_dk_04_03.png"/>
+                                        <state key="normal" backgroundImage="dot.png"/>
+                                        <state key="highlighted" backgroundImage="dots.png"/>
                                         <connections>
-                                            <action selector="zero:" destination="93X-9A-h6e" eventType="touchUpInside" id="7Aq-of-2Kt"/>
+                                            <action selector="dian:" destination="93X-9A-h6e" eventType="touchUpInside" id="el9-nQ-L1h"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuY-uI-KEi">
                                         <rect key="frame" x="362" y="135" width="114" height="60"/>
-                                        <state key="normal" backgroundImage="jianpan_mr_08.png"/>
-                                        <state key="highlighted" backgroundImage="jianpan_dk_04_13.png"/>
+                                        <state key="normal" backgroundImage="jianpan_mr_25.png"/>
+                                        <state key="highlighted" backgroundImage="jianpan_dk_04_03.png"/>
                                         <connections>
-                                            <action selector="houtui:" destination="93X-9A-h6e" eventType="touchUpInside" id="qrC-1d-djt"/>
+                                            <action selector="zero:" destination="93X-9A-h6e" eventType="touchUpInside" id="A9H-k7-NTV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUe-pB-DE9">
@@ -1552,7 +1553,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔍扫描或输入药品条形码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYM-eM-s0I">
-                                <rect key="frame" x="20" y="23" width="560" height="35"/>
+                                <rect key="frame" x="20" y="23" width="510" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="vS4-Nb-9hP"/>
                                 </constraints>
@@ -1624,12 +1625,36 @@
                                 <rect key="frame" x="0.0" y="63" width="600" height="124"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yx-Hq-f6n">
+                                <rect key="frame" x="535" y="27" width="60" height="25"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.75294117647058822" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="HDU-FO-miQ"/>
+                                    <constraint firstAttribute="width" constant="60" id="ekK-8d-FgB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="上一条">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="lastone:" destination="93X-9A-h6e" eventType="touchUpInside" id="k6B-fD-1R4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Yvg-fQ-Xic" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leading" id="1bT-Fd-7mu"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="height" secondItem="yi6-If-UUn" secondAttribute="height" multiplier="0.333333" id="5F6-H8-6IT"/>
-                            <constraint firstAttribute="trailing" secondItem="QYM-eM-s0I" secondAttribute="trailing" constant="20" id="DO1-mP-jbi"/>
+                            <constraint firstItem="7yx-Hq-f6n" firstAttribute="top" secondItem="tFt-RR-qy8" secondAttribute="bottom" constant="7" id="6W6-DT-zb5">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                             <constraint firstItem="ne8-OL-5Tk" firstAttribute="top" secondItem="QYM-eM-s0I" secondAttribute="bottom" constant="5" id="InG-nJ-vK0"/>
                             <constraint firstItem="QYM-eM-s0I" firstAttribute="top" secondItem="tFt-RR-qy8" secondAttribute="bottom" constant="3" id="NV0-Oy-BTt"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leading" id="NhC-kX-RmF"/>
@@ -1643,6 +1668,8 @@
                             <constraint firstAttribute="trailing" secondItem="ne8-OL-5Tk" secondAttribute="trailing" id="jFb-KF-k33"/>
                             <constraint firstItem="Yvg-fQ-Xic" firstAttribute="top" secondItem="QYM-eM-s0I" secondAttribute="bottom" constant="5" id="mbl-7w-aB7"/>
                             <constraint firstItem="QYM-eM-s0I" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leading" constant="20" id="qI4-50-h7j"/>
+                            <constraint firstItem="7yx-Hq-f6n" firstAttribute="leading" secondItem="QYM-eM-s0I" secondAttribute="trailing" constant="5" id="s0B-7s-1Fr"/>
+                            <constraint firstAttribute="trailing" secondItem="7yx-Hq-f6n" secondAttribute="trailing" constant="5" id="uOc-dY-iDo"/>
                             <constraint firstItem="ne8-OL-5Tk" firstAttribute="leading" secondItem="yi6-If-UUn" secondAttribute="leading" id="xcX-TQ-Atl"/>
                             <constraint firstItem="SBN-5R-CBc" firstAttribute="width" secondItem="2hH-5K-aZw" secondAttribute="width" id="y7c-bl-GQl"/>
                             <constraint firstItem="2hH-5K-aZw" firstAttribute="centerX" secondItem="yi6-If-UUn" secondAttribute="centerX" id="zHZ-di-qHK"/>
@@ -1651,6 +1678,7 @@
                     <connections>
                         <outlet property="InfoView" destination="2hH-5K-aZw" id="4ZB-yl-eA0"/>
                         <outlet property="Search" destination="QYM-eM-s0I" id="0Ji-Wc-MwM"/>
+                        <outlet property="canbtn" destination="5ke-ZY-T2D" id="2sL-BH-t8C"/>
                         <outlet property="gundview" destination="Bbj-Jb-PU0" id="136-ad-dvZ"/>
                         <outlet property="onelabel" destination="W0M-QD-atx" id="65t-vq-fDJ"/>
                         <outlet property="oneview" destination="ne8-OL-5Tk" id="6Ib-gF-1w6"/>
@@ -1675,6 +1703,8 @@
         <image name="btn_save.png" width="900" height="130"/>
         <image name="change.png" width="46" height="67"/>
         <image name="change2.png" width="30" height="42"/>
+        <image name="dot.png" width="194" height="156"/>
+        <image name="dots.png" width="190" height="151"/>
         <image name="ic_kefu.png" width="244" height="244"/>
         <image name="ic_qq.png" width="268" height="268"/>
         <image name="ic_weixin.png" width="228" height="228"/>
@@ -1713,7 +1743,6 @@
         <image name="jianpan_mr_33.png" width="190" height="154"/>
         <image name="jianpan_mr_34.png" width="190" height="154"/>
         <image name="jianpan_mr_35.png" width="190" height="154"/>
-        <image name="jianpan_mr_36.png" width="190" height="154"/>
         <image name="lainxi.png" width="60" height="60"/>
         <image name="next.png" width="34" height="54"/>
         <image name="wifi.png" width="128" height="128"/>

@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *InfoView;
 
 @property (weak, nonatomic) IBOutlet UIButton *surebtn;
+@property (weak, nonatomic) IBOutlet UIButton *canbtn;
 
 
 
@@ -41,7 +42,10 @@
 - (IBAction)eight:(id)sender;
 - (IBAction)nine:(id)sender;
 - (IBAction)houtui:(id)sender;
-- (IBAction)clear:(id)sender;
 - (IBAction)zhujima:(id)sender;
 - (IBAction)check:(id)sender;
+- (IBAction)dian:(id)sender;
+- (IBAction)lastone:(id)sender;
+
+
 @end

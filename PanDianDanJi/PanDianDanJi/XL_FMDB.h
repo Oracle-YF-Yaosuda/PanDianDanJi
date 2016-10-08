@@ -57,6 +57,14 @@
  *  @param tableName 表名称
  *  @return 查询得到数据
  */
+-(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues whereConditions:(NSDictionary *)conditions;
+/**
+ *  查询数据库表中的所有值 限制数据条数10
+ *  @param db        数据库名称
+ *  @param keysTypes 查询字段以及对应字段类型 字典
+ *  @param tableName 表名称
+ *  @return 查询得到数据
+ */
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName;
 /**

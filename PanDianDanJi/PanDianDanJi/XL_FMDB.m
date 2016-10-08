@@ -144,7 +144,7 @@ static XL_FMDB *fmdb =nil;
     }
 }
 
-#pragma mark --条件更新
+#pragma mark --单个条件更新
 
 -(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues whereCondition:(NSDictionary *)condition{
     
@@ -156,7 +156,17 @@ static XL_FMDB *fmdb =nil;
         }
     }
 }
-
+#pragma  mark ----多个条件更新
+-(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues whereConditions:(NSDictionary *)conditions{
+    if ([self isOpenDatabese:db]) {
+        for (NSString *key in keyValues) {
+            NSMutableString *sql = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? WHERE %@ = ? AND %@ = ?", tableName, key, [conditions allKeys][0],[conditions allKeys][1]]];
+            [db executeUpdate:sql,[keyValues valueForKey:key],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]]];
+    
+          
+        }
+    }
+}
 #pragma mark --查询数据库表中的所有值
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName{

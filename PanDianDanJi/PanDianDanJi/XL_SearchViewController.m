@@ -71,7 +71,7 @@
     return guding;
 }
 -(NSArray *)duiying{
-    NSArray*guding=[NSArray arrayWithObjects:@"productName",@"shuliang",@"productCode",@"oldpos",@"pycode",@"manufacturer",@"specification",@"prodBatchNo",nil];
+    NSArray*guding=[NSArray arrayWithObjects:@"productName",@"checkNum",@"productCode",@"oldpos",@"pycode",@"manufacturer",@"specification",@"prodBatchNo",nil];
     return guding;
 }
 -(NSArray *)xiabian{
@@ -209,7 +209,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section!=0) {
         NSLog(@"%@",arr[indexPath.section-1]);
-        NSDictionary*txm=[NSDictionary dictionaryWithDictionary:arr[indexPath.section-1]];
+        
+        NSMutableDictionary*txm=[NSMutableDictionary dictionaryWithDictionary:arr[indexPath.section-1]];
+        [txm setObject:@"0" forKey:@"checkNum"];
+        [txm setObject:@"" forKey:@"oldpos"];
+        
         if (self.passdicValueBlock!=nil) {
             self.passdicValueBlock(txm);
         }
@@ -280,7 +284,7 @@
             [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
 
     }else{
-        if (NULL == [dic objectForKey:@"shuliang"]) {
+        if (NULL == [dic objectForKey:@"checkNum"]) {
             [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
         }else
             [self chuanshu];
@@ -288,7 +292,7 @@
 }
 -(void)chuanshu{
     int q=0;
-    for (NSString*ss in dic) {
+    for (NSString*ss in [dic allValues]) {
         if ([ss isEqualToString:@""]) {
             q=1;
         }
