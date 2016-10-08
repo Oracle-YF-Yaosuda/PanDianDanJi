@@ -85,6 +85,7 @@
         _onelabel.text=[arr[0] objectForKey:@"shuliang"];
         
         
+        
         [self xztianjia:0];
         [self sccharu:0];
         
@@ -554,8 +555,8 @@
     NSDictionary *dic;
     if (tianjiapanduan==1) {
       
-     dic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"vipPrice"],@"vipPrice",@"",@"stockNum",[tianjiade objectForKey:@"specification"],@"specification",[tianjiade objectForKey:@"salePrice"],@"salePrice",[tianjiade objectForKey:@"pycode"],@"pycode",@"",@"purchaseBatchNo",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"id"],@"id",[tianjiade objectForKey:@"costPrice"],@"costPrice",@"",@"checkId",[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",@"",@"status",@"",@"checkNum",@"",@"oldpos", nil];
-        NSLog(@"the dic is -----%@",dic);
+     dic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"vipPrice"],@"vipPrice",@"",@"stockNum",[tianjiade objectForKey:@"specification"],@"specification",[tianjiade objectForKey:@"salePrice"],@"salePrice",[tianjiade objectForKey:@"pycode"],@"pycode",@"",@"purchaseBatchNo",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"id"],@"id",[tianjiade objectForKey:@"costPrice"],@"costPrice",@"",@"checkId",[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",@"",@"status",[tianjiade objectForKey:@"shuliang"],@"checkNum",[tianjiade objectForKey:@"oldpos"],@"oldpos", nil];
+  
         
     }else{
     dic =[NSDictionary dictionaryWithObjectsAndKeys:[arr[i]objectForKey:@"approvalNumber"],@"approvalNumber",[arr[i]objectForKey:@"vipPrice"],@"vipPrice",[arr[i]objectForKey:@"stockNum"],@"stockNum",[arr[i]objectForKey:@"status"],@"status",[arr[i]objectForKey:@"specification"],@"specification",[arr[i]objectForKey:@"salePrice"],@"salePrice",[arr[i]objectForKey:@"pycode"],@"pycode",[arr[i]objectForKey:@"purchaseBatchNo"],@"purchaseBatchNo",[arr[i]objectForKey:@"productName"],@"productName",[arr[i]objectForKey:@"productCode"],@"productCode",[arr[i]objectForKey:@"oldpos"],@"oldpos",[arr[i]objectForKey:@"manufacturer"],@"manufacturer",[arr[i]objectForKey:@"id"],@"id",[arr[i]objectForKey:@"costPrice"],@"costPrice",[arr[i]objectForKey:@"checkId"],@"checkId",[arr[i]objectForKey:@"barCode"],@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", nil];
@@ -592,11 +593,12 @@
 //没写完呢
 -(void)czshangchuan{
     scarr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
-    if (scarr.count==0){
-        scarr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
-    }
-    // NSLog(@"%@",scarr);
+       // NSLog(@"%@",scarr);
 }
+-(void)czxiazai{
+ arr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+}
+
 
 #pragma mark --- tableview
 
