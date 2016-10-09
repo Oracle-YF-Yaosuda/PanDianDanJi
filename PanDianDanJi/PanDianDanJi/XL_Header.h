@@ -5,9 +5,10 @@
 //  Created by 小狼 on 16/9/7.
 //  Copyright © 2016年 BinXiaolang. All rights reserved.
 
+/*125.211.221.232:9000*/
 
-#define Host    @"125.211.221.232"
-#define Port    @":9000"
+#define Host    @""
+#define Port    @"80"
 #define JuyuwangIP [[NSUserDefaults standardUserDefaults] objectForKey:@"JuYuWang"]
 
 #define Scheme  @"http://"
