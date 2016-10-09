@@ -170,7 +170,7 @@
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
 //                NSLog(@"%@",responseObject);
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-//                NSLog(@"\n\n\n\n-*-*-*-*同步-*-*-*-\n\n\n%@\n\n",list);
+              NSLog(@"\n\n\n\n-*-*-*-*同步-*-*-*-\n\n\n%@\n\n",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 for (int i=0; i<list.count; i++) {
@@ -191,24 +191,20 @@
 }
 -(void)xiazaishuju:(NSString *)str :(NSString *)ss{
     [WarningBox warningBoxModeIndeterminate:[NSString stringWithFormat:@"正在同步%@",str] andView:self.view];
-    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",ss] forKey:@"state"];
+    
     NSString *fangshi=@"/sys/download";
     
-    NSString * status;
-    if ([ss isEqualToString:@"0"]) {
-        status = @"0";
-    }else{
-        status = @"0";
-    }
+    
+ 
     /*
      checkId   缺少字段
      */
-    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",status,@"status", nil];
+    NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"checkId",ss,@"status", nil];
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-            //NSLog(@"\n\nxiazai____\n\n%@",responseObject);
+            NSLog(@"\n\nxiazai____\n\n%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
