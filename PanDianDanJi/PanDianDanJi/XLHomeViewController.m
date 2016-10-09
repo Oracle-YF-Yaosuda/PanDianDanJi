@@ -74,7 +74,7 @@
         [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
         
         NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
-        NSLog(@"上传的数据-------\n\n%@",rucan);
+NSLog(@"上传的数据-------\n\n%@",rucan);
         [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
             if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
@@ -85,7 +85,6 @@
         } failure:^(NSError *error) {
             [WarningBox warningBoxHide:YES andView:self.view];
             [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-            NSLog(@"%@",error);
         }];
     }
 }
@@ -110,9 +109,8 @@
         
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-                NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
+NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 for (int i=0; i<list.count; i++) {
@@ -139,7 +137,7 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-            NSLog(@"\n\n下载数据*******\n\n%@",responseObject);
+NSLog(@"\n\n下载数据*******\n\n%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
                 NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
@@ -159,8 +157,6 @@
     } failure:^(NSError *error) {
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-        NSLog(@"%@",error);
     }];
-    
 }
 @end
