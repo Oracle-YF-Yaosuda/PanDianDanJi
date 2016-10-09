@@ -125,6 +125,9 @@
     [_canbtn addGestureRecognizer:longPress];
     
     
+   
+    
+    
 }
 
 
@@ -147,6 +150,7 @@
     [_Search addGestureRecognizer:searTapGestureRecognizer];
     _Search.userInteractionEnabled = YES;
     _Search.tag=1000;
+    //_Search.textColor = [UIColor colorWithHexString:@"34C083"];
     _Search.textColor = [UIColor lightGrayColor];
     [_Search.layer setBorderWidth:1.5];
     [_Search.layer setCornerRadius:5.0];
@@ -196,6 +200,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+          _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"0";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"0"];
@@ -217,6 +222,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+      
             _Search.text = @"1";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"1"];
@@ -228,6 +234,7 @@
 - (IBAction)two:(id)sender {
     if(onepand==3){
         if ([_onelabel.text isEqualToString:@"0"]){
+            
             _onelabel.text = @"2";
         }else{
             _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
@@ -236,6 +243,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+           _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"2";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"2"];
@@ -256,6 +264,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+          _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"3";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"3"];
@@ -275,6 +284,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"4";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"4"];
@@ -294,6 +304,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+           _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"5";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"5"];
@@ -313,6 +324,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+      _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"6";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"6"];
@@ -332,6 +344,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"7";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"7"];
@@ -351,6 +364,7 @@
     else if (onepand==1){
         
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+    _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"8";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"8"];
@@ -370,6 +384,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+            _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"9";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"9"];
@@ -382,7 +397,7 @@
     if(onepand==3){
         NSRange range = [_onelabel.text rangeOfString:@"."];
         if (range.location !=NSNotFound){
-            
+
         }else{
             if (_onelabel.text.length==0){
                 _onelabel.text = [_onelabel.text stringByAppendingString:@"0."];
@@ -415,10 +430,12 @@
     else if (onepand==1){
         if([_Search.text isEqualToString:@""]||[_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
             _Search.text = @"🔍扫描或输入药品条形码";
+         
         }else{
             if(_Search.text.length!=0)
                 _Search.text= [_Search.text substringToIndex:[_Search.text length] - 1];
             if (_Search.text.length==0) {
+               _Search.textColor = [UIColor lightGrayColor];
                 _Search.text = @"🔍扫描或输入药品条形码";
             }
         }
@@ -436,6 +453,7 @@
         _onelabel.text= @"";
     }
     else if (onepand==1){
+      _Search.textColor = [UIColor lightGrayColor];
         _Search.text = @"🔍扫描或输入药品条形码";
     }else{
         oo.text= @"";
@@ -467,13 +485,16 @@
 - (IBAction)check:(id)sender {
     /*没写呢*/
     if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+       
         [WarningBox warningBoxModeText:@"请输入条码后进行查询" andView:self.view];
     }else{
+        
         if(onepand==1){
             iii=0;
             [self chazhao];
         }
         else{
+            _Search.textColor = [UIColor lightGrayColor];
             [self quedin];
         }
     }
@@ -620,6 +641,7 @@
     if (arr.count==0||NULL ==arr) {
         [WarningBox warningBoxModeText:@"请先查询药品!" andView:self.view];
     }else{
+        
         tianpihao=0;
         [self czshangchuan];
         if(arr.count==1){
@@ -1009,6 +1031,7 @@
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun_press.png"] forState:UIControlStateHighlighted];
         
         _Search.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
+       
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
@@ -1016,6 +1039,7 @@
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_dk_04_10.png"] forState:UIControlStateHighlighted];
         _ypgoods.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
+         _ypgoods.textColor = [UIColor colorWithHexString:@"34C083"];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
@@ -1025,6 +1049,7 @@
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _Search.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
+        _onelabel.textColor = [UIColor colorWithHexString:@"34C083"];
         [self tableviewhide];
     }else{
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
@@ -1245,6 +1270,7 @@
 -(void)tishi{
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示:" message:@"没有查询到能匹配此条码的药品" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _Search.textColor = [UIColor lightGrayColor];
         _Search.text=@"🔍扫描或输入药品条形码";
         
     }];

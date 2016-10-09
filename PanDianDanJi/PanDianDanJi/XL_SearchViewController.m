@@ -29,6 +29,29 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     arr=[XL  DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode", nil]];
+    
+    if (arr.count==0) {
+        NSArray*diyi;
+        diyi =[ XL DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereKey:@"barCode" containStr:@","] ;
+        NSMutableArray *arr2=[[NSMutableArray alloc] init];
+        for (NSDictionary*dd in diyi) {
+            NSString *muma=[NSString stringWithFormat:@"%@",[dd objectForKey:@"barCode"]];
+            NSArray * dier=[muma componentsSeparatedByString:@","];
+            for (NSString*ss in dier) {
+                if ([ss isEqualToString:_str]) {
+                    [arr2 addObject:dd];
+                }
+                
+            }
+        }
+        
+        arr =[NSArray arrayWithArray:arr2];
+    }
+    
+    
+    
+    
+   // arr=[XL  DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode", nil]];
     NSLog(@"%@",_str);
     NSLog(@"\n\nchuanguolaide-*-*-*-*-*-*-*\n\n%@\n\n",arr);
     if (arr.count==0) {
@@ -41,6 +64,12 @@
         [_table reloadData];
         _table.hidden=NO;
     }
+    
+   
+    
+    
+    
+    
     
     
 }
