@@ -103,13 +103,13 @@
 - (IBAction)KuCun_Button:(id)sender {
     [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"zhuangtai"];
     [self tongbushuju];
-    [self xiazaishuju:@"全部库存" :@"9"];
+    [self xiazaishuju:@"全部库存" :@"0"];
 }
 
 //下载数据
 - (IBAction)ShuJu_Button:(id)sender {
     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"zhuangtai"];
-    [self xiazaishuju:@"异常数据" :@"8"];
+    [self xiazaishuju:@"异常数据" :@"0"];
 }
 //提交盘点结果
 - (IBAction)TiJian_Button:(id)sender {
@@ -207,14 +207,16 @@
             NSLog(@"\n\nxiazai____\n\n%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
-                NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+                NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
                 [XL clearDatabase:db from:ShangChuanBiaoMing];
                 [XL clearDatabase:db from:XiaZaiBiaoMing];
                 for (int i=0; i<list.count; i++) {
                     //向下载表中插入数据
-//                    NSString  *code = [NSString stringWithFormat:@"%@,%@",[list[i]objectForKey:@"barCode"],[list[i]objectForKey:@"productCode"]];
-//                    NSLog(@"%@",code);
-                    [XL DataBase:db insertKeyValues:list[i] intoTable:XiaZaiBiaoMing];
+                    NSString  *code = [NSString stringWithFormat:@"%@,%@",[list[i]objectForKey:@"barCode"],[list[i]objectForKey:@"productCode"]];
+                    NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
+                    [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
+                    NSLog(@"/*/*/*/*/*/%@",dd);
+                    [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
                   
 
                 }
