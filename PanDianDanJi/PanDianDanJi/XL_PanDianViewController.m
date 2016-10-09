@@ -393,7 +393,17 @@
             //_Search.text = [_Search.text stringByAppendingString:@"."];
         }
     }else{
-        [self lableFuzhi:@"."];
+        NSRange range = [oo.text rangeOfString:@"."];
+        if (range.location !=NSNotFound){
+            //存在
+        }else{
+            if(oo.text.length==0){
+            
+            }else{
+          [self lableFuzhi:@"."];
+            }
+        }
+       
     }
     
 }
@@ -439,7 +449,7 @@
     oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
     [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
     
-    
+   
     
 }
 #pragma mark -----助记码
