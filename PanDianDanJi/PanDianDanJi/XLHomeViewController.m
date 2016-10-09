@@ -72,8 +72,8 @@
         [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
     }else{
         [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
-        
         NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
+NSLog(@"上传的数据-------\n\n%lu",(unsigned long)rucan.count);
 NSLog(@"上传的数据-------\n\n%@",rucan);
         [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];
@@ -110,6 +110,7 @@ NSLog(@"上传的数据-------\n\n%@",rucan);
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+NSLog(@"同步数据-*-*-*-\n\n\n%lu",(unsigned long)list.count);
 NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
@@ -119,7 +120,6 @@ NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                     if (NULL==barcode){
                       barcode = @"";
                     }
-                  
                     NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
                     NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
                     [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
@@ -144,15 +144,16 @@ NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-NSLog(@"\n\n下载数据*******\n\n%@",responseObject);
+
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
                 NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
+NSLog(@"\n\n下载数据*******\n\n%@",list);
                 [XL clearDatabase:db from:ShangChuanBiaoMing];
                 [XL clearDatabase:db from:XiaZaiBiaoMing];
                 for (int i=0; i<list.count; i++) {
                     //向下载表中插入数据
-                    
                     NSString *barcode =[list[i]objectForKey:@"barCode"];
                     if (NULL==barcode){
                         barcode = @"";
