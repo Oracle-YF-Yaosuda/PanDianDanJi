@@ -101,21 +101,21 @@
 
 //同步全部库存
 - (IBAction)KuCun_Button:(id)sender {
-    
+    [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"zhuangtai"];
     [self tongbushuju];
-    [self xiazaishuju:@"全部库存" :@"0"];
+    [self xiazaishuju:@"全部库存" :@"9"];
 }
 
 //下载数据
 - (IBAction)ShuJu_Button:(id)sender {
-    [self xiazaishuju:@"异常数据" :@"1"];
+    [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"zhuangtai"];
+    [self xiazaishuju:@"异常数据" :@"8"];
 }
 //提交盘点结果
 - (IBAction)TiJian_Button:(id)sender {
     /*
      缺少字段
      */
-    
     
     NSString *fangshi=@"/sys/upload";
     NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
@@ -125,7 +125,9 @@
     }else{
         [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
         
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",@"0",@"state",list,@"list",nil];
+        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
+        
+        
         NSLog(@"%@",rucan);
         //自己写的网络请求    请求外网地址
         [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
@@ -173,8 +175,11 @@
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 for (int i=0; i<list.count; i++) {
                     //向同步表中插入数据
+//                    [list[i]objectForKey:@"barCode"];
+//                    [list[i]objectForKey:@"productCode"];
+                   
                     [XL DataBase:db insertKeyValues:list[i] intoTable:TongBuBiaoMing];
-                }
+                                    }
             }
         } @catch (NSException *exception) {
             [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
@@ -206,15 +211,19 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-            NSLog(@"\n\nxiazai____\n\n%@",responseObject);
+            //NSLog(@"\n\nxiazai____\n\n%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-                
+                [XL clearDatabase:db from:ShangChuanBiaoMing];
                 [XL clearDatabase:db from:XiaZaiBiaoMing];
                 for (int i=0; i<list.count; i++) {
                     //向下载表中插入数据
+//                    NSString  *code = [NSString stringWithFormat:@"%@,%@",[list[i]objectForKey:@"barCode"],[list[i]objectForKey:@"productCode"]];
+//                    NSLog(@"%@",code);
                     [XL DataBase:db insertKeyValues:list[i] intoTable:XiaZaiBiaoMing];
+                  
+
                 }
             }
         } @catch (NSException *exception) {

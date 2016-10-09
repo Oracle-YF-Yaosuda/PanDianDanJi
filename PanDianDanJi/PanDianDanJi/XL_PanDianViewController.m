@@ -31,7 +31,7 @@
     int searcpd;//判断是不是搜索条输入
     //乱乱的判断
     int abcdefg;
-    
+    int tjphpanduan;//添加批号的插入判断
     
     
     UILabel*oo;
@@ -367,7 +367,6 @@
 
 //长按后退删除
 -(void)btnLong:(UILongPressGestureRecognizer *)gestureRecognizer{
-    NSLog(@"changa");
     if(onepand==3){
         _onelabel.text= @"";
     }
@@ -510,6 +509,8 @@
                 [_oneview addSubview:techangview];
                 onepand=3;
                 [self firstResponderInSubView];
+             _onelabel.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"checkNum"]];
+                
                 
             }
             else{
@@ -582,32 +583,40 @@
     }
 }
 #pragma mark 数据库操作
+
+
+ //修改下载表
 -(void)xzxiugai:(int)i{
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
     }
-  
-    
-   // [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo", nil]];
-   [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
+    // [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo", nil]];
+    [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
     NSLog(@"%@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
     
 }
+//修改上传表
+-(void)scxiugai:(int)i{
+    if ([shularr[i] isEqual:@""]) {
+        shularr[i]=@"0";
+    }
+   //[XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo", nil]];
+    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
+}
+//插入下载表
 -(void)xztianjia:(int)i{
     NSDictionary *dic;
     if (tianjiapanduan==1) {
         
-     dic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"vipPrice"],@"vipPrice",@"",@"stockNum",[tianjiade objectForKey:@"specification"],@"specification",[tianjiade objectForKey:@"salePrice"],@"salePrice",[tianjiade objectForKey:@"pycode"],@"pycode",@"",@"purchaseBatchNo",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"id"],@"id",[tianjiade objectForKey:@"costPrice"],@"costPrice",@"",@"checkId",[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",@"",@"status",[tianjiade objectForKey:@"checkNum"],@"checkNum",[tianjiade objectForKey:@"oldpos"],@"oldpos", nil];
-  
+        dic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"vipPrice"],@"vipPrice",[tianjiade objectForKey:@"specification"],@"specification",[tianjiade objectForKey:@"salePrice"],@"salePrice",[tianjiade objectForKey:@"pycode"],@"pycode",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"id"],@"id",[tianjiade objectForKey:@"costPrice"],@"costPrice",[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",[tianjiade objectForKey:@"checkNum"],@"checkNum",[tianjiade objectForKey:@"oldpos"],@"oldpos",@"",@"stockNum",@"",@"status",@"",@"purchaseBatchNo",@"",@"checkId", nil];
+        
         
     }else{
         
-        
         NSString *approvalNumber=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"approvalNumber"]];
         if (NULL ==approvalNumber) {
-             approvalNumber =@"";
+            approvalNumber =@"";
         }
-        
         NSString * vipPrice=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"vipPrice"]];
         if (NULL == vipPrice) {
             vipPrice=@"";
@@ -622,7 +631,7 @@
         }
         NSString * purchaseBatchNo=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"purchaseBatchNo"]];
         if (NULL ==purchaseBatchNo) {
-           purchaseBatchNo =@"";
+            purchaseBatchNo =@"";
         }
         NSString * productName=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"productName"]];
         if (NULL ==productName) {
@@ -634,7 +643,7 @@
         }
         NSString * oldpos=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"oldpos"]];
         if (NULL ==oldpos) {
-           oldpos =@"";
+            oldpos =@"";
         }
         NSString * manufacturer=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"manufacturer"]];
         if (NULL ==manufacturer) {
@@ -646,7 +655,7 @@
         }
         NSString * costPrice=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"costPrice"]];
         if (NULL ==costPrice) {
-           costPrice =@"";
+            costPrice =@"";
         }
         NSString * checkId=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"checkId"]];
         if (NULL ==checkId) {
@@ -670,18 +679,15 @@
             specification=@"";
         }
         
-    dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",status,@"status",specification,@"specification",nil];
+        if (tjphpanduan==1){
+        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",status,@"status",specification,@"specification",nil];
+        }
+        
     }
     NSLog(@"-*-*-*-*-*-*-*-*-*-*%@",dic);
     [XL DataBase:db insertKeyValues:dic intoTable:XiaZaiBiaoMing];
 }
--(void)scxiugai:(int)i{
-    if ([shularr[i] isEqual:@""]) {
-        shularr[i]=@"0";
-    }
-   //[XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo", nil]];
-    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
-}
+//插入上传表
 -(void)sccharu:(int)i{
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -695,11 +701,56 @@
             huoweihao=@"";
         }else
         huoweihao=[tianjiade objectForKey:@"oldpos"];
-      scdic =[NSDictionary dictionaryWithObjectsAndKeys:@"",@"status",[tianjiade objectForKey:@"barCode"],@"barCode",@"",@"checkId",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"pycode"],@"pycode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",@"",@"approvalNumber",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"productName"],@"productName",@"",@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum", nil];
+      scdic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"pycode"],@"pycode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"specification"],@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"",@"status",@"",@"checkId", nil];
        
-    }else
-   scdic =[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"status"],@"status",[arr[i] objectForKey:@"barCode"],@"barCode",[arr[i] objectForKey:@"checkId"],@"checkId",[arr[i] objectForKey:@"manufacturer"],@"manufacturer",[arr[i] objectForKey:@"pycode"],@"pycode",[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"approvalNumber"],@"approvalNumber",[arr[i] objectForKey:@"productCode"],@"productCode",[arr[i] objectForKey:@"productName"],@"productName",[arr[i]objectForKey:@"specification"],@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum", nil];
+    }else{
+        NSString *status=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"status"]];
+        if (NULL ==status) {
+            status =@"";
+        }
+        NSString *barCode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"barCode"]];
+        if (NULL ==barCode) {
+            barCode =@"";
+        }
+        NSString *checkId=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"checkId"]];
+        if (NULL ==checkId) {
+            checkId =@"";
+        }
+        NSString *manufacturer=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"manufacturer"]];
+        if (NULL ==manufacturer) {
+            manufacturer =@"";
+        }
+        NSString *pycode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"pycode"]];
+        if (NULL ==pycode) {
+            pycode =@"";
+        }
+       
+        NSString *approvalNumber=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"approvalNumber"]];
+        if (NULL ==approvalNumber) {
+            approvalNumber =@"";
+        }
+        NSString *productCode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"productCode"]];
+        if (NULL ==productCode) {
+            productCode =@"";
+        }
+        NSString *productName=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"productName"]];
+        if (NULL ==productName) {
+            productName =@"";
+        }
+        NSString *specification=[NSString stringWithFormat:@"%@",[arr[i]objectForKey:@"specification"]];
+        if (NULL ==specification) {
+            specification =@"";
+        }
+        NSString *prodBatchNo=[NSString stringWithFormat:@"%@",[arr[i]objectForKey:@"prodBatchNo"]];
+        if (NULL ==prodBatchNo) {
+            prodBatchNo =@"";
+        }
+
+        scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo", nil];
+
+    }
     
+    NSLog(@"*-----*-*-*-*-*-*-*-%@",scdic);
     [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
     
 }
@@ -1051,13 +1102,11 @@
     [jiemian addSubview:ge1];
     [jiemian addSubview:wei1];
 }
-
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField!=goodstxt) {
         [self setupCustomedKeyboard:textField :nil];
     }
     
-
     return YES;
 }
 
@@ -1066,7 +1115,12 @@
 
     NSLog(@"/*/*/*/*/*/*/*/*/\n\n\n%@",arr);
     
+    if ([pi1.text isEqual:@""]||[shu1.text isEqual:@""]){
+    [WarningBox warningBoxModeText:@"请输入当前药品的数量" andView:self.view];
+    }else{
+        tjphpanduan=1;
     [self xztianjia:0];
+    //[self sccharu:0];
     if(arr.count==1){
         shularr=[[NSMutableArray alloc] init];
         [shularr addObject:[NSString stringWithFormat:@"%@",_onelabel.text]];
@@ -1094,6 +1148,8 @@
     dabeijing.hidden=YES;
     jiemian.hidden=YES;
     abcdefg=0;
+        
+    }
 }
 -(void)ququ{
 //    [self qingkong];
