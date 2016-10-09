@@ -175,9 +175,6 @@
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 for (int i=0; i<list.count; i++) {
                     //向同步表中插入数据
-//                    [list[i]objectForKey:@"barCode"];
-//                    [list[i]objectForKey:@"productCode"];
-                   
                     [XL DataBase:db insertKeyValues:list[i] intoTable:TongBuBiaoMing];
                                     }
             }

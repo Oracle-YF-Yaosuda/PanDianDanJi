@@ -187,7 +187,11 @@
 #pragma mark  数字键盘
 - (IBAction)zero:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"0"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"0";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"0"];
+        }
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -201,7 +205,11 @@
 }
 - (IBAction)one:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"1";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"1"];
+        }
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -215,7 +223,12 @@
 }
 - (IBAction)two:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"2";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"2"];
+        }
+
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -230,7 +243,12 @@
 - (IBAction)three:(id)sender {
     
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"3"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"3";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"3"];
+        }
+
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -244,7 +262,12 @@
 }
 - (IBAction)four:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"4"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"4";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"4"];
+        }
+
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -258,7 +281,12 @@
 }
 - (IBAction)five:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"5"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"5";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"5"];
+        }
+
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -272,7 +300,12 @@
 }
 - (IBAction)six:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"6"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"6";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"6"];
+        }
+
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -286,7 +319,12 @@
 }
 - (IBAction)seven:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"7"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"7";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"7"];
+        }
+
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -300,9 +338,14 @@
 }
 - (IBAction)eight:(id)sender {
     if(onepand==3){
+        if ([_onelabel.text isEqualToString:@"0"]){
+        _onelabel.text = @"8";
+        }else{
         _onelabel.text = [_onelabel.text stringByAppendingString:@"8"];
+        }
     }
     else if (onepand==1){
+
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
             _Search.text = @"8";
         }else{
@@ -314,7 +357,12 @@
 }
 - (IBAction)nine:(id)sender {
     if(onepand==3){
-        _onelabel.text = [_onelabel.text stringByAppendingString:@"9"];
+        if ([_onelabel.text isEqualToString:@"0"]){
+            _onelabel.text = @"9";
+        }else{
+            _onelabel.text = [_onelabel.text stringByAppendingString:@"9"];
+        }
+
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
@@ -328,13 +376,21 @@
 }
 - (IBAction)dian:(id)sender {
     if(onepand==3){
+        NSRange range = [_onelabel.text rangeOfString:@"."];
+        if (range.location !=NSNotFound){
+        
+        }else{
+            if (_onelabel.text.length==0){
+            }else
         _onelabel.text = [_onelabel.text stringByAppendingString:@"."];
+        }
+        
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-            _Search.text = @".";
+            //_Search.text = @".";
         }else{
-            _Search.text = [_Search.text stringByAppendingString:@"."];
+            //_Search.text = [_Search.text stringByAppendingString:@"."];
         }
     }else{
         [self lableFuzhi:@"."];
@@ -382,6 +438,9 @@
 -(void)lableFuzhi:(NSString*)ss{
     oo.text= [oo.text stringByAppendingString:[NSString stringWithFormat:@"%@",ss]];
     [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
+    
+    
+    
 }
 #pragma mark -----助记码
 - (IBAction)zhujima:(id)sender {
