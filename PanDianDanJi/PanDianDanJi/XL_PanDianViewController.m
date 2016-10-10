@@ -99,7 +99,7 @@
         
         
         [self xztianjia:0];
-        [self sccharu:0];
+        //[self sccharu:0];
         
         
         tianjiapanduan=0;
@@ -846,68 +846,70 @@
         
     }else{
         
-        NSString *approvalNumber=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"approvalNumber"]];
+        NSString *approvalNumber=[arr[i] objectForKey:@"approvalNumber"];
         if (NULL ==approvalNumber) {
             approvalNumber =@"";
         }
-        NSString * vipPrice=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"vipPrice"]];
+        NSString * vipPrice=[arr[i] objectForKey:@"vipPrice"];
         if (NULL == vipPrice) {
             vipPrice=@"";
         }
-        NSString * salePrice=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"salePrice"]];
+        NSString * salePrice=[arr[i] objectForKey:@"salePrice"];
         if (NULL ==salePrice) {
             salePrice=@"";
         }
-        NSString * pycode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"pycode"]];
+        NSString * pycode=[arr[i] objectForKey:@"pycode"];
         if (NULL ==pycode) {
             pycode=@"";
         }
-        NSString * purchaseBatchNo=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"purchaseBatchNo"]];
+        NSString * purchaseBatchNo=[arr[i] objectForKey:@"purchaseBatchNo"];
         if (NULL ==purchaseBatchNo) {
             purchaseBatchNo =@"";
         }
-        NSString * productName=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"productName"]];
+        NSString * productName=[arr[i] objectForKey:@"productName"];
         if (NULL ==productName) {
             productName=@"";
         }
-        NSString * productCode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"productCode"]];
+        NSString * productCode=[arr[i] objectForKey:@"productCode"];
         if (NULL ==productCode) {
             productCode=@"";
         }
-        NSString * oldpos=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"oldpos"]];
+        NSString * oldpos=[arr[i] objectForKey:@"oldpos"];
         if (NULL ==oldpos) {
             oldpos =@"";
         }
-        NSString * manufacturer=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"manufacturer"]];
+        NSString * manufacturer=[arr[i] objectForKey:@"manufacturer"];
         if (NULL ==manufacturer) {
             manufacturer=@"";
         }
-        NSString * Id=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"id"]];
+        NSString * Id=[arr[i] objectForKey:@"id"];
         if (NULL ==Id) {
             Id=@"";
         }
-        NSString * costPrice=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"costPrice"]];
+        NSString * costPrice=[arr[i] objectForKey:@"costPrice"];
         if (NULL ==costPrice) {
             costPrice =@"";
         }
-        NSString * checkId=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"checkId"]];
+        NSString * checkId=[arr[i] objectForKey:@"checkId"];
         if (NULL ==checkId) {
             checkId=@"";
         }
-        NSString * barCode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"barCode"]];
+        NSString * barCode=[arr[i] objectForKey:@"barCode"];
         if (NULL ==barCode) {
             barCode=@"";
         }
-        NSString * stockNum=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"stockNum"]];
+        NSString * stockNum=[arr[i] objectForKey:@"stockNum"];
         
         if (NULL ==stockNum) {
             stockNum=@"";
         }
-        NSString * status=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"status"]];
-        if (NULL ==status) {
+        NSString * status;
+        if (NULL ==[arr[i] objectForKey:@"status"]) {
             status=@"";
+        }else{
+       status=[arr[i] objectForKey:@"status"];
         }
-        NSString * specification=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"specification"]];
+        NSString * specification=[arr[i] objectForKey:@"specification"];
         if (NULL ==specification) {
             specification=@"";
         }
@@ -987,45 +989,45 @@
         scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"",@"status",@"",@"checkId", nil];
         
     }else{
-        NSString *status=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"status"]];
+        NSString *status=[arr[i] objectForKey:@"status"];
         if (NULL ==status) {
             status =@"";
         }
-        NSString *barCode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"barCode"]];
+        NSString *barCode=[arr[i] objectForKey:@"barCode"];
         if (NULL ==barCode) {
             barCode =@"";
         }
-        NSString *checkId=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"checkId"]];
+        NSString *checkId=[arr[i] objectForKey:@"checkId"];
         if (NULL ==checkId) {
             checkId =@"";
         }
-        NSString *manufacturer=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"manufacturer"]];
+        NSString *manufacturer=[arr[i] objectForKey:@"manufacturer"];
         if (NULL ==manufacturer) {
             manufacturer =@"";
         }
-        NSString *pycode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"pycode"]];
+        NSString *pycode=[arr[i] objectForKey:@"pycode"];
         if (NULL ==pycode) {
             pycode =@"";
         }
         
-        NSString *approvalNumber=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"approvalNumber"]];
+        NSString *approvalNumber=[arr[i] objectForKey:@"approvalNumber"];
         if (NULL ==approvalNumber) {
             approvalNumber =@"";
         }
-        NSString *productCode=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"productCode"]];
+        NSString *productCode=[arr[i] objectForKey:@"productCode"];
         if (NULL ==productCode) {
             productCode =@"";
         }
-        NSString *productName=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"productName"]];
+        NSString *productName=[arr[i] objectForKey:@"productName"];
         if (NULL ==productName) {
             productName =@"";
         }
-        NSString *specification=[NSString stringWithFormat:@"%@",[arr[i]objectForKey:@"specification"]];
+        NSString *specification=[arr[i]objectForKey:@"specification"];
         if (NULL ==specification) {
             specification =@"";
         }
-        NSString *prodBatchNo=[NSString stringWithFormat:@"%@",[arr[i]objectForKey:@"prodBatchNo"]];
-        if (NULL ==prodBatchNo) {
+        NSString *prodBatchNo=[arr[i]objectForKey:@"prodBatchNo"];
+        if (NULL ==prodBatchNo){
             prodBatchNo =@"";
         }
         
