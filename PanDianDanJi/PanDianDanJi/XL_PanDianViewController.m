@@ -86,8 +86,11 @@
         NSLog(@"------   %@",arr);
         [self xianshi:arr];
         //[arr[0]setObject:@"" forKey:@"salePrice"];
+        if (NULL==[arr[0] objectForKey:@"checkNum"]){
+            _onelabel.text = @"";
+        }else{
         _onelabel.text=[arr[0] objectForKey:@"checkNum"];
-        
+        }
         [_oneview bringSubviewToFront:self.view];
         if(NULL==[tianjiade objectForKey:@"oldpos"]){
             _ypgoods.text = @"";
@@ -222,7 +225,7 @@
     }
     else if (onepand==1){
         if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-      
+        _Search.textColor =[UIColor colorWithHexString:@"34C083"];
             _Search.text = @"1";
         }else{
             _Search.text = [_Search.text stringByAppendingString:@"1"];
@@ -579,8 +582,19 @@
         }
         else{
             tianpihao=1;
+            if (NULL==[arr[0]objectForKey:@"productName"]){
+             name.text = @"";
+            }else{
             name.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
+            }
+            if (NULL==[arr[0]objectForKey:@"manufacturer"]){
+            chang.text = @"";
+            }else{
             chang.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"manufacturer"]];
+            }
+            
+        
+            
             for (UIView *v in [_InfoView subviews]) {
                 if (v.tag==101) {
                     [v removeFromSuperview];
@@ -595,15 +609,26 @@
             /*
              显示的所有信息都不是固定的 最后需要重新更改
              */
+            if (NULL==[arr[0]objectForKey:@"productCode"]){
+            _ypnumber.text = @"";
+            }else{
             _ypnumber.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productCode"]];//药品编号
+            }
             if (NULL==[arr[0]objectForKey:@"oldpos"]) {
                 _ypgoods.text =@"";
             }else{
                 _ypgoods.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
             }
-            _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//批准文号
+            if (NULL==[arr[0]objectForKey:@"pycode"]) {
+                _ypwenhao.text =@"";
+            }else{
+            _ypwenhao.text = [NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"pycode"]];//助记码
+            }
+            if (NULL==[arr[0]objectForKey:@"specification"]) {
+                _ypetalon.text =@"";
+            }else{
             _ypetalon.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
-            
+            }
             if(arr.count==1){
                 _oneview.hidden=NO;
                 for (UIView *vv in [_oneview subviews]) {
@@ -611,13 +636,28 @@
                         [vv removeFromSuperview];
                     }
                 }
-                TextFlowView* techangview= [[TextFlowView alloc] initWithFrame:_gundview.frame Text:[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"prodBatchNo"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+                
+                NSString  *Ss;
+                if (NULL==[arr[0] objectForKey:@"prodBatchNo"]){
+                 Ss = @"";
+                }
+                else{
+                Ss=[arr[0] objectForKey:@"prodBatchNo"];
+                }
+                TextFlowView* techangview= [[TextFlowView alloc] initWithFrame:_gundview.frame Text:Ss textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+                
                 techangview.tag =110;
                 _table.hidden = YES;
                 [_oneview addSubview:techangview];
                 onepand=3;
                 [self firstResponderInSubView];
-                _onelabel.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"checkNum"]];
+                if(NULL==[arr[0]objectForKey:@"checkNum"]){
+                 _onelabel.text = @"";
+                }else{
+                 _onelabel.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"checkNum"]];
+                }
+                
+               
                 
                 
             }
@@ -716,8 +756,92 @@
 -(void)xztianjia:(int)i{
     NSDictionary *dic;
     if (tianjiapanduan==1) {
+        NSString *approvalNumber;
+        if(NULL==[tianjiade objectForKey:@"approvalNumber"]){
+        approvalNumber = @"";
+        }else{
+          approvalNumber=[tianjiade objectForKey:@"approvalNumber"];
+        }
+        NSString *vipPrice;
+        if(NULL==[tianjiade objectForKey:@"vipPrice"]){
+            vipPrice = @"";
+        }else{
+           vipPrice= [tianjiade objectForKey:@"vipPrice"];
+        }
+        NSString*specification;
+        if(NULL==[tianjiade objectForKey:@"specification"]){
+           specification =@"";
+        }else{
+           specification= [tianjiade objectForKey:@"specification"];
+        }
+        NSString *salePrice;
+        if(NULL==[tianjiade objectForKey:@"salePrice"]){
+            salePrice =@"";
+        }else{
+           salePrice= [tianjiade objectForKey:@"salePrice"];
+        }
+        NSString *pycode;
+        if(NULL==[tianjiade objectForKey:@"pycode"]){
+          pycode =@"";
+        }else{
+          pycode=  [tianjiade objectForKey:@"pycode"];
+        }
+        NSString *productName;
+        if(NULL==[tianjiade objectForKey:@"productName"]){
+            productName = @"";
+        }else{
+           productName= [tianjiade objectForKey:@"productName"];
+        }
+        NSString*productCode;
+        if(NULL==[tianjiade objectForKey:@"productCode"]){
+          productCode = @"";
+        }else{
+           productCode= [tianjiade objectForKey:@"productCode"];
+        }
+        NSString *manufacturer;
+        if(NULL==[tianjiade objectForKey:@"manufacturer"]){
+           manufacturer = @"";
+        }else{
+           manufacturer= [tianjiade objectForKey:@"manufacturer"];
+        }
+        NSString *Id;
+        if(NULL==[tianjiade objectForKey:@"id"]){
+            Id = @"";
+        }else{
+           Id= [tianjiade objectForKey:@"id"];
+        }
+        NSString *costPrice;
+        if(NULL==[tianjiade objectForKey:@"costPrice"]){
+           costPrice = @"";
+        }else{
+          costPrice=  [tianjiade objectForKey:@"costPrice"];
+        }
+        NSString *barCode;
+        if(NULL==[tianjiade objectForKey:@"barCode"]){
+           barCode= @"";
+        }else{
+           barCode= [tianjiade objectForKey:@"barCode"];
+        }
+        NSString *prodBatchNo;
+        if(NULL==[tianjiade objectForKey:@"prodBatchNo"]){
+            prodBatchNo =@"";
+        }else{
+           prodBatchNo= [tianjiade objectForKey:@"prodBatchNo"];
+        }
+        NSString *checkNum;
+        if(NULL==[tianjiade objectForKey:@"checkNum"]){
+            checkNum =@"";
+        }else{
+            checkNum= [tianjiade objectForKey:@"checkNum"];
+        }
+        NSString *oldpos;
+        if(NULL==[tianjiade objectForKey:@"oldpos"]){
+            oldpos= @"";
+        }else{
+           oldpos= [tianjiade objectForKey:@"oldpos"];
+        }
         
-        dic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"vipPrice"],@"vipPrice",[tianjiade objectForKey:@"specification"],@"specification",[tianjiade objectForKey:@"salePrice"],@"salePrice",[tianjiade objectForKey:@"pycode"],@"pycode",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"id"],@"id",[tianjiade objectForKey:@"costPrice"],@"costPrice",[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",[tianjiade objectForKey:@"checkNum"],@"checkNum",[tianjiade objectForKey:@"oldpos"],@"oldpos",@"",@"stockNum",@"",@"status",@"",@"purchaseBatchNo",@"",@"checkId", nil];
+        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",specification,@"specification",salePrice,@"salePrice",pycode,@"pycode",productName,@"productName",productCode,@"productCode",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",barCode,@"barCode",prodBatchNo,@"prodBatchNo",checkNum,@"checkNum",oldpos,@"oldpos",@"",@"stockNum",@"",@"status",@"",@"purchaseBatchNo",@"",@"checkId", nil];
         
         
     }else{
@@ -808,9 +932,59 @@
         NSString *huoweihao;
         if (NULL == [tianjiade objectForKey:@"oldpos"]) {
             huoweihao=@"";
-        }else
+        }else{
             huoweihao=[tianjiade objectForKey:@"oldpos"];
-        scdic =[NSDictionary dictionaryWithObjectsAndKeys:[tianjiade objectForKey:@"barCode"],@"barCode",[tianjiade objectForKey:@"manufacturer"],@"manufacturer",[tianjiade objectForKey:@"pycode"],@"pycode",[tianjiade objectForKey:@"prodBatchNo"],@"prodBatchNo",[tianjiade objectForKey:@"approvalNumber"],@"approvalNumber",[tianjiade objectForKey:@"productCode"],@"productCode",[tianjiade objectForKey:@"productName"],@"productName",[tianjiade objectForKey:@"specification"],@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"",@"status",@"",@"checkId", nil];
+        }
+        NSString *barCode;
+        if(NULL==[tianjiade objectForKey:@"barCode"]){
+        barCode = @"";
+        }else{
+            barCode =[tianjiade objectForKey:@"barCode"];
+        }
+        NSString *manufacturer;
+        if(NULL==[tianjiade objectForKey:@"manufacturer"]){
+          manufacturer =@"";
+        }else{
+            manufacturer =[tianjiade objectForKey:@"manufacturer"];
+        }
+        NSString *pycode;
+        if(NULL==[tianjiade objectForKey:@"pycode"]){
+          pycode = @"";
+        }else{
+            pycode = [tianjiade objectForKey:@"pycode"];
+        }
+        NSString *prodBatchNo;
+        if(NULL==[tianjiade objectForKey:@"prodBatchNo"]){
+           prodBatchNo = @"";
+        }else{
+            prodBatchNo =[tianjiade objectForKey:@"prodBatchNo"];
+        }
+        NSString *approvalNumber;
+        if(NULL==[tianjiade objectForKey:@"approvalNumber"]){
+           approvalNumber = @"";
+        }else{
+            approvalNumber = [tianjiade objectForKey:@"approvalNumber"];
+        }
+        NSString *productCode;
+        if(NULL==[tianjiade objectForKey:@"productCode"]){
+         productCode = @"";
+        }else{
+          productCode= [tianjiade objectForKey:@"productCode"];
+        }
+        NSString *productName;
+        if(NULL==[tianjiade objectForKey:@"productName"]){
+          productName = @"";
+        }else{
+          productName= [tianjiade objectForKey:@"productName"];
+        }
+        NSString *specification;
+        if(NULL==[tianjiade objectForKey:@"specification"]){
+          specification = @"";
+        }else{
+          specification = [tianjiade objectForKey:@"specification"];
+        }
+        
+        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"",@"status",@"",@"checkId", nil];
         
     }else{
         NSString *status=[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"status"]];
@@ -923,7 +1097,14 @@
     text.userInteractionEnabled = YES;
     lll.text=@"批号:";
     
-    techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"prodBatchNo"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];/*批号不明确是哪个*/
+    NSString *sq;
+    if (NULL==[arr[indexPath.section] objectForKey:@"prodBatchNo"]){
+    sq = @"";
+    }else{
+        sq = [arr[indexPath.section] objectForKey:@"prodBatchNo"];
+    }
+    
+    techangview = [[TextFlowView alloc] initWithFrame:viewaa.frame Text:sq textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];/*批号不明确是哪个*/
     shulianglab.text=@"数量:";
     
     lll.textColor=[UIColor colorWithHexString:@"545454"];
@@ -1099,7 +1280,13 @@
         }else{
             abcdefg=1;
             ming1.text =@"";
-            NSString* aaa=[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productName"]];
+            NSString* aaa;
+            if (NULL==[arr[0]objectForKey:@"productName"]){
+             aaa = @"";
+            }else{
+                aaa = [arr[0]objectForKey:@"productName"];
+            }
+    
             TextFlowView *nameview =  [[TextFlowView alloc] initWithFrame:ming1.frame Text:aaa textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:18] backgroundColor:[UIColor clearColor] alignLeft:YES];
             
             for (UIView *vv  in jiemian.subviews) {
@@ -1109,9 +1296,22 @@
             }
             nameview.tag = 120;
             [jiemian addSubview:nameview];
-            wei1.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"oldpos"]];//货位
-            bian1.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"productCode"]];//药品编号
-            ge1.text =[NSString stringWithFormat:@"%@",[arr[0]objectForKey:@"specification"]];//药品规格
+            if (NULL==[arr[0]objectForKey:@"oldpos"]){
+            wei1.text = @"";
+            }else{
+            wei1.text =[arr[0]objectForKey:@"oldpos"];//货位
+            }
+            if (NULL==[arr[0]objectForKey:@"productCode"]){
+             bian1.text = @"";
+            }else{
+             bian1.text =[arr[0]objectForKey:@"productCode"];//药品编号
+            }
+            if (NULL==[arr[0]objectForKey:@"specification"]){
+            ge1.text = @"";
+            }else{
+            ge1.text =[arr[0]objectForKey:@"specification"];//药品规格
+            }
+            
             [self.view bringSubviewToFront:dabeijing];
             [self.view bringSubviewToFront:jiemian];
             

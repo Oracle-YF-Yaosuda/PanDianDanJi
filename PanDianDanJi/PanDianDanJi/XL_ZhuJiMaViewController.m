@@ -111,20 +111,38 @@
     
     if (indexPath.row==0) {
         lll.text=@"药品名称:";
-        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productName"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        NSString *ss =[arr[indexPath.section] objectForKey:@"productName"];
+        if (NULL==[arr[indexPath.section] objectForKey:@"productName"]){
+            ss =@"";
+        }
+        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",ss] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
         [cell addSubview:techangview];
     }else if (indexPath.row==1){
         lll.text=@"药品编号:";
+        if (NULL==[arr[indexPath.section] objectForKey:@"productCode"]){
+        text.text = @"";
+        }
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"productCode"]];
     }else if (indexPath.row==2){
         lll.text=@"批        号:";
+        if (NULL==[arr[indexPath.section] objectForKey:@"prodBatchNo"]){
+            text.text = @"";
+        }
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"prodBatchNo"]];
     }else if (indexPath.row==3){
         lll.text=@"生产厂家:";
-        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"manufacturer"]] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
+        NSString *ss =[arr[indexPath.section] objectForKey:@"manufacturer"];
+        if (NULL==[arr[indexPath.section] objectForKey:@"manufacturer"]){
+            ss =@"";
+        }
+        techangview = [[TextFlowView alloc] initWithFrame:CGRectMake(100, 10, CGRectGetWidth(self.view.frame)-100,33) Text:[NSString stringWithFormat:@"%@",ss] textColor:[UIColor colorWithHexString:@"646464"] font:[UIFont boldSystemFontOfSize:16] backgroundColor:[UIColor clearColor] alignLeft:YES];
         [cell addSubview:techangview];
     }else if (indexPath.row==4){
         lll.text=@"药品规格:";
+        if (NULL==[arr[indexPath.section] objectForKey:@"specification"]){
+            text.text = @"";
+        }
+        
         text.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section] objectForKey:@"specification"]];
         [cell addSubview:viewaa];
     }

@@ -150,6 +150,9 @@
         lll.text=guding[indexPath.row];
         if(indexPath.row==0){
             @try {
+                if (NULL==[arr[0] objectForKey:@"productName"]){
+                 text.text = @"";
+                }else
                 text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productName"]];
             } @catch (NSException *exception) {
                 text.text=@"";
@@ -158,6 +161,9 @@
         }else if (indexPath.row==1){
         }else if (indexPath.row==2){
             @try {
+                if (NULL==[arr[0] objectForKey:@"productCode"]){
+                    text.text = @"";
+                }else
                 text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]];
             } @catch (NSException *exception) {
                 text.text=@"";
@@ -171,24 +177,36 @@
             //}
         }else if (indexPath.row==4){
             @try {
+                if (NULL==[arr[0] objectForKey:@"pycode"]){
+                    text.text = @"";
+                }else
                 text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"pycode"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
         }else if (indexPath.row==5){
             @try {
+                if (NULL==[arr[0] objectForKey:@"manufacturer"]){
+                    text.text = @"";
+                }else
                 text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"manufacturer"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
         }else if (indexPath.row==6){
             @try {
+                if (NULL==[arr[0] objectForKey:@"specification"]){
+                    text.text = @"";
+                }else
                 text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"specification"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
         }else if (indexPath.row==7){
             @try {
+                if (NULL==[arr[0] objectForKey:@"prodBatchNo"]){
+                    text.text = @"";
+                }else
                 text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"prodBatchNo"]];
             } @catch (NSException *exception) {
                 text.text=@"";
@@ -198,14 +216,29 @@
     }else{
         lll.text=xiabian[indexPath.row];
         if(indexPath.row==0){
+            if (NULL==[arr[indexPath.section-1] objectForKey:@"productName"]){
+            text1.text = @"";
+            }else
             text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productName"]];
         }else if (indexPath.row==1){
+            if (NULL==[arr[indexPath.section-1] objectForKey:@"productCode"]){
+                text1.text = @"";
+            }else
             text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productCode"]];
         }else if (indexPath.row==2){
+            if (NULL==[arr[indexPath.section-1] objectForKey:@"prodBatchNo"]){
+                text1.text = @"";
+            }else
             text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"prodBatchNo"]];
         }else if (indexPath.row==3){
+            if (NULL==[arr[indexPath.section-1] objectForKey:@"manufacturer"]){
+                text1.text = @"";
+            }else
             text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"manufacturer"]];
         }else if (indexPath.row==4){
+            if (NULL==[arr[indexPath.section-1] objectForKey:@"specification"]){
+                text1.text = @"";
+            }else
             text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"specification"]];
         }
         [cell addSubview:text1];
