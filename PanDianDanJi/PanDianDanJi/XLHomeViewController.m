@@ -145,6 +145,7 @@ NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                 NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
 NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
 NSLog(@"\n\n下载数据*******\n\n%@",list);
+                [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
                 [XL clearDatabase:db from:ShangChuanBiaoMing];
                 [XL clearDatabase:db from:XiaZaiBiaoMing];
                 for (int i=0; i<list.count; i++) {
