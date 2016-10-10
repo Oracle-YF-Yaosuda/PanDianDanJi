@@ -65,27 +65,22 @@
 }
 //提交盘点结果
 - (IBAction)TiJian_Button:(id)sender {
-    NSString *fangshi=@"/sys/upload";
-    NSArray *list = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
     
+    NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+    NSMutableArray*list = [[NSMutableArray alloc] init];
+    for (NSDictionary*dd in list1) {
+        if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
+            [list addObject:dd];
+        }
+    }
     if (list.count==0) {
         [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
     }else{
         [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
         NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
-NSLog(@"上传的数据-------\n\n%lu",(unsigned long)rucan.count);
+NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
 NSLog(@"上传的数据-------\n\n%@",rucan);
-        [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
-                [WarningBox warningBoxModeText:@"提交盘点结果成功!" andView:self.view];
-            }else
-                [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
-            
-        } failure:^(NSError *error) {
-            [WarningBox warningBoxHide:YES andView:self.view];
-            [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
-        }];
+        [self shangchuan:rucan];
     }
 }
 //盘点药品
@@ -171,5 +166,20 @@ NSLog(@"\n\n下载数据*******\n\n%@",list);
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
     }];
+}
+-(void)shangchuan:(NSDictionary*)rucan{
+    NSString *fangshi=@"/sys/upload";
+    [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
+            [WarningBox warningBoxModeText:@"提交盘点结果成功!" andView:self.view];
+        }else
+            [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
+        
+    } failure:^(NSError *error) {
+        [WarningBox warningBoxHide:YES andView:self.view];
+        [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
+    }];
+
 }
 @end
