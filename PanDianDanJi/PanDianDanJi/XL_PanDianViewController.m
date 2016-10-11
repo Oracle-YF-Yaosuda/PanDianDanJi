@@ -1042,7 +1042,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     UILabel *shulianglab;
     TextFlowView *techangview;
     lll = [[UILabel alloc]initWithFrame:CGRectMake(10, 7, 50, 30)];
-    viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 90, 30)];
+    viewaa = [[UIView alloc]initWithFrame:CGRectMake(lll.frame.size.width+10, 7, 85, 30)];
     text = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width-120, 11, 95, 25)];
     shulianglab =[[UILabel alloc]initWithFrame:CGRectMake(text.frame.origin.x-55, 7, 50, 30)];
     text.tag = 100+indexPath.section;
