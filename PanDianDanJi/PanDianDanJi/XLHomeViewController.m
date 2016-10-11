@@ -242,7 +242,8 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         if ([[responseObject objectForKey:@"code"] isEqual:@"0000"]) {
-            [WarningBox warningBoxModeText:@"提交盘点结果成功!" andView:self.view];
+            NSString *ss = [NSString stringWithFormat:@"已盘点%lu条数据，成功提交%lu条数据请等待后台处理",[[rucan objectForKey:@"list"]count],[[rucan objectForKey:@"list"]count]];
+            [WarningBox warningBoxModeText:ss andView:self.view];
         }else
             [WarningBox warningBoxModeText:@"提交盘点结果失败!" andView:self.view];
         
