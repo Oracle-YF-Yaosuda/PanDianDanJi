@@ -53,36 +53,93 @@
 
 //同步全部库存
 - (IBAction)KuCun_Button:(id)sender {
-    [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"zhuangtai"];
-    [self tongbushuju];
-    [self xiazaishuju:@"全部库存" :@"9"];
+    
+    NSArray  *arr= [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+    if (arr.count!=0){
+        UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"同步提示" message:@"同步全部库存将会清空本次盘点未提交的数据，确定要同步全部库存吗?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"zhuangtai"];
+            [self tongbushuju];
+            [self xiazaishuju:@"全部库存" :@"9"];
+            
+        }];
+        UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+
+    }else{
+        [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"zhuangtai"];
+        [self tongbushuju];
+        [self xiazaishuju:@"全部库存" :@"9"];
+    }
+    
+    
 }
 
-//下载数据
+//同步异常数据
 - (IBAction)ShuJu_Button:(id)sender {
-    [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"zhuangtai"];
-    [self xiazaishuju:@"异常数据" :@"8"];
+  
+    NSArray *arr = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+    if (arr.count!=0){
+        UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"同步提示" message:@"同步异常数据将会清空本次盘点未提交的数据，确定要同步异常数据吗?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"zhuangtai"];
+            [self xiazaishuju:@"异常数据" :@"8"];
+        }];
+        UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:action1];
+        [alert addAction:action2];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+    }else{
+        [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"zhuangtai"];
+        [self xiazaishuju:@"异常数据" :@"8"];
+    }
+    
+  
+    
+
+    
 }
 //提交盘点结果
 - (IBAction)TiJian_Button:(id)sender {
     
-    NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
-    NSMutableArray*list = [[NSMutableArray alloc] init];
-    for (NSDictionary*dd in list1) {
-        if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
-            [list addObject:dd];
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"确定要提交盘点结果吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+        NSMutableArray*list = [[NSMutableArray alloc] init];
+        for (NSDictionary*dd in list1) {
+            if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
+                [list addObject:dd];
+            }
         }
-    }
-    if (list.count==0) {
-        [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
-    }else{
-        [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
-NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
-NSLog(@"上传的数据-------\n\n%@",rucan);
-        [self shangchuan:rucan];
-    }
-}
+        if (list.count==0) {
+            [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
+        }else{
+            [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
+            NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
+            NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
+            NSLog(@"上传的数据-------\n\n%@",rucan);
+            [self shangchuan:rucan];
+        }
+
+        
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
+
+    
+    
+   }
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
     /*需要加判断*/
