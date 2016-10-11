@@ -171,7 +171,7 @@
     if ([str isEqualToString:@""]) {
         _table.hidden=YES;
     }else{
-        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"pycode" containStr:[NSString stringWithFormat:@"%@",str]];
+        arr=[XL  DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereKey:@"pycode" beginWithStr:[NSString stringWithFormat:@"%@",str]];
         [_table reloadData];
         _table.hidden=NO;
     }
