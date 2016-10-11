@@ -29,7 +29,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     arr=[XL  DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode", nil]];
-    
     if (arr.count==0) {
         NSArray*diyi;
         diyi =[ XL DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereKey:@"barCode" containStr:@","] ;
@@ -40,38 +39,21 @@
             for (NSString*ss in dier) {
                 if ([ss isEqualToString:_str]) {
                     [arr2 addObject:dd];
+                    break;
                 }
-                
             }
         }
         
         arr =[NSArray arrayWithArray:arr2];
     }
-    
-    
-    
-    
-   // arr=[XL  DataBase:db selectKeyTypes:TongBuShiTiLei fromTable:TongBuBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:_str,@"barCode", nil]];
-    NSLog(@"%@",_str);
-    NSLog(@"\n\nchuanguolaide-*-*-*-*-*-*-*\n\n%@\n\n",arr);
     if (arr.count==0) {
         dic=[[NSMutableDictionary alloc] init];
         [self navigationyou];
-        
-        
     }else{
         dic=[NSMutableDictionary dictionaryWithDictionary:arr[0]];
         [_table reloadData];
         _table.hidden=NO;
     }
-    
-   
-    
-    
-    
-    
-    
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,7 +71,6 @@
 -(void)tabledelegate{
     _table.delegate=self;
     _table.dataSource=self;
-    //    _table.hidden=YES;
     //去除多余分割线
     self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //解决tableview多出的白条
@@ -110,7 +91,6 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return  arr.count+1;
 }
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) {
         return 8;
@@ -118,7 +98,6 @@
         return 5;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     return 44;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -126,14 +105,9 @@
     NSArray*guding=[self gudingshuzu];
     NSArray*xiabian=[self xiabian];
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
-    
     if (cell==nil) {
-        
-        
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
-        
     }
-    
     UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 7, 100, 30)];
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
@@ -151,36 +125,30 @@
         if(indexPath.row==0){
             @try {
                 if (NULL==[arr[0] objectForKey:@"productName"]){
-                 text.text = @"";
+                    text.text = @"";
                 }else
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productName"]];
+                    text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productName"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
-            
         }else if (indexPath.row==1){
         }else if (indexPath.row==2){
             @try {
                 if (NULL==[arr[0] objectForKey:@"productCode"]){
                     text.text = @"";
                 }else
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]];
+                    text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
         }else if (indexPath.row==3){
-//            @try {
-//                /*同步表里没有货位号这个字段*/
-//                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"oldpos"]];
-//            } @catch (NSException *exception) {
-                text.text=@"";
-            //}
+            text.text=@"";
         }else if (indexPath.row==4){
             @try {
                 if (NULL==[arr[0] objectForKey:@"pycode"]){
                     text.text = @"";
                 }else
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"pycode"]];
+                    text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"pycode"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
@@ -189,7 +157,7 @@
                 if (NULL==[arr[0] objectForKey:@"manufacturer"]){
                     text.text = @"";
                 }else
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"manufacturer"]];
+                    text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"manufacturer"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
@@ -198,7 +166,7 @@
                 if (NULL==[arr[0] objectForKey:@"specification"]){
                     text.text = @"";
                 }else
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"specification"]];
+                    text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"specification"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
@@ -207,7 +175,7 @@
                 if (NULL==[arr[0] objectForKey:@"prodBatchNo"]){
                     text.text = @"";
                 }else
-                text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"prodBatchNo"]];
+                    text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"prodBatchNo"]];
             } @catch (NSException *exception) {
                 text.text=@"";
             }
@@ -217,43 +185,39 @@
         lll.text=xiabian[indexPath.row];
         if(indexPath.row==0){
             if (NULL==[arr[indexPath.section-1] objectForKey:@"productName"]){
-            text1.text = @"";
+                text1.text = @"";
             }else
-            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productName"]];
+                text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productName"]];
         }else if (indexPath.row==1){
             if (NULL==[arr[indexPath.section-1] objectForKey:@"productCode"]){
                 text1.text = @"";
             }else
-            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productCode"]];
+                text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"productCode"]];
         }else if (indexPath.row==2){
             if (NULL==[arr[indexPath.section-1] objectForKey:@"prodBatchNo"]){
                 text1.text = @"";
             }else
-            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"prodBatchNo"]];
+                text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"prodBatchNo"]];
         }else if (indexPath.row==3){
             if (NULL==[arr[indexPath.section-1] objectForKey:@"manufacturer"]){
                 text1.text = @"";
             }else
-            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"manufacturer"]];
+                text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"manufacturer"]];
         }else if (indexPath.row==4){
             if (NULL==[arr[indexPath.section-1] objectForKey:@"specification"]){
                 text1.text = @"";
             }else
-            text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"specification"]];
+                text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"specification"]];
         }
         [cell addSubview:text1];
     }
-    
     [cell addSubview:lll];
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
-
 - (void)setupCustomedKeyboard:(UITextField*)tf {
     tf.inputView = [DSKyeboard keyboardWithTextField:tf];
     [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
-        
         tf.text = fakePassword;
     } loginBlock:^(NSString *password) {
         [tf resignFirstResponder];
@@ -270,12 +234,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section!=0) {
-        NSLog(@"%@",arr[indexPath.section-1]);
-        
         NSMutableDictionary*txm=[NSMutableDictionary dictionaryWithDictionary:arr[indexPath.section-1]];
         [txm setObject:@"0" forKey:@"checkNum"];
         [txm setObject:@"" forKey:@"oldpos"];
-        
         if (self.passdicValueBlock!=nil) {
             self.passdicValueBlock(txm);
         }
@@ -283,7 +244,6 @@
     }else{
         [self.view endEditing:YES];
     }
-    
 }
 #pragma mark-----text
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -308,20 +268,11 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     UITableViewCell * cell=(UITableViewCell*)[textField superview];
     NSIndexPath *indexPath=[_table indexPathForCell:cell];
-    
     NSArray*guiding=[self duiying];
-    
-    
-    NSLog(@"%@",indexPath);
     [dic setObject:textField.text forKey:[NSString stringWithFormat:@"%@",guiding[indexPath.row]]];
-    //    NSLog(@"%@",dic);
 }
 -(void)passdicValue:(PassdicValueBlock)block{
     self.passdicValueBlock = block;
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 #pragma mark ------上边按钮
 -(void)navigation{
@@ -344,7 +295,7 @@
             [self chuanshu];
         }else
             [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
-
+        
     }else{
         if (NULL == [dic objectForKey:@"checkNum"]) {
             [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
@@ -360,17 +311,17 @@
         }
     }
     if (q==0) {
+        NSMutableDictionary *dd=[NSMutableDictionary dictionaryWithDictionary:dic];
+        if (arr.count==0) {
+            [dd setObject:_str forKey:@"barCode"];
+        }
         if (self.passdicValueBlock!=nil) {
-            NSLog(@"======   %@"   ,dic);
-            self.passdicValueBlock(dic);
+            self.passdicValueBlock(dd);
         }
         [self.navigationController popViewControllerAnimated:YES];
-        
-        NSLog(@"填写完整");
     }else{
         [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
     }
-
 }
 /*
  #pragma mark - Navigation
