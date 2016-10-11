@@ -38,6 +38,9 @@
     NSArray *scarr;//上传表查找到的数组
     NSDictionary*tianjiade;
     
+    
+    
+    UITextField * txt;
     ///添加批号
     //新建界面
     UIView * dabeijing;
@@ -63,7 +66,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     onepand=1;
-    [self firstResponderInSubView];
+    
     if (chuanzhipanduan==1) {
         [self chazhao];
         chuanzhipanduan=0;
@@ -84,6 +87,8 @@ NSLog(@"传过来的arr  ------   %@",arr);
         [self xztianjia:0];
         [self sccharu:0];
         tianjiapanduan=0;
+    }else{
+        [self firstResponderInSubView];
     }
 }
 - (void)viewDidLoad {
@@ -156,6 +161,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
     
     UILabel*la =(UILabel *)lab.self.view;
     if(la==_Search){
+        
         onepand=1;
     }
     else if(la==_onelabel){
@@ -403,14 +409,14 @@ NSLog(@"传过来的arr  ------   %@",arr);
     }
     else if (onepand==1){
         if([_Search.text isEqualToString:@""]||[_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
-            _Search.text = @"🔍扫描或输入药品条形码";
+            _Search.text = @"🔍扫描或输入药品条形码";txt.text=@"";
             
         }else{
             if(_Search.text.length!=0)
                 _Search.text= [_Search.text substringToIndex:[_Search.text length] - 1];
             if (_Search.text.length==0) {
                 _Search.textColor = [UIColor lightGrayColor];
-                _Search.text = @"🔍扫描或输入药品条形码";
+                _Search.text = @"🔍扫描或输入药品条形码";txt.text=@"";
             }
         }
     }else{
@@ -428,7 +434,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
     }
     else if (onepand==1){
         _Search.textColor = [UIColor lightGrayColor];
-        _Search.text = @"🔍扫描或输入药品条形码";
+        _Search.text = @"🔍扫描或输入药品条形码";txt.text=@"";
     }else{
         oo.text= @"";
         [buyaoFuyong setObject:[NSString stringWithFormat:@"%@", oo.text ] forKey:[NSString stringWithFormat:@"%ld",(long)oo.tag]];
@@ -1137,12 +1143,19 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
 #pragma  mark ----边框变色
 - (void)firstResponderInSubView{
     if (onepand==1) {
+        _Search.text=@"🔍扫描或输入药品条形码";
+        _Search.textColor=[UIColor lightGrayColor];
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun.png"] forState:UIControlStateNormal];
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun_press.png"] forState:UIControlStateHighlighted];
         _Search.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
         _ypgoods.layer.borderColor = [[UIColor blackColor] CGColor];
         _onelabel.layer.borderColor = [[UIColor blackColor] CGColor];
         [self tableviewhide];
+        txt=[[UITextField alloc] init];
+        txt.inputView=[[UIView alloc]initWithFrame:CGRectZero];
+        txt.delegate=self;
+        [self.view addSubview:txt];
+        [txt becomeFirstResponder];
     }else if(onepand==2){
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_mr_27.png"] forState:UIControlStateNormal];
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_dk_04_10.png"] forState:UIControlStateHighlighted];
@@ -1325,9 +1338,20 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     [jiemian addSubview:wei1];
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField!=goodstxt) {
+    
+    if (textField!=txt) {
         [self setupCustomedKeyboard:textField :nil];
     }
+    return YES;
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField == txt) {
+        if ([string isEqualToString:@"\n"]) {
+            _Search.text=[NSString stringWithFormat:@"%@",textField.text];
+            [self chazhao];
+        }
+    }
+    
     return YES;
 }
 
@@ -1379,6 +1403,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         _Search.textColor = [UIColor lightGrayColor];
         _Search.text=@"🔍扫描或输入药品条形码";
+        txt.text=@"";
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"新增药品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         XL_SearchViewController *search=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"search"];
