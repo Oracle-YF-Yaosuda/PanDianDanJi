@@ -426,7 +426,6 @@ NSLog(@"传过来的arr  ------   %@",arr);
         }
     }
 }
-
 //长按后退删除
 -(void)btnLong:(UILongPressGestureRecognizer *)gestureRecognizer{
     if(onepand==3){
@@ -689,7 +688,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
         shularr[i]=@"0";
     }
     [XL DataBase:db updateTable:XiaZaiBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"oldpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
-    NSLog(@"%@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
+    NSLog(@"批号修改下载表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
     
 }
 //修改上传表
@@ -698,7 +697,9 @@ NSLog(@"传过来的arr  ------   %@",arr);
         shularr[i]=@"0";
     }
     [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
+    NSLog(@"批号修改上传表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
 }
+
 //插入下载表
 -(void)xztianjia:(int)i{
     NSDictionary *dic;
@@ -865,7 +866,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
             dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",status,@"status",specification,@"specification",nil];
         }
     }
-NSLog(@"插入到下载表的数据 -*-*-*-*-*-*-*-*-*-*%@",dic);
+    NSLog(@"插入到下载表的数据 -*-*-*-*-*-*-*-*-*-*%@",dic);
     [XL DataBase:db insertKeyValues:dic intoTable:XiaZaiBiaoMing];
 }
 //插入上传表
@@ -933,7 +934,8 @@ NSLog(@"插入到下载表的数据 -*-*-*-*-*-*-*-*-*-*%@",dic);
         
         scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"2",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId", nil];
         
-    }else{
+    }
+    else{
         NSString *status=[arr[i] objectForKey:@"status"];
         if (NULL ==status) {
             status =@"";
@@ -1002,6 +1004,24 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
 //没写完呢
 -(void)czshangchuan{
     scarr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
+    if (scarr.count==0) {
+        NSArray*diyi;
+        diyi =[ XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereKey:@"barCode" containStr:@","] ;
+        NSMutableArray *arr2=[[NSMutableArray alloc] init];
+        for (NSDictionary*dd in diyi) {
+            NSString *muma=[NSString stringWithFormat:@"%@",[dd objectForKey:@"barCode"]];
+            NSArray * dier=[muma componentsSeparatedByString:@","];
+            for (NSString*ss in dier) {
+                if ([ss isEqualToString:_Search.text]) {
+                    [arr2 addObject:dd];
+                    break;
+                }
+            }
+        }
+        scarr =[NSArray arrayWithArray:arr2];
+        NSLog(@"上传表中的条数****** %lu",(unsigned long)scarr.count);
+    }
+    
 }
 -(void)czxiazai{
     arr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
