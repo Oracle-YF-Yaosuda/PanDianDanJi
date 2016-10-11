@@ -70,7 +70,7 @@
         [alert addAction:action2];
         [self presentViewController:alert animated:YES completion:^{
         }];
-
+        
     }else{
         [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"zhuangtai"];
         [self tongbushuju];
@@ -82,7 +82,7 @@
 
 //同步异常数据
 - (IBAction)ShuJu_Button:(id)sender {
-  
+    
     NSArray *arr = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
     if (arr.count!=0){
         UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"同步提示" message:@"同步异常数据将会清空本次盘点未提交的数据，确定要同步异常数据吗?" preferredStyle:UIAlertControllerStyleAlert];
@@ -101,9 +101,9 @@
         [self xiazaishuju:@"异常数据" :@"8"];
     }
     
-  
     
-
+    
+    
     
 }
 //提交盘点结果
@@ -111,25 +111,7 @@
     
     UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"提示" message:@"确定要提交盘点结果吗?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
-        NSMutableArray*list = [[NSMutableArray alloc] init];
-        for (NSDictionary*dd in list1) {
-            if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
-                [list addObject:dd];
-            }
-        }
-        if (list.count==0) {
-            [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
-        }else{
-            [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
-            NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
-            NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
-            NSLog(@"上传的数据-------\n\n%@",rucan);
-            [self shangchuan:rucan];
-        }
-
-        
+        [self shangchuanshujujiexi];
     }];
     UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
@@ -137,10 +119,39 @@
     [alert addAction:action2];
     [self presentViewController:alert animated:YES completion:^{
     }];
-
+}
+-(void)shangchuanshujujiexi{
+    NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
+    NSMutableArray*list = [[NSMutableArray alloc] init];
+    for (NSDictionary*dd in list1) {
+        if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
+            NSString * tiaoma=[dd objectForKey:@"barCode"];
+            NSArray * fenge =[tiaoma componentsSeparatedByString:@","];
+            NSString* xintiaoma;
+            if ( NULL== fenge) {
+                xintiaoma = tiaoma;
+            }else{
+                xintiaoma=(NSString*)fenge[0];
+                for (int i=1; i<fenge.count-1; i++) {
+                    xintiaoma=[xintiaoma stringByAppendingFormat:@",%@", fenge[i]];
+                }
+            }
+            //新条码 插入到dd里
+            [dd setValue:xintiaoma forKey:@"barCode"];
+            [list addObject:dd];
+        }
+    }
+    if (list.count==0) {
+        [WarningBox warningBoxModeText:@"请先盘点数据!" andView:self.view];
+    }else{
+        [WarningBox warningBoxModeIndeterminate:@"正在提交盘点结果...." andView:self.view];
+        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[[NSUserDefaults standardUserDefaults] objectForKey:@"Mac"],@"mac",[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"],@"checker",[[NSUserDefaults standardUserDefaults]objectForKey:@"zhuangtai"],@"state",list,@"list",nil];
+        NSLog(@"上传的数据-------\n\n%lu",(unsigned long)list.count);
+        NSLog(@"上传的数据-------\n\n%@",rucan);
+        [self shangchuan:rucan];
+    }
     
-    
-   }
+}
 //盘点药品
 - (IBAction)PanDian_Button:(id)sender {
     /*需要加判断*/
@@ -163,21 +174,21 @@
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-NSLog(@"同步数据-*-*-*-\n\n\n%lu",(unsigned long)list.count);
-NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
+                NSLog(@"同步数据-*-*-*-\n\n\n%lu",(unsigned long)list.count);
+                NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
                 for (int i=0; i<list.count; i++) {
-                  
+                    
                     NSString *barcode =[list[i]objectForKey:@"barCode"];
                     if (NULL==barcode){
-                      barcode = @"";
+                        barcode = @"";
                     }
                     NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
                     NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
                     [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
                     [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
-          
+                    
                 }
             }else
                 [WarningBox warningBoxModeText:@"同步库存失败，请与管理员联系！" andView:self.view];
@@ -197,12 +208,12 @@ NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-
+            
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
                 NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
-NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
-NSLog(@"\n\n下载数据*******\n\n%@",list);
+                NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
+                NSLog(@"\n\n下载数据*******\n\n%@",list);
                 [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
                 [XL clearDatabase:db from:ShangChuanBiaoMing];
                 [XL clearDatabase:db from:XiaZaiBiaoMing];
@@ -239,6 +250,6 @@ NSLog(@"\n\n下载数据*******\n\n%@",list);
         [WarningBox warningBoxHide:YES andView:self.view];
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
     }];
-
+    
 }
 @end
