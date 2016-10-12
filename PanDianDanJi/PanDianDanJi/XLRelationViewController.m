@@ -70,7 +70,22 @@
      NSLog(@"QQ");
 }
 - (IBAction)DianHua_Button:(id)sender {
-    NSLog(@"这里要写一个判断   提示框");
-     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18390907126"]];
+   // NSLog(@"这里要写一个判断   提示框");
+    UIAlertController*alert=[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要联系客服吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*action1=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18390907126"]];
+        
+    }];
+    UIAlertAction*action2=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
+
+    
+    
+    
 }
 @end

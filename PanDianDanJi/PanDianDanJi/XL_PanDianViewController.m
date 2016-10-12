@@ -152,7 +152,9 @@ NSLog(@"传过来的arr  ------   %@",arr);
     goodstxt = [[UITextField alloc]init];
     goodstxt.delegate = self;
     [self.view addSubview:goodstxt];
+    
     UILabel*la =(UILabel *)lableField.self.view;
+    NSLog(@"%@",la);
     [self setupCustomedKeyboard:goodstxt :la];
     [goodstxt becomeFirstResponder];
 }
@@ -1001,7 +1003,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     [XL DataBase:db insertKeyValues:scdic intoTable:ShangChuanBiaoMing];
     
 }
-//没写完呢
+
 -(void)czshangchuan{
     scarr =  [XL  DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing whereCondition:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",_Search.text],@"barCode", nil]];
     if (scarr.count==0) {
@@ -1034,7 +1036,6 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     self.table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _table.backgroundColor = [UIColor clearColor];
 }
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [arr count];
 }
@@ -1119,13 +1120,14 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     [self firstResponderInSubView];
     
 }
-
 #pragma mark-- 自定义键盘
 - (void)setupCustomedKeyboard:(UITextField*)tf :(UILabel *)ss {
+    //NSLog(@"-------------------------%@",ss.text);
     tf.inputView = [DSKyeboard keyboardWithTextField:tf];
+    
     [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
         tf.text = fakePassword;
-        ss.text = tf.text;
+        ss.text = [NSString stringWithFormat:@"%@", tf.text ];
     } loginBlock:^(NSString *password) {
         [tf resignFirstResponder];
     }];
@@ -1267,7 +1269,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
             [self.view bringSubviewToFront:dabeijing];
             [self.view bringSubviewToFront:jiemian];
             
-            NSLog(@"the arr = %@",arr);
+            NSLog(@"添加批号的数据  = %@",arr);
             if (arr.count==1&&[_onelabel.text isEqual:@""]){
                 [WarningBox warningBoxModeText:@"请输入当前药品的数量" andView:self.view];
             }else{
