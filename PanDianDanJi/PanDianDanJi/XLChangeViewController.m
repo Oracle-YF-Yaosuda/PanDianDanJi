@@ -130,7 +130,7 @@
 }
 #pragma mark - 确认按钮
 - (IBAction)QueRen_Button:(id)sender {
-    
+    [self.view endEditing:YES];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     if (self.Oldpass_Field.text.length > 0 && self.Newpass_Field.text.length > 0 && self.Newpass_Field_2.text.length > 0)
     {

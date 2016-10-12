@@ -70,7 +70,7 @@
      NSLog(@"QQ");
 }
 - (IBAction)DianHua_Button:(id)sender {
-    NSLog(@"Tel");
-     //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18390907126"]];
+    NSLog(@"这里要写一个判断   提示框");
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://18390907126"]];
 }
 @end

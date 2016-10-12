@@ -41,12 +41,12 @@
 {
     cha=0.0;
     pan=0;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qkeyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(keyboardWasHidden:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(qkeyboardWasHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 #pragma mark ----通知实现
-- (void) keyboardWasShown:(NSNotification *) notif
+- (void) qkeyboardWasShown:(NSNotification *) notif
 {
     if (pan==0) {
         NSDictionary *info = [notif userInfo];
@@ -65,7 +65,7 @@
         [self animateTextField:cha  up: YES];
     }
 }
-- (void) keyboardWasHidden:(NSNotification *) notif
+- (void) qkeyboardWasHidden:(NSNotification *) notif
 {
     pan=0;
     [self animateTextField:cha up:NO];
@@ -134,6 +134,13 @@
         }];
    }
 }
+//拖拽  传值方法
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"tuozhuai"/*与拖拽出来的线的定义*/]) {
+        [self.view endEditing:YES];
+    }
+}
+
 -(void)jumpHome{
     XLHomeViewController *home=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"home"];
     [self.navigationController pushViewController:home animated:YES];

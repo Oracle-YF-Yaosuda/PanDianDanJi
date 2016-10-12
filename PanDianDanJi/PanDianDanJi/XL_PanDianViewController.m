@@ -1359,7 +1359,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
-    if (textField!=txt) {
+    if (textField != goodstxt && textField != txt) {
         [self setupCustomedKeyboard:textField :nil];
     }
     return YES;
@@ -1371,7 +1371,6 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
             [self chazhao];
         }
     }
-    
     return YES;
 }
 
