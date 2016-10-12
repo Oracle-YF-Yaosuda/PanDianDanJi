@@ -40,9 +40,12 @@
     _Oldpass_Field.delegate = self;
     _Newpass_Field.delegate = self;
     _Newpass_Field_2.delegate = self;
-    _Newpass_Field.keyboardType = UIKeyboardTypeNamePhonePad;
-    _Oldpass_Field.keyboardType = UIKeyboardTypeNamePhonePad;
-    _Newpass_Field_2.keyboardType=UIKeyboardTypeNamePhonePad;
+    _Newpass_Field.keyboardType = UIKeyboardTypeASCIICapable;
+    _Oldpass_Field.keyboardType = UIKeyboardTypeASCIICapable;
+    _Newpass_Field_2.keyboardType=UIKeyboardTypeASCIICapable;
+    _Oldpass_Field.autocorrectionType = UITextAutocorrectionTypeNo;
+    _Newpass_Field.autocorrectionType = UITextAutocorrectionTypeNo;
+    _Newpass_Field_2.autocorrectionType = UITextAutocorrectionTypeNo;
 }
 -(void)fanhui{
     [self.navigationController popViewControllerAnimated:YES];
@@ -136,7 +139,7 @@
     {
         if(self.Oldpass_Field.text != [NSString stringWithFormat:@"%@",[defaults objectForKey:@"Password"]])
         {
-            [WarningBox warningBoxModeText:@"旧密码不正确" andView:self.view];
+            [WarningBox warningBoxModeText:@"原密码不正确" andView:self.view];
         }
         else if (![self newpass1:self.Newpass_Field.text])
         {
