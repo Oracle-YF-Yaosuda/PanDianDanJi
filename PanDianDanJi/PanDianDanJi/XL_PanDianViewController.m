@@ -1171,7 +1171,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
 #pragma  mark ----边框变色
 - (void)firstResponderInSubView{
     if (onepand==1) {
-        _Search.text=@"🔍扫描或输入药品条形码";
+//        _Search.text=@"🔍扫描或输入药品条形码";
         _Search.textColor=[UIColor lightGrayColor];
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun.png"] forState:UIControlStateNormal];
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun_press.png"] forState:UIControlStateHighlighted];

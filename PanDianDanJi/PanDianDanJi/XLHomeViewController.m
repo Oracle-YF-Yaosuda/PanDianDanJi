@@ -122,7 +122,7 @@
 }
 -(void)shangchuanshujujiexi{
     NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
-    NSLog(@"上传表里的数据%@",list1);
+NSLog(@"上传表里的数据%@",list1);
     NSMutableArray*list = [[NSMutableArray alloc] init];
     for (NSDictionary*dd in list1) {
         if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
