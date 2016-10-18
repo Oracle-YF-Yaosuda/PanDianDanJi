@@ -471,6 +471,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
     }else{
         if(onepand==1){
             iii=0;
+            tjphpanduan=0;
             [self chazhao];
         }
         else{
@@ -935,7 +936,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
             specification = [tianjiade objectForKey:@"specification"];
         }
         
-        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"2",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId", nil];
+        scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId", nil];
         
     }
     else{
@@ -981,15 +982,16 @@ NSLog(@"传过来的arr  ------   %@",arr);
         }
         if (tjphpanduan==1){
             int kkkk=0;
+            NSLog(@"%@",arr);
             for (NSDictionary*dd in arr) {
-                if ([[dd objectForKey:@"status"]isEqualToString:@"2"]) {
+                if ([[dd objectForKey:@"status"]isEqualToString:@"1"]) {
                     kkkk=1;
                 }
             }
             if (kkkk==0) {
-                status=@"1";
-            }else{
                 status=@"2";
+            }else{
+                status=@"1";
             }
             
 NSLog(@"添加批号时的status＝＝＝＝  %@",status);
@@ -1385,7 +1387,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
         tjphpanduan=1;
         [self xztianjia:0];
 //        [self sccharu:0];
-        tjphpanduan=0;
+        
         if(arr.count==1){
             shularr=[[NSMutableArray alloc] init];
             [shularr addObject:[NSString stringWithFormat:@"%@",_onelabel.text]];
