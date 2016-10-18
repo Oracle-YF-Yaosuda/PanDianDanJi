@@ -19,7 +19,7 @@
     XL_FMDB *   XL;
     FMDatabase *db;
     
-    NSMutableDictionary*dic;
+    NSMutableDictionary*dic11;
 }
 
 @end
@@ -47,10 +47,10 @@
         arr =[NSArray arrayWithArray:arr2];
     }
     if (arr.count==0) {
-        dic=[[NSMutableDictionary alloc] init];
+        dic11=[[NSMutableDictionary alloc] init];
         [self navigationyou];
     }else{
-        dic=[NSMutableDictionary dictionaryWithDictionary:arr[0]];
+        dic11=[NSMutableDictionary dictionaryWithDictionary:arr[0]];
         [_table reloadData];
         _table.hidden=NO;
     }
@@ -123,8 +123,8 @@
     if (indexPath.section==0) {
         lll.text=guding[indexPath.row];
         NSArray *hah=[self duiying];
-        if (NULL != [dic objectForKey:hah[indexPath.row]]) {
-            text.text=[NSString stringWithFormat:@"%@",[dic objectForKey:hah[indexPath.row]] ];
+        if (NULL != [dic11 objectForKey:hah[indexPath.row]]) {
+            text.text=[NSString stringWithFormat:@"%@",[dic11 objectForKey:hah[indexPath.row]] ];
         }else{
             if(indexPath.row==0){
                 @try {
@@ -190,6 +190,7 @@
         lll.text=xiabian[indexPath.row];
         
         if(indexPath.row==0){
+            NSLog(@"%@",arr[0]);
             if (NULL==[arr[indexPath.section-1] objectForKey:@"productName"]){
                 text1.text = @"";
             }else
@@ -214,9 +215,8 @@
                 text1.text = @"";
             }else
                 text1.text=[NSString stringWithFormat:@"%@",[arr[indexPath.section-1] objectForKey:@"specification"]];
-            
-            [cell addSubview:text1];
         }
+        [cell addSubview:text1];
     }
     [cell addSubview:lll];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -276,7 +276,7 @@
     UITableViewCell * cell=(UITableViewCell*)[textField superview];
     NSIndexPath *indexPath=[_table indexPathForCell:cell];
     NSArray*guiding=[self duiying];
-    [dic setObject:textField.text forKey:[NSString stringWithFormat:@"%@",guiding[indexPath.row]]];
+    [dic11 setObject:textField.text forKey:[NSString stringWithFormat:@"%@",guiding[indexPath.row]]];
 }
 -(void)passdicValue:(PassdicValueBlock)block{
     self.passdicValueBlock = block;
@@ -298,13 +298,13 @@
 -(void)baocun{
     [self.view endEditing:YES];
     if (arr.count==0) {
-        if ([dic allKeys].count==8) {
+        if ([dic11 allKeys].count==8) {
             [self chuanshu];
         }else
             [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
         
     }else{
-        if (NULL == [dic objectForKey:@"checkNum"]) {
+        if (NULL == [dic11 objectForKey:@"checkNum"]) {
             [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
         }else
             [self chuanshu];
@@ -312,13 +312,16 @@
 }
 -(void)chuanshu{
     int q=0;
-    for (NSString*ss in [dic allValues]) {
-        if ([ss isEqualToString:@""]) {
-            q=1;
+    for (NSString*ss in [dic11 allKeys]) {
+        if ([[dic11 objectForKey:ss]isEqualToString:@""]) {
+            if ([ss isEqualToString:@"approvalNumber"]) {
+                
+            }else
+                q=1;
         }
     }
     if (q==0) {
-        NSMutableDictionary *dd=[NSMutableDictionary dictionaryWithDictionary:dic];
+        NSMutableDictionary *dd=[NSMutableDictionary dictionaryWithDictionary:dic11];
         if (arr.count==0) {
             [dd setObject:_str forKey:@"barCode"];
         }

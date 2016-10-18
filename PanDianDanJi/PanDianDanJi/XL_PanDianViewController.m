@@ -663,14 +663,15 @@ NSLog(@"传过来的arr  ------   %@",arr);
                 }
             }
             for (int i=0; i<[arr count]; i++){
-                if (scarr.count==0) {
+                for (NSDictionary*dd in scarr) {
+                    if ([[dd objectForKey:@"prodBatchNo"] isEqualToString:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"prodBatchNo"]]]) {
+                        //如果有
+                        //修改上传表数量
+                        [self scxiugai:i];
+                    }else
                     //如果，没有
                     //所有信息插入上传表中
                     [self sccharu:i];
-                }else{
-                    //如果有
-                    //修改上传表数量
-                    [self scxiugai:i];
                 }
                 //修改下载表中的药品数量 （批号prodBatchNo）
                 [self xzxiugai:i];
@@ -791,7 +792,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
             oldpos= [tianjiade objectForKey:@"oldpos"];
         }
         
-        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",specification,@"specification",salePrice,@"salePrice",pycode,@"pycode",productName,@"productName",productCode,@"productCode",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",barCode,@"barCode",prodBatchNo,@"prodBatchNo",checkNum,@"checkNum",oldpos,@"oldpos",@"",@"stockNum",@"2",@"status",@"",@"purchaseBatchNo",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId", nil];
+        dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",specification,@"specification",salePrice,@"salePrice",pycode,@"pycode",productName,@"productName",productCode,@"productCode",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",barCode,@"barCode",prodBatchNo,@"prodBatchNo",checkNum,@"checkNum",oldpos,@"oldpos",@"",@"stockNum",@"1",@"status",@"",@"purchaseBatchNo",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId", nil];
         
         arr=[NSArray arrayWithObject:dic];
     }else{
@@ -865,7 +866,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
         }
         
         if (tjphpanduan==1){
-            dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",status,@"status",specification,@"specification",nil];
+            dic =[NSDictionary dictionaryWithObjectsAndKeys:approvalNumber,@"approvalNumber",vipPrice,@"vipPrice",salePrice,@"salePrice",pycode,@"pycode",purchaseBatchNo,@"purchaseBatchNo",productName,@"productName",productCode,@"productCode",oldpos,@"oldpos",manufacturer,@"manufacturer",Id,@"id",costPrice,@"costPrice",checkId,@"checkId",barCode,@"barCode",pi1.text,@"prodBatchNo",shu1.text,@"checkNum", stockNum,@"stockNum",@"2",@"status",specification,@"specification",nil];
         }
     }
     NSLog(@"插入到下载表的数据 -*-*-*-*-*-*-*-*-*-*%@",dic);
