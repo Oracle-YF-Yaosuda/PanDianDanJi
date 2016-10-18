@@ -985,17 +985,17 @@ NSLog(@"传过来的arr  ------   %@",arr);
         }
         if (tjphpanduan==1){
             int kkkk=0;
-            NSLog(@"%@",arr);
             for (NSDictionary*dd in arr) {
                 if ([[dd objectForKey:@"status"]isEqualToString:@"1"]) {
                     kkkk=1;
                 }
             }
-            if (kkkk==0) {
-                status=@"2";
-            }else{
+            if (kkkk!=0) {
                 status=@"1";
             }
+//            else{
+//                status=@"1";
+//            }
             
 NSLog(@"添加批号时的status＝＝＝＝  %@",status);
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo", nil];
