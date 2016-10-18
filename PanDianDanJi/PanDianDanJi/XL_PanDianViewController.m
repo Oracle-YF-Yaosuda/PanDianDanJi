@@ -503,7 +503,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
         arr =[NSArray arrayWithArray:arr2];
     }
     for (int i=0; i<arr.count; i++) {
-        if ([[arr[i] objectForKey:@"checkNum"] intValue]==0) {
+        if ([[arr[i] objectForKey:@"checkNum"] floatValue]==0) {
         }else
             [buyaoFuyong setObject:[arr[i] objectForKey:@"checkNum"] forKey:[NSString stringWithFormat:@"%d",i+100]];
     }
@@ -1090,7 +1090,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     text.textAlignment =NSTextAlignmentCenter;
     
     if(NULL ==[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%ld",indexPath.section+100]]){
-        if ([[arr[indexPath.section] objectForKey:@"checkNum"] intValue]==0) {
+        if ([[arr[indexPath.section] objectForKey:@"checkNum"] floatValue]==0) {
             text.text=@"";
         }else
             text.text=[arr[indexPath.section] objectForKey:@"checkNum"];
@@ -1383,7 +1383,7 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
     }else{
         tjphpanduan=1;
         [self xztianjia:0];
-        [self sccharu:0];
+//        [self sccharu:0];
         tjphpanduan=0;
         if(arr.count==1){
             shularr=[[NSMutableArray alloc] init];
