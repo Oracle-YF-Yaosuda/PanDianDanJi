@@ -665,21 +665,16 @@ NSLog(@"传过来的arr  ------   %@",arr);
             }
             
             for (int i=0; i<[arr count]; i++){
-                int opp=0;
+               int heheda=0;
                 for (NSDictionary*dd in scarr) {
                     if ([[dd objectForKey:@"prodBatchNo"] isEqualToString:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"prodBatchNo"]]]) {
-                        //如果有
-                        //修改上传表数量
-                        opp=1;
-                        [self scxiugai:i];
-                    }else{
-                    //如果，没有
-                    //所有信息插入上传表中
-                    [self sccharu:i];
-                        opp=1;
+                        heheda=1;
                     }
                 }
-                if (opp==0) {
+                if (heheda==1) {
+                    [self scxiugai:i];
+                }
+                else{
                     [self sccharu:i];
                 }
                 //修改下载表中的药品数量 （批号prodBatchNo）
