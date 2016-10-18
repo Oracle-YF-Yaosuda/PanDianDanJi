@@ -663,15 +663,23 @@ NSLog(@"传过来的arr  ------   %@",arr);
                     [ shularr addObject:[buyaoFuyong objectForKey:[NSString stringWithFormat:@"%d",i+100]]];
                 }
             }
+            
             for (int i=0; i<[arr count]; i++){
+                int opp=0;
                 for (NSDictionary*dd in scarr) {
                     if ([[dd objectForKey:@"prodBatchNo"] isEqualToString:[NSString stringWithFormat:@"%@",[arr[i] objectForKey:@"prodBatchNo"]]]) {
                         //如果有
                         //修改上传表数量
+                        opp=1;
                         [self scxiugai:i];
-                    }else
+                    }else{
                     //如果，没有
                     //所有信息插入上传表中
+                    [self sccharu:i];
+                        opp=1;
+                    }
+                }
+                if (opp==0) {
                     [self sccharu:i];
                 }
                 //修改下载表中的药品数量 （批号prodBatchNo）
@@ -995,7 +1003,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
             }
             
 NSLog(@"添加批号时的status＝＝＝＝  %@",status);
-            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shu1.text,@"checkNum",pi1.text,@"prodBatchNo", nil];
+            scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo", nil];
         }else{
 NSLog(@"不添加时候的  status   ＝＝＝＝＝   %@",status);
             scdic =[NSDictionary dictionaryWithObjectsAndKeys:status,@"status",barCode,@"barCode",checkId,@"checkId",manufacturer,@"manufacturer",pycode,@"pycode",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",_ypgoods.text,@"newpos",dateString,@"checktime",shularr[i],@"checkNum",prodBatchNo,@"prodBatchNo", nil];
