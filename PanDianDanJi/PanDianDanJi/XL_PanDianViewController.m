@@ -472,6 +472,7 @@ NSLog(@"传过来的arr  ------   %@",arr);
         if(onepand==1){
             iii=0;
             tjphpanduan=0;
+            // _Search.textColor = [UIColor colorWithHexString:@"34C083"];
             [self chazhao];
         }
         else{
@@ -1172,7 +1173,13 @@ NSLog(@"插入到上传表的数据--*-*-*-*-*-*-*-%@",scdic);
 - (void)firstResponderInSubView{
     if (onepand==1) {
 //        _Search.text=@"🔍扫描或输入药品条形码";
+        //_Search.textColor=[UIColor lightGrayColor];
+        if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
         _Search.textColor=[UIColor lightGrayColor];
+        }else{
+        _Search.textColor=[UIColor colorWithHexString:@"34C083"];
+        }
+        
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun.png"] forState:UIControlStateNormal];
         [_surebtn setBackgroundImage:[UIImage imageNamed:@"jianpan_chaxun_press.png"] forState:UIControlStateHighlighted];
         _Search.layer.borderColor = [[UIColor colorWithHexString:@"34C083"] CGColor];
