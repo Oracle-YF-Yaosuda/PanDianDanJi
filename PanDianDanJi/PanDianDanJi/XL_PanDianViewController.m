@@ -90,6 +90,13 @@ NSLog(@"传过来的arr  ------   %@",arr);
     }else{
         [self firstResponderInSubView];
     }
+
+    if ([_Search.text isEqualToString:@"🔍扫描或输入药品条形码"]){
+        _Search.textColor=[UIColor lightGrayColor];
+    }else{
+        _Search.textColor=[UIColor colorWithHexString:@"34C083"];
+    }
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
