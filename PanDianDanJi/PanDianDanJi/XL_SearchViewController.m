@@ -292,20 +292,10 @@
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     if(textField.tag == 100||textField.tag == 101||textField.tag==105||textField.tag==106){
-        [textField becomeFirstResponder];
         textField.inputView = nil;
         [textField reloadInputViews];
-        NSLog(@"%@", textField.isFirstResponder ? @"YES" : @"NO");
+        [textField becomeFirstResponder];
     }
-}
-
-- (BOOL)becomeFirstResponder:(UITextField*)textField
-
-{
-    [super becomeFirstResponder];
-    
-    return [textField becomeFirstResponder];
-    
 }
 -(void)passdicValue:(PassdicValueBlock)block{
     self.passdicValueBlock = block;
