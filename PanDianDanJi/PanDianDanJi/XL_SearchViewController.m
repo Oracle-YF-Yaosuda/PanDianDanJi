@@ -60,6 +60,7 @@
     [self tabledelegate];
     [self shujuku];
     [self navigation];
+    [self registerForKeyboardNotifications];
 }
 -(void)shujuku{
     XL = [XL_FMDB tool];
@@ -88,6 +89,10 @@
     NSArray*guding=[NSArray arrayWithObjects:@"药品名称:",@"药品编号:",@"批        号:",@"生产厂家:",@"药品规格:",nil];
     return guding;
 }
+-(NSArray *)tishi{
+    NSArray*tishi=[NSArray arrayWithObjects:@"例:阿莫西林",@"例:10",@"例:4111011",@"例:A1",@"例:AMXL",@"例:吉林银河药业有限公司",@"例:57mg*6片",@"例:J7628", nil];
+    return tishi;
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return  arr.count+1;
 }
@@ -104,10 +109,12 @@
     static NSString *str=@"cell";
     NSArray*guding=[self gudingshuzu];
     NSArray*xiabian=[self xiabian];
+    NSArray*tishi=[self tishi];
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
     }
+    
     UILabel*lll=[[UILabel alloc] initWithFrame:CGRectMake(10, 7, 100, 30)];
     lll.textColor=[UIColor colorWithHexString:@"545454"];
     lll.font=[UIFont boldSystemFontOfSize:16];
@@ -118,6 +125,8 @@
     text.layer.borderWidth=1;
     text.delegate=self;
     text.layer.borderColor=[[UIColor grayColor] CGColor];
+    text.placeholder=tishi[indexPath.row];
+    text.adjustsFontSizeToFitWidth=YES;
     UILabel *text1=[[UILabel alloc] initWithFrame:CGRectMake(100, 7, CGRectGetWidth(self.view.frame)-110,30)];
     text1.textColor=[UIColor colorWithHexString:@"767676"];
     if (indexPath.section==0) {
@@ -190,7 +199,6 @@
         lll.text=xiabian[indexPath.row];
         
         if(indexPath.row==0){
-            NSLog(@"%@",arr[0]);
             if (NULL==[arr[indexPath.section-1] objectForKey:@"productName"]){
                 text1.text = @"";
             }else
@@ -222,6 +230,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 - (void)setupCustomedKeyboard:(UITextField*)tf {
     tf.inputView = [DSKyeboard keyboardWithTextField:tf];
     [(DSKyeboard *)tf.inputView dsKeyboardTextChangedOutputBlock:^(NSString *fakePassword) {
@@ -254,7 +263,6 @@
 }
 #pragma mark-----text
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    NSLog(@"%ld",(long)textField.tag);
     if (arr.count!=0) {
         if (textField.tag==101) {
             textField.keyboardType=UIKeyboardTypeNumberPad;
@@ -266,6 +274,8 @@
     }else{
         if (textField.tag==101) {
             textField.keyboardType=UIKeyboardTypeNumberPad;
+            
+
         }else if (textField.tag==103||textField.tag==102||textField.tag==104||textField.tag==107){
             [self setupCustomedKeyboard:textField];
         }
@@ -277,6 +287,25 @@
     NSIndexPath *indexPath=[_table indexPathForCell:cell];
     NSArray*guiding=[self duiying];
     [dic11 setObject:textField.text forKey:[NSString stringWithFormat:@"%@",guiding[indexPath.row]]];
+   
+   
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if(textField.tag == 100||textField.tag == 101||textField.tag==105||textField.tag==106){
+        [textField becomeFirstResponder];
+        textField.inputView = nil;
+        [textField reloadInputViews];
+        NSLog(@"%@", textField.isFirstResponder ? @"YES" : @"NO");
+    }
+}
+
+- (BOOL)becomeFirstResponder:(UITextField*)textField
+
+{
+    [super becomeFirstResponder];
+    
+    return [textField becomeFirstResponder];
+    
 }
 -(void)passdicValue:(PassdicValueBlock)block{
     self.passdicValueBlock = block;
@@ -333,6 +362,22 @@
         [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
     }
 }
+#pragma  mark ---注册通知
+- (void) registerForKeyboardNotifications
+{
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qkeyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+}
+#pragma mark ----通知实现
+- (void) qkeyboardWasShown:(NSNotification *) notif
+{
+        NSDictionary *info = [notif userInfo];
+        NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
+        CGSize keyboardSize = [value CGRectValue].size;
+    CGPoint haha=[value CGRectValue].origin;
+    NSLog(@"%f\n%f\n%f\n%f",keyboardSize.height,keyboardSize.width,haha.x,haha.y);
+}
+
 /*
  #pragma mark - Navigation
  
