@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="width" constant="90" id="ntr-tB-hlS"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_01_07.png" translatesAutoresizingMaskIntoConstraints="NO" id="u0z-Aa-HQb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_01_6.png" translatesAutoresizingMaskIntoConstraints="NO" id="u0z-Aa-HQb">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="0MT-qF-egI"/>
                                     <constraint firstAttribute="height" constant="60" id="4r2-Aa-nxl"/>
@@ -1660,9 +1660,9 @@
         <image name="ic_qq.png" width="268" height="268"/>
         <image name="ic_weixin.png" width="228" height="228"/>
         <image name="icon_01_03.png" width="320" height="368"/>
-        <image name="icon_01_07.png" width="764" height="164"/>
         <image name="icon_01_11.png" width="900" height="130"/>
         <image name="icon_01_14.png" width="900" height="130"/>
+        <image name="icon_01_6.png" width="764" height="164"/>
         <image name="icon_02_07.png" width="1040" height="600"/>
         <image name="icon_02_11.png" width="150" height="150"/>
         <image name="icon_02_14.png" width="228" height="228"/>

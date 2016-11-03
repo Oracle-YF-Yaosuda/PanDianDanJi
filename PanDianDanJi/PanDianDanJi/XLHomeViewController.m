@@ -43,7 +43,7 @@
     [self.navigationController setNavigationBarHidden:NO];
     
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"盘点助手" style:UIBarButtonItemStyleDone target:nil action:nil];
+    UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"店小二" style:UIBarButtonItemStyleDone target:nil action:nil];
     [self.navigationItem setLeftBarButtonItem:left];
     
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cehua_12.png"] style:UIBarButtonItemStyleDone target:self action:@selector(set:)];
@@ -171,7 +171,7 @@ NSLog(@"上传表里的数据%@",list1);
     
     //自己写的网络请求    请求外网地址
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:nil type:Post success:^(id responseObject) {
-        
+        NSLog(@"%@",responseObject);
         @try {
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
                 NSArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
@@ -191,6 +191,7 @@ NSLog(@"上传表里的数据%@",list1);
                     [XL DataBase:db insertKeyValues:dd intoTable:TongBuBiaoMing];
                     
                 }
+                
             }else
                 [WarningBox warningBoxModeText:@"同步库存失败，请与管理员联系！" andView:self.view];
         } @catch (NSException *exception) {

@@ -21,8 +21,8 @@
 @implementation XLLogin_ViewController
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    if (NULL != JuyuwangIP) {
-        [WarningBox warningBoxModeText:@"局域网已设置" andView:self.view];
+    if (NULL == JuyuwangIP) {
+        [WarningBox warningBoxModeText:@"局域网未设置" andView:self.view];
     }
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];

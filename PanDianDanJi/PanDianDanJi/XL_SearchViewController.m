@@ -60,7 +60,6 @@
     [self tabledelegate];
     [self shujuku];
     [self navigation];
-    [self registerForKeyboardNotifications];
 }
 -(void)shujuku{
     XL = [XL_FMDB tool];
@@ -352,30 +351,6 @@
         [WarningBox warningBoxModeText:@"请填写完整信息!" andView:self.view];
     }
 }
-#pragma  mark ---注册通知
-- (void) registerForKeyboardNotifications
-{
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qkeyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
-}
-#pragma mark ----通知实现
-- (void) qkeyboardWasShown:(NSNotification *) notif
-{
-        NSDictionary *info = [notif userInfo];
-        NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
-        CGSize keyboardSize = [value CGRectValue].size;
-    CGPoint haha=[value CGRectValue].origin;
-    NSLog(@"%f\n%f\n%f\n%f",keyboardSize.height,keyboardSize.width,haha.x,haha.y);
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
