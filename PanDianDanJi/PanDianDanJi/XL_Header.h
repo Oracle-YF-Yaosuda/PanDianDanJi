@@ -4,6 +4,11 @@
 //
 //  Created by 小狼 on 16/9/7.
 //  Copyright © 2016年 BinXiaolang. All rights reserved.
+#define CLog(format, ...)  NSLog(format, ## __VA_ARGS__)
+
+#define NSLog(FORMAT, ...) printf("%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
+
 
 /*125.211.221.232:9000*/
 
@@ -25,8 +30,7 @@
 
 #define TongBuBiaoMing @"tongbu"
 
-#define XiaZaiShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"approvalNumber",@"text",@"barCode",@"text",@"checkId",@"text",@"checkNum",@"text",@"costPrice",@"text",@"id",@"text",@"manufacturer",@"text",@"oldpos",@"text",@"prodBatchNo",@"text",@"productCode",@"text",@"productName",@"text",@"purchaseBatchNo",@"text",@"pycode",@"text",@"salePrice",@"text",@"specification",@"text",@"status",@"integer",@"stockNum",@"text",@"vipPrice", nil]
-
+#define XiaZaiShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"approvalNumber",@"text",@"barCode",@"text",@"checkId",@"text",@"checkNum",@"text",@"costPrice",@"text",@"id",@"text",@"manufacturer",@"text",@"oldpos",@"text",@"prodBatchNo",@"text",@"productCode",@"text",@"productName",@"text",@"purchaseBatchNo",@"text",@"pycode",@"text",@"salePrice",@"text",@"specification",@"text",@"status",@"integer",@"stockNum",@"text",@"vipPrice",@"text",@"f1",@"text",@"f2", nil]
 
 #define XiaZaiBiaoMing @"xiazai"
 /*
@@ -69,6 +73,7 @@
  //	盘点时间
 	String checkTime;
  */
-#define ShangChuanShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"productCode",@"text",@"checkNum",@"text",@"prodBatchNo",@"text",@"status",@"text",@"checkTime",@"text",@"productName",@"text",@"manufacturer",@"text",@"specification",@"text",@"barCode",@"text",@"approvalNumber",@"text",@"pycode",@"text",@"checkId",@"text",@"newpos", nil]
+#define ShangChuanShiTiLei [NSDictionary dictionaryWithObjectsAndKeys:@"text",@"productCode",@"text",@"checkNum",@"text",@"prodBatchNo",@"text",@"status",@"text",@"checkTime",@"text",@"productName",@"text",@"manufacturer",@"text",@"specification",@"text",@"barCode",@"text",@"approvalNumber",@"text",@"pycode",@"text",@"checkId",@"text",@"newpos",@"text",@"f1",@"text",@"f2", nil]
 
 #define ShangChuanBiaoMing @"shangchuan"
+

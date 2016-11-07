@@ -122,7 +122,7 @@
 }
 -(void)shangchuanshujujiexi{
     NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
-NSLog(@"上传表里的数据%@",list1);
+    NSLog(@"上传表里的数据%@",list1);
     NSMutableArray*list = [[NSMutableArray alloc] init];
     for (NSDictionary*dd in list1) {
         if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
@@ -179,6 +179,7 @@ NSLog(@"上传表里的数据%@",list1);
                 NSLog(@"同步数据-*-*-*-\n\n\n%@",list);
                 //清空数据
                 [XL clearDatabase:db from:TongBuBiaoMing];
+                
                 for (int i=0; i<list.count; i++) {
                     
                     NSString *barcode =[list[i]objectForKey:@"barCode"];
@@ -192,10 +193,11 @@ NSLog(@"上传表里的数据%@",list1);
                     
                 }
                 
-            }else
+            }else{
                 [WarningBox warningBoxModeText:@"同步库存失败，请与管理员联系！" andView:self.view];
+            }
         } @catch (NSException *exception) {
-            [WarningBox warningBoxModeText:@"请仔细检查您的网络" andView:self.view];
+            
         }
     } failure:^(NSError *error) {
         [WarningBox warningBoxModeText:@"网络请求失败" andView:self.view];
@@ -212,23 +214,29 @@ NSLog(@"上传表里的数据%@",list1);
         @try {
             
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
-                [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
+                
                 NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
                 NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
                 NSLog(@"\n\n下载数据*******\n\n%@",list);
-                [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
-                [XL clearDatabase:db from:ShangChuanBiaoMing];
-                [XL clearDatabase:db from:XiaZaiBiaoMing];
-                for (int i=0; i<list.count; i++) {
-                    //向下载表中插入数据
-                    NSString *barcode =[list[i]objectForKey:@"barCode"];
-                    if (NULL==barcode){
-                        barcode = @"";
+                if(list.count == 0){
+                    [WarningBox warningBoxModeText:@"后台数据为空，请联系管理员添加数据......" andView:self.view];
+                }else{
+                    [WarningBox warningBoxModeText:[NSString stringWithFormat:@"%@同步成功!",str] andView:self.view];
+                    [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
+                    [XL clearDatabase:db from:ShangChuanBiaoMing];
+                    [XL clearDatabase:db from:XiaZaiBiaoMing];
+                    
+                    for (int i=0; i<list.count; i++) {
+                        //向下载表中插入数据
+                        NSString *barcode =[list[i]objectForKey:@"barCode"];
+                        if (NULL==barcode){
+                            barcode = @"";
+                        }
+                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
+                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
+                        [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
+                        [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
                     }
-                    NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
-                    NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
-                    [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
-                    [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
                 }
             }
         } @catch (NSException *exception) {
