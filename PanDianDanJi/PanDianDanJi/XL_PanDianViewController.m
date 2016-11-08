@@ -720,7 +720,10 @@
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
     }
-    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil] whereConditions:[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil]];
+    NSDictionary*tiao1=[NSDictionary dictionaryWithObjectsAndKeys:[arr[i] objectForKey:@"prodBatchNo"],@"prodBatchNo",[arr[i] objectForKey:@"barCode"],@"barCode", nil];
+    NSArray*nbh=[ XL DataBase:db selectKeyTypes:XiaZaiShiTiLei fromTable:XiaZaiBiaoMing whereConditions:tiao1];
+    NSDictionary*val1=[NSDictionary dictionaryWithObjectsAndKeys:[nbh[0] objectForKey:@"f1"],@"f1",shularr[i],@"checkNum",_ypgoods.text,@"newpos", nil];
+    [XL DataBase:db updateTable:ShangChuanBiaoMing setKeyValues:val1 whereConditions:tiao1];
     NSLog(@"批号修改上传表数量***** %@--------%@",[arr[i] objectForKey:@"prodBatchNo"],shularr[i]);
 }
 
@@ -991,7 +994,7 @@
         }else{
             yuliuziduan2= [tianjiade objectForKey:@"f2"];
         }
-        
+        NSLog(@"上传插入1-－－－－%@,%@",yuliuziduan1,yuliuziduan2);
         scdic =[NSDictionary dictionaryWithObjectsAndKeys:barCode,@"barCode",manufacturer,@"manufacturer",pycode,@"pycode",prodBatchNo,@"prodBatchNo",approvalNumber,@"approvalNumber",productCode,@"productCode",productName,@"productName",specification,@"specification",huoweihao,@"newpos",dateString,@"checktime",_onelabel.text,@"checkNum",@"1",@"status",[[NSUserDefaults standardUserDefaults] objectForKey:@"checkId"],@"checkId",yuliuziduan1,@"f1",yuliuziduan2,@"f2", nil];
         
     }
@@ -1040,14 +1043,16 @@
         if(NULL==[arr[i] objectForKey:@"f1"]){
             yuliuziduan1= @"";
         }else{
-            yuliuziduan1= [tianjiade objectForKey:@"f1"];
+            yuliuziduan1= [arr[i] objectForKey:@"f1"];
         }
         NSString*yuliuziduan2;
-        if(NULL==[arr[i] objectForKey:@"f2"]){
+        NSLog(@"%@",[arr[i] objectForKey:@"f2"]);
+        if(NULL==[arr[i] objectForKey:@"f2"]/*||[[arr[i] objectForKey:@"f2"]isEqual:[NSNull null]]*/){
             yuliuziduan2= @"";
         }else{
-            yuliuziduan2= [tianjiade objectForKey:@"f2"];
+            yuliuziduan2= [arr[i] objectForKey:@"f2"];
         }
+        NSLog(@"上传插入2-－－－－%@,%@",yuliuziduan1,yuliuziduan2);
         if (tjphpanduan==1){
             int kkkk=0;
             for (NSDictionary*dd in arr) {
