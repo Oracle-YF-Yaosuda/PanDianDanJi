@@ -22,7 +22,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (NULL == JuyuwangIP) {
-        [WarningBox warningBoxModeText:@"局域网未设置" andView:self.view];
+        [[NSUserDefaults standardUserDefaults]setObject:@"www.yaopandian.com" forKey:@"JuYuWang"];
     }
     if (NULL !=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"]) {
         _Name.text=[[NSUserDefaults standardUserDefaults] objectForKey:@"Name"];
@@ -106,7 +106,7 @@
        
         [WarningBox warningBoxModeIndeterminate:@"登录中..." andView:self.view];
         NSString *fangshi=@"/sys/login";
-        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:_Name.text,@"loginName",_Password.text,@"password", nil];
+        NSDictionary*rucan=[NSDictionary dictionaryWithObjectsAndKeys:[_Name.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"loginName",[_Password.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"password", nil];
 //自己写的网络请求    请求外网地址
         [XL_WangLuo WaiwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
             [WarningBox warningBoxHide:YES andView:self.view];

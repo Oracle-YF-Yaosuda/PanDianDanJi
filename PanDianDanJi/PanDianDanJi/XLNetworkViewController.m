@@ -26,6 +26,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     if (NULL != JuyuwangIP) {
+        if ([JuyuwangIP rangeOfString:@"www."].location !=NSNotFound) {
+            
+        }else{
         NSArray*Fenge=[JuyuwangIP componentsSeparatedByString:@"."];
         NSArray*fe2=[[Fenge lastObject] componentsSeparatedByString:@":"];
         _NetText1.text=[NSString stringWithFormat:@"%@",Fenge[0]];
@@ -33,6 +36,7 @@
         _NetText3.text=[NSString stringWithFormat:@"%@",Fenge[2]];
         _NetText4.text=[NSString stringWithFormat:@"%@",fe2[0]];
         _NetText5.text=[NSString stringWithFormat:@"%@",fe2[1]];
+        }
     }
     
 }

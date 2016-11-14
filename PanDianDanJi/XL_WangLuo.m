@@ -31,7 +31,8 @@
     
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/html", nil];
-    
+    Url = [Url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSLog(@"------%@",Url);
     switch (type) {
         case Get:{
             [manager GET:Url parameters:ChuanCan progress:^(NSProgress * _Nonnull uploadProgress) {

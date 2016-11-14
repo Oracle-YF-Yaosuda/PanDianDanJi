@@ -17,6 +17,7 @@
 
 @interface DSKyeboard ()
 {
+    int _tag;
     UIButton *_selectedBtn;
 }
 @property (nonatomic, strong) UITextField *tf;
@@ -116,12 +117,14 @@ CGFloat _dsKeyboardToolH;
 }
 
 + (instancetype)keyboardWithTextField:(UITextField *)tf {
+    
     return [[self alloc] initWithTextField:tf];
 }
 
 - (instancetype)initWithTextField:(UITextField *)tf {
     if (self = [super init]) {
         self.tf = tf;
+        _tag=(int)_tf.tag;
         self.frame = CGRectMake(0, 0, kScreenWidth, _dsKeyboardH);
         [self editingData];
     }
@@ -174,16 +177,32 @@ CGFloat _dsKeyboardToolH;
         } else if ([text isEqualToString:@"清空"]) {
             self.output=nil;
         } else {
+            
             self.output = [self.output stringByAppendingString:text];
         }
         if (self.outputBlock) {
+                if (_tag==101) {
+                    NSString* yee=[self deptNumInputShouldNumber:_output] ? @"YES" : @"NO";
+                    if ([yee isEqual:@"NO"]) {
+                        _output=[_output substringToIndex:_output.length-1];
+                        
+                    }
+                }
+
             NSString *fakePassword = [self fakePasswordWithOutput:self.output];
             
             self.outputBlock(fakePassword);
         }
     }
 }
-
+- (BOOL) deptNumInputShouldNumber:(NSString*)textfield{
+    NSString *regex =@"[0-9]*";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    if ([pred evaluateWithObject:textfield]) {
+        return YES;
+    }
+    return NO;
+}
 - (NSString *)fakePasswordWithOutput:(NSString *)output {
     if (output.length) {
         NSString *fakePassword = [NSString string];

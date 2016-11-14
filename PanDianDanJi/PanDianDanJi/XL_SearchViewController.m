@@ -13,8 +13,9 @@
 #import "XL_Header.h"
 #import "DSKyeboard.h"
 #import "WarningBox/WarningBox.h"
+#import "ZYCustomKeyboardTypeNumberView.h"
 
-@interface XL_SearchViewController (){
+@interface XL_SearchViewController ()<ZYCustomKeyboardTypeNumberViewDelegate>{
     NSArray *  arr;
     XL_FMDB *   XL;
     FMDatabase *db;
@@ -126,6 +127,9 @@
     text.layer.borderColor=[[UIColor grayColor] CGColor];
     text.placeholder=tishi[indexPath.row];
     text.adjustsFontSizeToFitWidth=YES;
+    if (text.tag==101) {
+         [ZYCustomKeyboardTypeNumberView customKeyboardViewWithServiceTextField:text Delegate:self];
+    }
     UILabel *text1=[[UILabel alloc] initWithFrame:CGRectMake(100, 7, CGRectGetWidth(self.view.frame)-110,30)];
     text1.textColor=[UIColor colorWithHexString:@"767676"];
     if (indexPath.section==0) {
@@ -238,6 +242,7 @@
         [tf resignFirstResponder];
     }];
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 5;
 }
@@ -263,21 +268,17 @@
 #pragma mark-----text
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (arr.count!=0) {
-        if (textField.tag==101) {
-            textField.keyboardType=UIKeyboardTypeNumberPad;
-            [self navigationyou];
-        }else if (textField.tag==103){
+        if (textField.tag==103) {
             [self setupCustomedKeyboard:textField];
+            [self navigationyou];
+        
         }else
             return NO;
     }else{
         if (textField.tag==101) {
-            textField.keyboardType=UIKeyboardTypeNumberPad;
             
-
-        }else if (textField.tag==103||textField.tag==102||textField.tag==104||textField.tag==107){
+        }else
             [self setupCustomedKeyboard:textField];
-        }
     }
     return YES;
 }
@@ -286,15 +287,15 @@
     NSIndexPath *indexPath=[_table indexPathForCell:cell];
     NSArray*guiding=[self duiying];
     [dic11 setObject:textField.text forKey:[NSString stringWithFormat:@"%@",guiding[indexPath.row]]];
-   
-   
 }
+
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if(textField.tag == 100||textField.tag == 101||textField.tag==105||textField.tag==106){
-        textField.inputView = nil;
-        [textField reloadInputViews];
-        [textField becomeFirstResponder];
-    }
+//    if(textField.tag == 100||textField.tag == 101||textField.tag==105||textField.tag==106){
+//        textField.inputView = nil;
+//        [textField reloadInputViews];
+//        [textField becomeFirstResponder];
+//    }
 }
 -(void)passdicValue:(PassdicValueBlock)block{
     self.passdicValueBlock = block;
