@@ -212,10 +212,18 @@
     [XL_WangLuo JuYuwangQingqiuwithBizMethod:fangshi Rucan:rucan type:Post success:^(id responseObject) {
         [WarningBox warningBoxHide:YES andView:self.view];
         @try {
-            
+            NSLog(@"%@",responseObject);
             if ([[responseObject objectForKey:@"code"]isEqual:@"0000"]) {
+                NSDictionary*dataa=[responseObject objectForKey:@"data"];
                 
-                NSMutableArray *list=[[responseObject objectForKey:@"data"] objectForKey:@"list"];
+                if (NULL == [dataa objectForKey:@"megBatchNoFlag"]||[[dataa objectForKey:@"megBatchNoFlag"] isEqual:[NSNull null]]) {
+                    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"megBatchNoFlag"];
+                }else{
+                    NSString*hebing=[dataa objectForKey:@"megBatchNoFlag"];
+                    [[NSUserDefaults standardUserDefaults] setObject:hebing forKey:@"megBatchNoFlag"];
+                }
+                
+                NSMutableArray *list=[dataa objectForKey:@"list"];
                 NSLog(@"\n\n下载数据*******\n\n%lu",(unsigned long)list.count);
                 NSLog(@"\n\n下载数据*******\n\n%@",list);
                 if(list.count == 0){

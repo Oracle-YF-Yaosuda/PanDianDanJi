@@ -1341,11 +1341,14 @@
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
-    
+    NSUserDefaults * ss=[NSUserDefaults standardUserDefaults];
+    if ([[ss objectForKey:@"megBatchNoFlag"]isEqualToString:@"1"]) {
+        
+    }else{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
     UIBarButtonItem*right=[[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStyleDone target:self  action:@selector(tjpihao)];
     [self.navigationItem setRightBarButtonItem:right];
-    
+    }
 }
 #pragma  mark ----返回到主页面
 -(void)fanhui{
