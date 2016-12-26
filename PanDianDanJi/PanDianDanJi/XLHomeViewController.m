@@ -233,15 +233,21 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[list[0] objectForKey:@"checkId"] forKey:@"checkId"];
                     [XL clearDatabase:db from:ShangChuanBiaoMing];
                     [XL clearDatabase:db from:XiaZaiBiaoMing];
+                    NSArray*akl=[[NSArray alloc] init];
+                    NSMutableDictionary*dict=[[NSMutableDictionary alloc] init];
+                    for (NSDictionary*dd in list) {
+                        [dict setObject:dd forKey:[NSString stringWithFormat:@"%@%@",[dd objectForKey:@"productCode"],[dd objectForKey:@"prodBatchNo"]]];
+                    }
+                    akl = [dict allValues];
                     
-                    for (int i=0; i<list.count; i++) {
+                    for (int i=0; i<akl.count; i++) {
                         //向下载表中插入数据
-                        NSString *barcode =[list[i]objectForKey:@"barCode"];
+                        NSString *barcode =[akl[i]objectForKey:@"barCode"];
                         if (NULL==barcode){
                             barcode = @"";
                         }
-                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[list[i]objectForKey:@"productCode"]];
-                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:list[i]];
+                        NSString  *code = [NSString stringWithFormat:@"%@,%@",barcode,[akl[i]objectForKey:@"productCode"]];
+                        NSMutableDictionary * dd=[NSMutableDictionary dictionaryWithDictionary:akl[i]];
                         [dd setObject:[NSString stringWithFormat:@"%@", code ] forKey:@"barCode"];
                         [XL DataBase:db insertKeyValues:dd intoTable:XiaZaiBiaoMing];
                     }
