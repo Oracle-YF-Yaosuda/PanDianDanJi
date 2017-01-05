@@ -719,7 +719,7 @@
 -(void)scxiugai:(int)i{
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     if ([shularr[i] isEqual:@""]) {
         shularr[i]=@"0";
@@ -929,7 +929,7 @@
 -(void)sccharu:(int)i{
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     NSDictionary  *scdic;
     if (tianjiapanduan==1) {
