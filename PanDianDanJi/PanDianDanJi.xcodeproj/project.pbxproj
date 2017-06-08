@@ -29,6 +29,7 @@
 		D21A24F51D7FF845007BBDCE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D21A24E91D7FF845007BBDCE /* SBJsonWriter.m */; };
 		D21A24FB1D8006BF007BBDCE /* XL_WangLuo.m in Sources */ = {isa = PBXBuildFile; fileRef = D21A24FA1D8006BF007BBDCE /* XL_WangLuo.m */; };
 		D21BF98A1D80FCE800D538DA /* XLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21BF9891D80FCE800D538DA /* XLHomeViewController.m */; };
+		D23831AB1EE8E7B70063F442 /* XL_tableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23831AA1EE8E7B70063F442 /* XL_tableViewController.m */; };
 		D23ECA701D7E5032006EDD7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECA6F1D7E5032006EDD7D /* main.m */; };
 		D23ECA731D7E5032006EDD7D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D23ECA721D7E5032006EDD7D /* AppDelegate.m */; };
 		D23ECA791D7E5032006EDD7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D23ECA771D7E5032006EDD7D /* Main.storyboard */; };
@@ -229,6 +230,8 @@
 		D21A24FA1D8006BF007BBDCE /* XL_WangLuo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XL_WangLuo.m; path = ../XL_WangLuo.m; sourceTree = "<group>"; };
 		D21BF9881D80FCE800D538DA /* XLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLHomeViewController.h; sourceTree = "<group>"; };
 		D21BF9891D80FCE800D538DA /* XLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLHomeViewController.m; sourceTree = "<group>"; };
+		D23831A91EE8E7B70063F442 /* XL_tableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XL_tableViewController.h; sourceTree = "<group>"; };
+		D23831AA1EE8E7B70063F442 /* XL_tableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XL_tableViewController.m; sourceTree = "<group>"; };
 		D23ECA6B1D7E5032006EDD7D /* PanDianDanJi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanDianDanJi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23ECA6F1D7E5032006EDD7D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D23ECA711D7E5032006EDD7D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -516,6 +519,15 @@
 			name = "设置相关";
 			sourceTree = "<group>";
 		};
+		D23831A81EE8E79D0063F442 /* 日销盘点 */ = {
+			isa = PBXGroup;
+			children = (
+				D23831A91EE8E7B70063F442 /* XL_tableViewController.h */,
+				D23831AA1EE8E7B70063F442 /* XL_tableViewController.m */,
+			);
+			name = "日销盘点";
+			sourceTree = "<group>";
+		};
 		D23ECA621D7E5032006EDD7D = {
 			isa = PBXGroup;
 			children = (
@@ -593,6 +605,7 @@
 		D23ECAA31D7E5084006EDD7D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D23831A81EE8E79D0063F442 /* 日销盘点 */,
 				D74F2C471D8922A6009AC061 /* 盘点相关 */,
 				D7F575C51D88D65100F8DA63 /* 助记码相关 */,
 				D21BF9821D80F0D000D538DA /* 登陆及密码相关 */,
@@ -1173,6 +1186,7 @@
 				D21A24FB1D8006BF007BBDCE /* XL_WangLuo.m in Sources */,
 				D21A24EF1D7FF845007BBDCE /* SBJsonStreamParserState.m in Sources */,
 				D7DB64481D86AC8000C40795 /* FMDatabasePool.m in Sources */,
+				D23831AB1EE8E7B70063F442 /* XL_tableViewController.m in Sources */,
 				D21A24CB1D7FF18C007BBDCE /* AFNetworkReachabilityManager.m in Sources */,
 				D23ECA701D7E5032006EDD7D /* main.m in Sources */,
 			);
