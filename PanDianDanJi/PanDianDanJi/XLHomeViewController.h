@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface XLHomeViewController : UIViewController
-
 @property (weak, nonatomic) IBOutlet UIButton *TiJian_Button;
 - (IBAction)TiJian_Button:(id)sender;
 

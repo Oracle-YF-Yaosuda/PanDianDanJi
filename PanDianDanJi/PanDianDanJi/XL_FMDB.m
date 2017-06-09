@@ -17,7 +17,7 @@ static XL_FMDB *fmdb =nil;
             fmdb = [[self alloc] init];
         }
     });
-
+    
     return fmdb;
 }
 +(instancetype)allocWithZone:(struct _NSZone *)zone{
@@ -38,10 +38,9 @@ static XL_FMDB *fmdb =nil;
 -(FMDatabase *)getDBWithDBName:(NSString *)dbName{
     NSArray *library = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *dbPath = [library[0] stringByAppendingPathComponent:dbName];
-    NSLog(@"%@", dbPath);
+    NSLog(@"%@",dbPath);
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     if (![db open]) {
-        //NSLog(@"无法获取数据库");
         return nil;
     }
     return db;
@@ -65,16 +64,15 @@ static XL_FMDB *fmdb =nil;
             }
         }
         [sql appendString:@")"];
-       // NSLog(@"%@", sql);
         [db executeUpdate:sql];
     }
-   
+    
 }
 
 #pragma mark --给指定数据库的表添加值
 
 -(void)DataBase:(FMDatabase *)db insertKeyValues:(NSDictionary *)keyValues intoTable:(NSString *)tableName{
-  
+    
     if ([self isOpenDatabese:db]) {
         
         //        int count = 0;
@@ -106,7 +104,7 @@ static XL_FMDB *fmdb =nil;
         //        }
         
         
-
+        
         NSArray *keys = [keyValues allKeys];
         NSArray *values = [keyValues allValues];
         NSMutableString *sql = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"INSERT INTO %@ (", tableName]];
@@ -129,7 +127,7 @@ static XL_FMDB *fmdb =nil;
         
         [db executeUpdate:sql withArgumentsInArray:values];
     }
-
+    
 }
 
 #pragma mark --给指定数据库的表更新值
@@ -152,21 +150,19 @@ static XL_FMDB *fmdb =nil;
         for (NSString *key in keyValues) {
             NSMutableString *sql = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? WHERE %@ = ?", tableName, key, [condition allKeys][0]]];
             [db executeUpdate:sql,[keyValues valueForKey:key],[condition valueForKey:[condition allKeys][0] ]];
-           
+            
         }
     }
 }
-#pragma  mark ----多个条件更新
+#pragma  mark ----AND多个条件更新
 -(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues whereConditions:(NSDictionary *)conditions{
     if ([self isOpenDatabese:db]) {
         for (NSString *key in keyValues) {
-            NSLog(@"%@",conditions);
             NSMutableString *sql = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? WHERE %@ = ? AND %@ = ?", tableName, key, [conditions allKeys][0],[conditions allKeys][1]]];
             [db executeUpdate:sql,[keyValues valueForKey:key],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]]];
-    
-          
+            
+            
         }
-        
     }
 }
 #pragma mark --查询数据库表中的所有值
@@ -177,26 +173,57 @@ static XL_FMDB *fmdb =nil;
     
 }
 
-#pragma mark --条件查询数据库中的数据
+#pragma mark --条件“=”查询数据库中的数据
 
--(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereCondition:(NSDictionary *)condition;{
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereCondition:(NSDictionary *)condition{
     if ([self isOpenDatabese:db]) {
         FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? ",tableName, [condition allKeys][0]], [condition valueForKey:[condition allKeys][0]]];
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
         return nil;
 }
-
-#pragma mark --多个条件查询数据库中的数据
-
--(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;{
+#pragma mark --条件“>”查询数据库中的数据
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where_Condition:(NSDictionary *)condition{
     if ([self isOpenDatabese:db]) {
-        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? AND %@ = ? ",tableName, [conditions allKeys][0],[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]]];
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE  %@ <> 0 AND checkNum  IS NOT NULL AND checkNum <> '' ",tableName, [condition allKeys][0]], [condition valueForKey:[condition allKeys][0]]];
+        return [self getArrWithFMResultSet:result keyTypes:keyTypes];
+    }else
+        return nil;
+}
+#pragma mark --条件“>”查询数据库中的数据
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where___Condition:(NSDictionary *)condition{
+    if ([self isOpenDatabese:db]) {
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ?  OR checkNum  is NULL OR checkNum = ''",tableName, [condition allKeys][0]], [condition valueForKey:[condition allKeys][0]]];
+        return [self getArrWithFMResultSet:result keyTypes:keyTypes];
+    }else
+        return nil;
+}
+#pragma mark --OR两个条件查询数据库中的数据
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionzss:(NSDictionary *)conditionss;{
+    if ([self isOpenDatabese:db]) {
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? COLLATE NOCASE OR %@ =? COLLATE NOCASE ",tableName,[conditionss allKeys][0],[conditionss allKeys][1]],[conditionss valueForKey:[conditionss allKeys][0]],[conditionss valueForKey:[conditionss allKeys][1]]];
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
         return nil;
 }
 
+#pragma mark --OR三个条件查询数据库中的数据
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionz:(NSDictionary *)conditions;{
+    if ([self isOpenDatabese:db]) {
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? COLLATE NOCASE OR %@ =? COLLATE NOCASE OR %@ = ? COLLATE NOCASE",tableName,[conditions allKeys][0],[conditions allKeys][1],[conditions allKeys][2]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][2]]];
+        return [self getArrWithFMResultSet:result keyTypes:keyTypes];
+    }else
+        return nil;
+}
+#pragma mark --AND两个条件查询数据库中的数据
+
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;{
+    if ([self isOpenDatabese:db]) {
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ? AND %@ = ? ",tableName,[conditions allKeys][0],[conditions allKeys][1]],[conditions valueForKey:[conditions allKeys][0]],[conditions valueForKey:[conditions allKeys][1]]];
+        return [self getArrWithFMResultSet:result keyTypes:keyTypes];
+    }else
+        return nil;
+}
 #pragma mark --模糊查询 某字段以指定字符串开头的数据
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereKey:(NSString *)key beginWithStr:(NSString *)str{
@@ -213,9 +240,9 @@ static XL_FMDB *fmdb =nil;
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereKey:(NSString *)key containStr:(NSString *)str{
     
     if ([self isOpenDatabese:db]) {
-       
-    FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ LIKE '%%%@%%'",tableName, key, str]];
-       
+        
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ LIKE '%%%@%%'",tableName, key, str]];
+        
         
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
@@ -284,7 +311,7 @@ static XL_FMDB *fmdb =nil;
         [tempArr addObject:tempDic];
     }
     return tempArr;
- 
+    
 }
 -(BOOL)isOpenDatabese:(FMDatabase *)db{
     

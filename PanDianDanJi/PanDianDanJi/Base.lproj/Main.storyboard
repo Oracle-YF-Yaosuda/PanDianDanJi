@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Bys-Sa-Tv9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Bys-Sa-Tv9">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -294,6 +294,9 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wES-Rg-gmw">
                                                 <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="110"/>
+                                                <connections>
+                                                    <action selector="PanDian_Button:" destination="S8I-oT-F91" eventType="touchUpInside" id="y8b-EA-ior"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.97254901959999995" green="0.6588235294" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -348,6 +351,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fJ-tD-HhL">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="220.66666666666669"/>
+                                        <connections>
+                                            <action selector="rixiaopandian:" destination="S8I-oT-F91" eventType="touchUpInside" id="hhs-Qb-bFt"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43529411764705883" green="0.5607843137254902" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -390,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MjT-9j-Lzf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-391.304347826087" y="1073.6413043478262"/>
+            <point key="canvasLocation" x="-404" y="1104"/>
         </scene>
         <!--Change View Controller-->
         <scene sceneID="uoT-dJ-ICa">
@@ -1238,7 +1244,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2z-in-Lk1">
                                         <rect key="frame" x="5" y="84.999999999999943" width="76.666666666666671" height="75.333333333333371"/>
-                                        <state key="normal" backgroundImage="jianpan_mr_119.png"/>
+                                        <state key="normal" backgroundImage="jianpan_mr_19.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_01_03_03.png"/>
                                         <connections>
                                             <action selector="four:" destination="R8x-M4-sma" eventType="touchUpInside" id="pWt-fB-8nz"/>
@@ -1278,7 +1284,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYw-60-zsM">
                                         <rect key="frame" x="168.66666666666666" y="165.33333333333331" width="76.666666666666686" height="75"/>
-                                        <state key="normal" backgroundImage="jianpan_mr_315.png"/>
+                                        <state key="normal" backgroundImage="jianpan_mr_35.png"/>
                                         <state key="highlighted" backgroundImage="jianpan_dk_02.png"/>
                                         <connections>
                                             <action selector="three:" destination="R8x-M4-sma" eventType="touchUpInside" id="5FX-eg-FGx"/>
@@ -1747,6 +1753,86 @@
             </objects>
             <point key="canvasLocation" x="306" y="1104"/>
         </scene>
+        <!--table View Controller-->
+        <scene sceneID="bb9-JX-d4P">
+            <objects>
+                <viewController storyboardIdentifier="tttable" id="s5p-kJ-qCT" customClass="XL_tableViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M3p-dN-p9v"/>
+                        <viewControllerLayoutGuide type="bottom" id="iPx-cz-6QO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KSr-An-tOZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vQa-Fu-6Oh">
+                                <rect key="frame" x="53" y="5" width="309" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1HR-Hk-xJj"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="未盘点"/>
+                                    <segment title="已盘点"/>
+                                </segments>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="twp-uT-jQ2">
+                                <rect key="frame" x="0.0" y="40" width="414" height="696"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="weipan" id="pqu-ex-3uY">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqu-ex-3uY" id="16v-9A-GXu">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="货位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvc-2Y-gMo">
+                                                    <rect key="frame" x="8" y="8" width="35" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" verticalHuggingPriority="251" text="名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjw-W6-QfJ">
+                                                    <rect key="frame" x="63" y="8" width="343" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Yvc-2Y-gMo" secondAttribute="bottom" id="3CI-4t-sqh"/>
+                                                <constraint firstItem="Yvc-2Y-gMo" firstAttribute="leading" secondItem="16v-9A-GXu" secondAttribute="leading" constant="8" id="9Aa-Rx-FFr"/>
+                                                <constraint firstItem="Bjw-W6-QfJ" firstAttribute="leading" secondItem="Yvc-2Y-gMo" secondAttribute="trailing" constant="20" id="GeD-97-9rg"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bjw-W6-QfJ" secondAttribute="trailing" constant="8" id="KNV-ee-ten"/>
+                                                <constraint firstAttribute="bottom" secondItem="Bjw-W6-QfJ" secondAttribute="bottom" id="eg4-SS-yVt"/>
+                                                <constraint firstItem="Bjw-W6-QfJ" firstAttribute="top" secondItem="16v-9A-GXu" secondAttribute="top" constant="8" id="hFp-4O-8un"/>
+                                                <constraint firstItem="Yvc-2Y-gMo" firstAttribute="top" secondItem="16v-9A-GXu" secondAttribute="top" constant="8" id="per-cN-1XB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="vQa-Fu-6Oh" secondAttribute="trailing" constant="32" id="5MQ-Mg-LKP"/>
+                            <constraint firstItem="twp-uT-jQ2" firstAttribute="top" secondItem="vQa-Fu-6Oh" secondAttribute="bottom" constant="5" id="F3A-fp-M5k"/>
+                            <constraint firstItem="vQa-Fu-6Oh" firstAttribute="leading" secondItem="KSr-An-tOZ" secondAttribute="leadingMargin" constant="33" id="Mef-LK-fAG"/>
+                            <constraint firstItem="twp-uT-jQ2" firstAttribute="leading" secondItem="KSr-An-tOZ" secondAttribute="leading" id="OIH-5E-TjE"/>
+                            <constraint firstAttribute="bottom" secondItem="twp-uT-jQ2" secondAttribute="bottom" id="Xqg-4h-7V2"/>
+                            <constraint firstItem="vQa-Fu-6Oh" firstAttribute="top" secondItem="KSr-An-tOZ" secondAttribute="topMargin" constant="5" id="bR8-bS-Uq9"/>
+                            <constraint firstAttribute="trailing" secondItem="twp-uT-jQ2" secondAttribute="trailing" id="jKn-uR-FrF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="biaoqian" destination="vQa-Fu-6Oh" id="GzP-q7-kub"/>
+                        <outlet property="tableview" destination="twp-uT-jQ2" id="Hqg-RK-MF3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iGc-Gy-9dw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1197" y="1850"/>
+        </scene>
     </scenes>
     <resources>
         <image name="about.png" width="34" height="40"/>
@@ -1787,14 +1873,14 @@
         <image name="jianpan_mr_08.png" width="190" height="154"/>
         <image name="jianpan_mr_09.png" width="190" height="151"/>
         <image name="jianpan_mr_09_03.png" width="190" height="151"/>
-        <image name="jianpan_mr_119.png" width="16" height="16"/>
+        <image name="jianpan_mr_19.png" width="190" height="154"/>
         <image name="jianpan_mr_21.png" width="190" height="154"/>
         <image name="jianpan_mr_23.png" width="190" height="154"/>
         <image name="jianpan_mr_25.png" width="190" height="154"/>
         <image name="jianpan_mr_27.png" width="190" height="327"/>
-        <image name="jianpan_mr_315.png" width="16" height="16"/>
         <image name="jianpan_mr_33.png" width="190" height="154"/>
         <image name="jianpan_mr_34.png" width="190" height="154"/>
+        <image name="jianpan_mr_35.png" width="190" height="154"/>
         <image name="lainxi.png" width="60" height="60"/>
         <image name="next.png" width="34" height="54"/>
         <image name="wifi.png" width="128" height="128"/>

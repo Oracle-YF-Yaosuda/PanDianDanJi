@@ -42,7 +42,7 @@
 
 -(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues;
 /**
- *  条件更新
+ *  单个条件更新
  *  @param db        数据库名称
  *  @param tableName 表名称
  *  @param keyValues 要更新的字段及对应值
@@ -51,57 +51,57 @@
 
 -(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues whereCondition:(NSDictionary *)condition;
 /**
- *  查询数据库表中的所有值 限制数据条数10
+ *  AND两个条件更新
  *  @param db        数据库名称
- *  @param keysTypes 查询字段以及对应字段类型 字典
+ *  @param keyValues 查询字段以及对应字段类型 字典
  *  @param tableName 表名称
- *  @return 查询得到数据
+ *  @param conditions 条件
  */
 -(void)DataBase:(FMDatabase *)db updateTable:(NSString *)tableName setKeyValues:(NSDictionary *)keyValues whereConditions:(NSDictionary *)conditions;
 /**
- *  多个条件查询数据库中的数据 限制数据条数10
+ *  查询数据库表中的所有值
  *  @param db        数据库名称
- *  @param keysTypes 查询字段以及对应字段类型 字典
- *  @param tableName 表名称
- *  @param condition 条件
- *  @return 查询得到数据 限制数据条数10
- */
-
--(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;
-/**
- *  查询数据库表中的所有值 限制数据条数10
- *  @param db        数据库名称
- *  @param keysTypes 查询字段以及对应字段类型 字典
+ *  @param keyTypes 查询字段以及对应字段类型 字典
  *  @param tableName 表名称
  *  @return 查询得到数据
  */
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName;
 /**
- *  条件查询数据库中的数据 限制数据条数10
+ *  单个条件"="查询数据库中的数据
  *  @param db        数据库名称
- *  @param keysTypes 查询字段以及对应字段类型 字典
+ *  @param keyTypes 查询字段以及对应字段类型 字典
  *  @param tableName 表名称
  *  @param condition 条件
- *  @return 查询得到数据 限制数据条数10
+ *  @return 查询得到数据
  */
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereCondition:(NSDictionary *)condition;
 /**
- *  模糊查询 某字段以指定字符串开头的数据 限制数据条数10
+ *  单个条件""查询数据库中的数据
  *  @param db        数据库名称
- *  @param keysTypes 查询字段以及对应字段类型 字典
+ *  @param keyTypes 查询字段以及对应字段类型 字典
+ *  @param tableName 表名称
+ *  @param condition 条件
+ *  @return 查询得到数据
+ */
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where___Condition:(NSDictionary *)condition;
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where_Condition:(NSDictionary *)condition;
+/**
+ *  模糊查询 某字段以指定字符串开头的数据
+ *  @param db        数据库名称
+ *  @param keyTypes 查询字段以及对应字段类型 字典
  *  @param tableName 表名称
  *  @param key       条件字段
  *  @param str       开头字符串
- *  @return 查询所得数据 限制数据条数10
+ *  @return 查询所得数据
  */
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereKey:(NSString *)key beginWithStr:(NSString *)str;
 /**
- *  模糊查询 某字段包含指定字符串的数据 限制数据条数10
+ *  模糊查询 某字段包含指定字符串的数据
  *  @param db        数据库名称
- *  @param keysTypes 查询字段以及对应字段类型 字典
+ *  @param keyTypes 查询字段以及对应字段类型 字典
  *  @param tableName 表名称
  *  @param key       条件字段
  *  @param str       所包含的字符串
@@ -110,9 +110,9 @@
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereKey:(NSString *)key containStr:(NSString *)str;
 /**
- *  模糊查询 某字段以指定字符串结尾的数据 限制数据条数10
+ *  模糊查询 某字段以指定字符串结尾的数据
  *  @param db        数据库名称
- *  @param keysTypes 查询字段以及对应字段类型 字典
+ *  @param keyTypes 查询字段以及对应字段类型 字典
  *  @param tableName 表名称
  *  @param key       条件字段
  *  @param str       结尾字符串
@@ -135,5 +135,43 @@
  *  @param condition 条件
  *  @return 查询得到数据 限制数据条数10
  */
+
 -(NSArray *)DataBase:(FMDatabase *)db deleteKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereCondition:(NSDictionary *)condition;
+
+
+/**
+ *  OR三个条件查询数据库中的数据 限制数据条数10
+ *  @param db        数据库名称
+ *  @param keyTypes 查询字段以及对应字段类型 字典
+ *  @param tableName 表名称
+ *  @param conditions 条件
+ *  @return 查询得到数据 限制数据条数10
+ */
+
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionz:(NSDictionary *)conditions;
+
+/**
+ *  AND两个条件查询数据库中的数据
+ *  @param db        数据库名称
+ *  @param keyTypes 查询字段以及对应字段类型 字典
+ *  @param tableName 表名称
+ *  @param conditions 条件
+ *  @return 查询得到数据 限制数据条数10
+ */
+
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditions:(NSDictionary *)conditions;
+/**
+ *  OR两个条件查询数据库中的数据
+ *  @param db        数据库名称
+ *  @param keyTypes 查询字段以及对应字段类型 字典
+ *  @param tableName 表名称
+ *  @param conditionss 条件
+ *  @return 查询得到数据
+ */
+
+
+-(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionzss:(NSDictionary *)conditionss;
+
+
+
 @end

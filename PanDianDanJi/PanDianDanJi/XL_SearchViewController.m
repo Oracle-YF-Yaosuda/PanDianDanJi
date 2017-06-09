@@ -19,7 +19,6 @@
     NSArray *  arr;
     XL_FMDB *   XL;
     FMDatabase *db;
-    
     NSMutableDictionary*dic11;
 }
 

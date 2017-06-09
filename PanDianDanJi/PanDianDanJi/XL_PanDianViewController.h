@@ -14,8 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *gundview;//一条数据的批号
 @property (weak, nonatomic) IBOutlet UILabel *Search;//搜索框
-
-
+@property (strong, nonatomic) NSString * rukou;
+@property (strong, nonatomic) NSString * jieshouzhi;
 @property (weak, nonatomic) IBOutlet UITableView *table;
 
 @property (weak, nonatomic) IBOutlet UIView *InfoView;
