@@ -150,11 +150,20 @@
             }else if (indexPath.row==2){
                 @try {
                     if (NULL==[arr[0] objectForKey:@"productCode"]){
-                        text.text = @"";
+                        NSDate *date=[NSDate date];
+                        NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+                        [dateformatter setDateFormat:@"YYYYMMddHHmmss"];
+                        NSString *date1 = [dateformatter stringFromDate:date];
+                        text.text = [NSString stringWithFormat:@"%@",date1];
                     }else
                         text.text=[NSString stringWithFormat:@"%@",[arr[0] objectForKey:@"productCode"]];
                 } @catch (NSException *exception) {
-                    text.text=@"";
+                    NSDate *date=[NSDate date];
+                    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+                    [dateformatter setDateFormat:@"YYYYMMddHHmmss"];
+                    NSString *date1 = [dateformatter stringFromDate:date];
+                    text.text = [NSString stringWithFormat:@"%@",date1];
+                
                 }
             }else if (indexPath.row==3){
                 text.text=@"";

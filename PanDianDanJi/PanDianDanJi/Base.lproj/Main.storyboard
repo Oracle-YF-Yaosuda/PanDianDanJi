@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Bys-Sa-Tv9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Bys-Sa-Tv9">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1531,7 +1531,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="Change:" destination="R8x-M4-sma" eventType="touchUpInside" id="LXe-6K-xrL"/>
+                                            <action selector="Change:" destination="R8x-M4-sma" eventType="touchUpInside" id="4Am-nx-tRA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1735,7 +1735,7 @@
                         <outlet property="InfoView" destination="u1u-w9-lAH" id="dhL-mG-SDh"/>
                         <outlet property="Search" destination="7R3-2y-ihe" id="Y1k-Hm-NaX"/>
                         <outlet property="canbtn" destination="g3m-lT-Ule" id="9ai-Vq-06L"/>
-                        <outlet property="change" destination="ZNu-Pc-KFb" id="es2-yG-217"/>
+                        <outlet property="change" destination="ZNu-Pc-KFb" id="duK-P2-77z"/>
                         <outlet property="gundview" destination="KWc-7B-goN" id="kcS-2U-Tbu"/>
                         <outlet property="onelabel" destination="x24-n7-ex2" id="8J5-6M-jgL"/>
                         <outlet property="oneview" destination="h8W-G8-bIy" id="hc2-sR-cIq"/>
@@ -1751,7 +1751,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n9D-Xm-7Vo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306" y="1104"/>
+            <point key="canvasLocation" x="305.79710144927537" y="1103.804347826087"/>
         </scene>
         <!--table View Controller-->
         <scene sceneID="bb9-JX-d4P">
@@ -1766,24 +1766,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vQa-Fu-6Oh">
-                                <rect key="frame" x="53" y="5" width="309" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="1HR-Hk-xJj"/>
-                                </constraints>
+                                <rect key="frame" x="52" y="63" width="310" height="29"/>
                                 <segments>
                                     <segment title="未盘点"/>
                                     <segment title="已盘点"/>
                                 </segments>
                             </segmentedControl>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JsQ-yK-9GL">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="ZCf-4h-RlJ"/>
+                                </items>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="twp-uT-jQ2">
-                                <rect key="frame" x="0.0" y="40" width="414" height="696"/>
+                                <rect key="frame" x="0.0" y="91" width="414" height="645"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="weipan" id="pqu-ex-3uY">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqu-ex-3uY" id="16v-9A-GXu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="货位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvc-2Y-gMo">
@@ -1815,13 +1818,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="vQa-Fu-6Oh" secondAttribute="trailing" constant="32" id="5MQ-Mg-LKP"/>
-                            <constraint firstItem="twp-uT-jQ2" firstAttribute="top" secondItem="vQa-Fu-6Oh" secondAttribute="bottom" constant="5" id="F3A-fp-M5k"/>
-                            <constraint firstItem="vQa-Fu-6Oh" firstAttribute="leading" secondItem="KSr-An-tOZ" secondAttribute="leadingMargin" constant="33" id="Mef-LK-fAG"/>
+                            <constraint firstItem="twp-uT-jQ2" firstAttribute="top" secondItem="vQa-Fu-6Oh" secondAttribute="bottom" id="2Iw-Pa-UTR"/>
+                            <constraint firstItem="vQa-Fu-6Oh" firstAttribute="top" secondItem="JsQ-yK-9GL" secondAttribute="bottom" constant="19" id="2su-F2-IC7"/>
+                            <constraint firstItem="JsQ-yK-9GL" firstAttribute="leading" secondItem="KSr-An-tOZ" secondAttribute="leading" id="Gq3-FZ-Qju"/>
+                            <constraint firstItem="JsQ-yK-9GL" firstAttribute="top" secondItem="KSr-An-tOZ" secondAttribute="top" id="IXV-Rt-I7R"/>
                             <constraint firstItem="twp-uT-jQ2" firstAttribute="leading" secondItem="KSr-An-tOZ" secondAttribute="leading" id="OIH-5E-TjE"/>
                             <constraint firstAttribute="bottom" secondItem="twp-uT-jQ2" secondAttribute="bottom" id="Xqg-4h-7V2"/>
-                            <constraint firstItem="vQa-Fu-6Oh" firstAttribute="top" secondItem="KSr-An-tOZ" secondAttribute="topMargin" constant="5" id="bR8-bS-Uq9"/>
                             <constraint firstAttribute="trailing" secondItem="twp-uT-jQ2" secondAttribute="trailing" id="jKn-uR-FrF"/>
+                            <constraint firstAttribute="trailing" secondItem="JsQ-yK-9GL" secondAttribute="trailing" id="tZ5-Qe-5yR"/>
+                            <constraint firstItem="vQa-Fu-6Oh" firstAttribute="leading" secondItem="KSr-An-tOZ" secondAttribute="leadingMargin" constant="32" id="vz7-nX-vJn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vQa-Fu-6Oh" secondAttribute="trailing" constant="32" id="yI8-Dx-f82"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1830,8 +1836,15 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGc-Gy-9dw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationBar contentMode="scaleToFill" id="Tjr-xh-91X">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <navigationItem title="Title" id="Ljq-Pi-50w"/>
+                    </items>
+                </navigationBar>
             </objects>
-            <point key="canvasLocation" x="1197" y="1850"/>
+            <point key="canvasLocation" x="1195.6521739130435" y="1849.7282608695652"/>
         </scene>
     </scenes>
     <resources>

@@ -40,9 +40,13 @@
     _biaoqian.selectedSegmentIndex=0;
     listarray=[self table_array:0];
     [_tableview reloadData];
+    [self navigation];
     //去除多余分割线
     self.tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    
 }
+
 -(void)Action:(UISegmentedControl *)segment{
     if (segment.selectedSegmentIndex ==0) {
         listarray=[self table_array:0];
@@ -118,7 +122,7 @@
 }
 -(void)navigation{
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    UIBarButtonItem*left=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back@2x"] style:UIBarButtonItemStyleDone target:self action:@selector(fanhui)];
+   UIBarButtonItem*left=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self  action:@selector(fanhui)];
     [self.navigationItem setLeftBarButtonItem:left];
 }
 -(void)fanhui{

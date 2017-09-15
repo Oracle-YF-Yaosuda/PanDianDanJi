@@ -185,7 +185,7 @@ static XL_FMDB *fmdb =nil;
 #pragma mark --条件“>”查询数据库中的数据
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where_Condition:(NSDictionary *)condition{
     if ([self isOpenDatabese:db]) {
-        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE  %@ <> 0 AND checkNum  IS NOT NULL AND checkNum <> '' ",tableName, [condition allKeys][0]], [condition valueForKey:[condition allKeys][0]]];
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE  %@ > -1 AND checkNum  IS NOT NULL AND checkNum <> '' ",tableName, [condition allKeys][0]], [condition valueForKey:[condition allKeys][0]]];
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
         return nil;
@@ -193,7 +193,7 @@ static XL_FMDB *fmdb =nil;
 #pragma mark --条件“>”查询数据库中的数据
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName where___Condition:(NSDictionary *)condition{
     if ([self isOpenDatabese:db]) {
-        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = ?  OR checkNum  is NULL OR checkNum = ''",tableName, [condition allKeys][0]], [condition valueForKey:[condition allKeys][0]]];
+        FMResultSet *result =  [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ < ?  OR checkNum  is NULL OR checkNum = ''",tableName, [condition allKeys][0]], [condition valueForKey:[condition allKeys][0]]];
         return [self getArrWithFMResultSet:result keyTypes:keyTypes];
     }else
         return nil;
@@ -206,7 +206,6 @@ static XL_FMDB *fmdb =nil;
     }else
         return nil;
 }
-
 #pragma mark --OR三个条件查询数据库中的数据
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionz:(NSDictionary *)conditions;{
     if ([self isOpenDatabese:db]) {

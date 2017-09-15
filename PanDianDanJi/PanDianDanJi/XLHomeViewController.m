@@ -130,7 +130,7 @@
     NSArray *list1 = [XL DataBase:db selectKeyTypes:ShangChuanShiTiLei fromTable:ShangChuanBiaoMing];
     NSMutableArray*list = [[NSMutableArray alloc] init];
     for (NSDictionary*dd in list1) {
-        if (![[dd objectForKey:@"checkNum"] isEqualToString:@"0"]) {
+        if ([[dd objectForKey:@"checkNum"] floatValue] > 0) {
             [list addObject:dd];
         }
     }

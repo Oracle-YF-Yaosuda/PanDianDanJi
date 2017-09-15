@@ -172,6 +172,4 @@
 
 -(NSArray *)DataBase:(FMDatabase *)db selectKeyTypes:(NSDictionary *)keyTypes fromTable:(NSString *)tableName whereConditionzss:(NSDictionary *)conditionss;
 
-
-
 @end
